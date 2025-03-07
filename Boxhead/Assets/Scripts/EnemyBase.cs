@@ -1,22 +1,24 @@
 using UnityEngine;
+using Mirror;
 
-public class EnemyBase : MonoBehaviour
+public class EnemyBase : NetworkBehaviour
 {
     [SerializeField] private int _health = 3; // Salud del zombie
     [SerializeField] private float moveSpeed = 3f; // Velocidad de movimiento del zombie
     private Transform playerTransform; // Referencia al transform del jugador
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // Buscar al jugador en la escena por su tag
-        playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        if (isServer)
+        {
+            // Buscar al jugador en la escena por su tag
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (playerTransform != null)
+        if (playerTransform != null && isServer)
         {
             // Calcular la dirección hacia el jugador
             Vector2 direction = (playerTransform.position - transform.position).normalized;
@@ -26,9 +28,9 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    // Movimiento del zombie
     void MoveZombie(Vector2 direction)
     {
-        // Mover el zombie utilizando Rigidbody2D
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
@@ -36,18 +38,27 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    // Función de daño, ejecutada en el servidor
+    [Server]
     public void GetDamage(int damage)
     {
         _health -= damage;
+
+        // Si la salud llega a 0 o menos, el zombie muere
         if (_health <= 0)
         {
+            // Volver al pool en lugar de destruir el objeto
             PoolEnemies.Instance.ReturnToPool(gameObject);
         }
     }
 
+    // Colisiones, solo ejecutadas por el servidor
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Cuando el zombie colisiona, recibe 1 de daño
-        GetDamage(1);
+        if (isServer)
+        {
+            // Cuando el zombie colisiona, recibe 1 de daño
+            GetDamage(1);
+        }
     }
 }
