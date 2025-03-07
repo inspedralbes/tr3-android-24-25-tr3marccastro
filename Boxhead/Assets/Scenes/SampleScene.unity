@@ -350,6 +350,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1199233322}
   - component: {fileID: 1199233321}
+  - component: {fileID: 1199233323}
   m_Layer: 0
   m_Name: Pool
   m_TagString: Untagged
