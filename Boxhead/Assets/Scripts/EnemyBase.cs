@@ -3,62 +3,105 @@ using Mirror;
 
 public class EnemyBase : NetworkBehaviour
 {
-    [SerializeField] private int _health = 3; // Salud del zombie
-    [SerializeField] private float moveSpeed = 3f; // Velocidad de movimiento del zombie
-    private Transform playerTransform; // Referencia al transform del jugador
+    [SerializeField] private Vector2 spawnAreaMin = new Vector2(-10, -10); // Mínimo de la zona de spawn
+    [SerializeField] private Vector2 spawnAreaMax = new Vector2(10, 10);   // Máximo de la zona de spawn
+    [SerializeField] private int health = 3; // Vidas del zombie
+    [SerializeField] private float speed = 2f; // Velocidad del zombie
+    private Transform target; // Objetivo (jugador más cercano)
 
-    void Start()
-    {
-        if (isServer)
-        {
-            // Buscar al jugador en la escena por su tag
-            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-        }
-    }
-
+    // Si el servidor controla el movimiento del zombie
     void Update()
     {
-        if (playerTransform != null && isServer)
-        {
-            // Calcular la dirección hacia el jugador
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
+        if (!isServer) return;
 
-            // Mover al zombie hacia el jugador
-            MoveZombie(direction);
+        // Encontrar el jugador más cercano
+        FindClosestPlayer();
+
+        if (target != null)
+        {
+            // Mover el zombie hacia el jugador más cercano
+            Vector2 newPosition = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+            RpcMoveMonster(newPosition); // Enviar la nueva posición a los clientes
         }
     }
 
-    // Movimiento del zombie
-    void MoveZombie(Vector2 direction)
-    {
-        Rigidbody2D rb = GetComponent<Rigidbody2D>();
-        if (rb != null)
-        {
-            rb.linearVelocity = direction * moveSpeed;
-        }
-    }
-
-    // Función de daño, ejecutada en el servidor
+    // Buscar el jugador más cercano
     [Server]
-    public void GetDamage(int damage)
+    void FindClosestPlayer()
     {
-        _health -= damage;
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        float minDistance = Mathf.Infinity;
+        Transform closestPlayer = null;
 
-        // Si la salud llega a 0 o menos, el zombie muere
-        if (_health <= 0)
+        foreach (GameObject player in players)
         {
-            // Volver al pool en lugar de destruir el objeto
-            PoolEnemies.Instance.ReturnToPool(gameObject);
+            float distance = Vector2.Distance(transform.position, player.transform.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closestPlayer = player.transform;
+            }
+        }
+
+        target = closestPlayer;
+    }
+
+    // Recibir daño, manejado en el servidor
+    [Server]
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            // Cuando la salud llegue a 0, el zombie debe regresar al pool
+            RcpReturnToPool();
         }
     }
 
-    // Colisiones, solo ejecutadas por el servidor
+    // Volver al pool y respawnear para todos los jugadores
+    [ClientRpc]
+    void RcpReturnToPool()
+    {
+        // Devolver el enemigo al pool (solo el servidor lo maneja)
+        PoolEnemies.Instance.ReturnToPool(gameObject);
+
+        // Re-spawnear el zombie para todos los jugadores
+        SpawnZombie();
+    }
+
+    // Re-spawnear un nuevo zombie en una posición aleatoria
+    [Server]
+    void SpawnZombie()
+    {
+        // Generamos una posición aleatoria dentro de los límites del spawn
+        Vector2 spawnPosition = new Vector2(
+            Random.Range(spawnAreaMin.x, spawnAreaMax.x),
+            Random.Range(spawnAreaMin.y, spawnAreaMax.y)
+        );
+
+        // Obtener el zombie del pool
+        GameObject zombie = PoolEnemies.Instance.GetFromPool(spawnPosition);
+
+        // Si el zombie es válido, hacer que se vea para todos los jugadores
+        if (zombie != null)
+        {
+            NetworkServer.Spawn(zombie); // Respawnear el zombie para todos los jugadores
+        }
+    }
+
+    // Colisión con otro objeto (recibe daño al colisionar)
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (isServer)
-        {
-            // Cuando el zombie colisiona, recibe 1 de daño
-            GetDamage(1);
-        }
+        if (!isServer) return;
+
+        // Cuando el zombie colisiona, recibe 1 de daño
+        TakeDamage(1);
+    }
+
+    // Sincronizar el movimiento del zombie entre todos los clientes
+    [ClientRpc]
+    void RpcMoveMonster(Vector2 newPosition)
+    {
+        transform.position = newPosition;
     }
 }
