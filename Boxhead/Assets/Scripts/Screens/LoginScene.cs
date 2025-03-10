@@ -1,88 +1,136 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using System.Collections;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
-using System.Collections;
+using UnityEngine.UIElements;
 
-public class LoginScene : MonoBehaviour
+public class LoginManager : MonoBehaviour
 {
-    private TextField usernameField;
-    private TextField passwordField;
-    private Button loginButton, backButton;
+    private TextField usernameField, passwordField;
     private Label errorLabel;
+    private string apiUrl = "http://localhost:3000/api/login";
 
     private void OnEnable()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
-        
         usernameField = root.Q<TextField>("usernameField");
         passwordField = root.Q<TextField>("passwordField");
-        loginButton = root.Q<Button>("loginButton");
-        backButton = root.Q<Button>("backButton");
         errorLabel = root.Q<Label>("errorLabel");
+        errorLabel.style.display = DisplayStyle.None;
 
-        loginButton.clicked += OnLoginButtonClicked;
-        backButton.clicked += BackToMenu;
-        errorLabel.style.display = DisplayStyle.None; // Ocultar el error al principio
+        root.Q<Button>("loginButton").clicked += () => StartCoroutine(LoginRequest());
+        root.Q<Button>("backButton").clicked += () => SceneManager.LoadScene("MainMenu");
     }
 
-    private void OnLoginButtonClicked()
+    private IEnumerator LoginRequest()
     {
-        string username = usernameField.value;
-        string password = passwordField.value;
-
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
+        if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
         {
-            errorLabel.text = "Por favor ingresa un nombre de usuario y contraseña.";
-            errorLabel.style.display = DisplayStyle.Flex;
+            Debug.Log("Por favor, ingresa usuario y contraseña.");
+            yield break;
         }
-        else
+
+        WWWForm form = new();
+        form.AddField("username",  usernameField.value);
+        form.AddField("password", passwordField.value);
+
+        UnityWebRequest request = UnityWebRequest.Post(apiUrl, form);
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
         {
-            StartCoroutine(LoginRequest(username, password));
-        }
-    }
+            // Obtener el resultado de la respuesta
+            string result = request.downloadHandler.text;
 
-    private IEnumerator LoginRequest(string username, string password)
-    {
-        // Datos para enviar en la petición
-        var loginData = new WWWForm();
-        loginData.AddField("username", username);
-        loginData.AddField("password", password);
+            // Depuración
+            Debug.Log("Resultado recibido del servidor: " + result);
 
-        // Reemplaza con tu URL de la API de login
-        string url = "https://tu-api.com/login";  
-
-        using (UnityWebRequest www = UnityWebRequest.Post(url, loginData))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result == UnityWebRequest.Result.Success)
+            // Comprobamos si el resultado es lo que esperamos
+            if (result.Contains("success"))
             {
-                // Respuesta de la API: Si es 200 OK, continúa
-                string response = www.downloadHandler.text;
-
-                if (response.Contains("success")) // Suponiendo que la API devuelve "success" en caso de éxito
-                {
-                    // Si el login es exitoso, vamos al menú multiplayer
-                    SceneManager.LoadScene("MultiplayerMenuScene");
-                }
-                else
-                {
-                    // Si no está registrado o el login falla
-                    errorLabel.text = "Credenciales incorrectas.";
-                    errorLabel.style.display = DisplayStyle.Flex;
-                }
+                Debug.Log("Operación exitosa. Cargando la escena...");
+                SceneManager.LoadScene("MultiplayerScene");
             }
             else
             {
-                errorLabel.text = "Error de conexión.";
-                errorLabel.style.display = DisplayStyle.Flex;
+                // En caso de que el servidor no devuelva el resultado esperado
+                Debug.LogWarning("Respuesta inesperada: " + result);
             }
         }
-    }
-
-    private void BackToMenu()
-    {
-        SceneManager.LoadScene("MainMenu"); // Cambia "MainMenu" por tu escena de menú
+        else
+        {
+            // Manejo detallado del error de la conexión
+            Debug.LogError("Error de conexión: " + request.error);
+        }
     }
 }
+
+    //private IEnumerator LoginRequest()
+    //{
+    //    if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
+    //    {
+    //        ShowError("Por favor, ingresa usuario y contraseña.");
+    //        yield break;
+    //    }
+
+    //    string jsonData = JsonUtility.ToJson(new LoginData(usernameField.value, passwordField.value));
+    //    byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
+
+    //    using UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
+    //    {
+    //        uploadHandler = new UploadHandlerRaw(jsonBytes),
+    //        downloadHandler = new DownloadHandlerBuffer()
+    //    };
+    //    request.SetRequestHeader("Content-Type", "application/json");
+
+    //    yield return request.SendWebRequest();
+
+    //    if (request.result == UnityWebRequest.Result.Success)
+    //    {
+    //        string jsonResponse = request.downloadHandler.text;
+    //        Debug.Log("Respuesta del servidor: " + jsonResponse);
+
+    //        LoginResponse response = JsonUtility.FromJson<LoginResponse>(jsonResponse);
+
+    //        if (response.status == "success")
+    //        {
+    //            // Si el login es exitoso, carga la escena del multiplayer
+    //            SceneManager.LoadScene("MultiplayerScene");
+    //        }
+    //        else
+    //        {
+    //            // Si el login falla, muestra el error
+    //            ShowError(response.message);
+    //        }
+    //    }
+    //    else
+    //    {
+    //        // Si hay error de conexión, muestra el error
+    //        ShowError("Error de conexión: " + request.error);
+    //    }
+    //}
+
+    //private void ShowError(string message)
+    //{
+    //    errorLabel.text = message;
+    //    errorLabel.style.display = DisplayStyle.Flex;
+    //}
+
+    //[System.Serializable]
+    //private class LoginData
+    //{
+    //    public string username, password;
+    //    public LoginData(string username, string password)
+    //    {
+    //        this.username = username;
+    //        this.password = password;
+    //    }
+    //}
+
+    //[System.Serializable]
+    //private class LoginResponse
+    //{
+    //    public string status;
+    //    public string message;
+    //}

@@ -26,7 +26,7 @@ public class MainMenuScreen : MonoBehaviour
     }
 
     private void MultiplayerGame() {
-        SceneManager.LoadScene("MultiplayerScene");
+        SceneManager.LoadScene("LoginScene");
     }
 
     private void ExitGame()

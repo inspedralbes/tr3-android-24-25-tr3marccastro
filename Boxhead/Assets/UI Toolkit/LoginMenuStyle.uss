@@ -39,7 +39,8 @@ TextField .unity-label {
 }
 
 #errorLabel {
-    color: red;
+    color: black;
+    background-color: white;
     font-size: 16px;
     display: none;
     margin-top: 10px;
