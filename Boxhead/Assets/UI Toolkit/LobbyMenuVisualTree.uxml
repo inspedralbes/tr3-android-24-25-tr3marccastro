@@ -1,0 +1,9 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MultiplayerMenuStyle.uss?fileID=7433441132597879392&amp;guid=1e1ec8ec80a2eb55d9d20ed3a71e0b28&amp;type=3#MultiplayerMenuStyle" />
+    <engine:VisualElement name="containerMain" style="flex-grow: 1; background-image: resource(&apos;Images/fondo-rojo&apos;);">
+        <engine:Label text="Lobby" name="Lobby" style="font-size: 40px;" />
+        <engine:Button text="Start" name="StartButton" class="button" />
+        <engine:Button text="Back" name="BackButton" class="button" />
+        <engine:ListView name="playersList" />
+    </engine:VisualElement>
+</engine:UXML>

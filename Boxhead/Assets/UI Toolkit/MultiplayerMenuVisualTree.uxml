@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MultiplayerMenuStyle.uss?fileID=7433441132597879392&amp;guid=3c62c66a69cf8937fa924573189e4df8&amp;type=3#MultiplayerMenuStyle" />
+    <engine:VisualElement name="multiplayerMenu" style="flex-grow: 1; background-image: resource(&apos;Images/fondo-rojo&apos;);">
+        <engine:Button text="Create Room" name="createRoomButton" class="button" />
+        <engine:Button text="Join Room" name="joinRoomButton" class="button" />
+        <engine:Button text="Back" name="backButton" class="button" />
+    </engine:VisualElement>
+</engine:UXML>
