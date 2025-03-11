@@ -1,0 +1,12 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/RegisterMenuStyle.uss?fileID=7433441132597879392&amp;guid=99910a391aa06ce2cac7440c16c76a59&amp;type=3#RegisterMenuStyle" />
+    <engine:VisualElement name="registerScreen">
+        <engine:Label name="registerTitle" text="Register" style="font-size: 40px; margin-bottom: 20px; text-align: center;" />
+        <engine:TextField name="usernameField" label="Username" style="margin-bottom: 10px; width: 450px;" />
+        <engine:TextField name="emailField" label="Email" style="margin-bottom: 10px; width: 450px;" />
+        <engine:TextField name="passwordField" label="Password" style="margin-bottom: 20px; width: 450px;" />
+        <engine:Button name="registerButton" text="Registrarse" class="button" style="width: 250px; height: 40px;" />
+        <engine:Label name="errorLabel" style="color: red; margin-top: 10px; display: none;" />
+        <engine:Button name="backButton" text="Back" class="button" style="width: 250px; height: 40px;" />
+    </engine:VisualElement>
+</engine:UXML>

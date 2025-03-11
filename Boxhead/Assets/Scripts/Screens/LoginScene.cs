@@ -19,6 +19,7 @@ public class LoginManager : MonoBehaviour
         errorLabel.style.display = DisplayStyle.None;
 
         root.Q<Button>("loginButton").clicked += () => StartCoroutine(LoginRequest());
+        root.Q<Button>("registerButton").clicked += () => SceneManager.LoadScene("RegisterMenu");
         root.Q<Button>("backButton").clicked += () => SceneManager.LoadScene("MainMenu");
     }
 

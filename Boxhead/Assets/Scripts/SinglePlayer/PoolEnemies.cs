@@ -5,15 +5,17 @@ using UnityEngine;
 public class PoolEnemies : MonoBehaviour
 {
     private static PoolEnemies _instance;
-
     public static PoolEnemies Instance { get { return _instance; } }
 
     [SerializeField] private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private GameObject prefabPool;
     public int maxEnemies = 20;
-    [SerializeField] private float spawnInterval = 1f; // Tiempo entre aparición de enemigos
-    [SerializeField] private Vector2 spawnAreaMin;
-    [SerializeField] private Vector2 spawnAreaMax;
+    [SerializeField] private float spawnInterval = 1f; // Tiempo entre spawns
+    public int totalEnemies = 0;
+    public int rounds = 0;
+
+    // 🔴 Lista de waypoints donde aparecerán los enemigos
+    public Transform[] waypoints;
 
     private void Awake()
     {
@@ -30,7 +32,7 @@ public class PoolEnemies : MonoBehaviour
     private void Start()
     {
         CreatePool(maxEnemies); // Crea los enemigos en el pool
-        StartCoroutine(SpawnEnemies()); // Comienza la corutina para generar enemigos
+        StartCoroutine(SpawnEnemies()); // Comienza la corutina de spawn
     }
 
     private void CreatePool(int maxEnemies)
@@ -40,10 +42,10 @@ public class PoolEnemies : MonoBehaviour
         for (int i = 0; i < maxEnemies; i++)
         {
             GameObject go = Instantiate(prefabPool);
-            go.transform.parent = transform; // Se asigna como hijo del pool
+            go.transform.parent = transform;
             go.SetActive(false);
             go.name = prefabPool.tag + "_" + i;
-            pool.Add(go); // Agregar el enemigo al pool
+            pool.Add(go);
         }
     }
 
@@ -51,44 +53,63 @@ public class PoolEnemies : MonoBehaviour
     {
         if (pool.Count <= 0) return null;
 
-        GameObject go = pool[0]; // Obtener el primer enemigo disponible
-        pool.RemoveAt(0); // Removerlo de la lista del pool
+        GameObject enemy = pool[0];
+        pool.RemoveAt(0);
 
-        go.transform.position = position; // Asignar la posición al enemigo
-        go.transform.rotation = rotation; // Asignar la rotación
-        go.transform.parent = null; // Sacarlo del parent (para evitar problemas)
-        go.SetActive(true); // Activar el enemigo
+        enemy.transform.position = position;
+        enemy.transform.rotation = rotation;
+        enemy.transform.parent = null;
+        enemy.SetActive(true);
 
-        return go; // Retornar el enemigo
+        return enemy;
     }
 
     public void ReturnToPool(GameObject enemy)
     {
-        enemy.SetActive(false); // Desactivar el enemigo
-        enemy.transform.parent = transform; // Reasignar como hijo del pool
-        enemy.transform.position = Vector3.zero; // Resetear la posición
-        enemy.transform.rotation = Quaternion.identity; // Resetear la rotación
-        pool.Add(enemy); // Reagregarlo al pool
+        enemy.SetActive(false);
+        enemy.transform.parent = transform;
+        enemy.transform.position = Vector3.zero;
+        enemy.transform.rotation = Quaternion.identity;
+        pool.Add(enemy);
     }
 
-    // Corutina para generar enemigos cada 'spawnInterval' segundos
+    // 🔴 Corutina modificada para usar los waypoints
     private IEnumerator SpawnEnemies()
     {
-        while (true) // Bucle infinito para spawn continuo
+        while (true) // Bucle infinito controlado internamente
         {
-            yield return new WaitForSeconds(spawnInterval); // Esperar el intervalo de tiempo
+            if (totalEnemies >= maxEnemies) 
+            {
+                Debug.Log("Fin de la ronda " + rounds);
+                rounds++;
+                totalEnemies = 0;
+                yield return new WaitForSeconds(5f); // Pausa entre rondas
+                Debug.Log("Comienza la ronda " + rounds);
+            }
 
-            int numberOfEnemiesToSpawn = Random.Range(1, 6); // Número aleatorio entre 1 y 5
+            yield return new WaitForSeconds(spawnInterval); // Espera antes de spawnear nuevos enemigos
+
+            int numberOfEnemiesToSpawn = Random.Range(1, 6);
 
             for (int i = 0; i < numberOfEnemiesToSpawn; i++)
             {
-                Vector2 spawnPosition = new(
-                    Random.Range(spawnAreaMin.x, spawnAreaMax.x), // Posición X aleatoria
-                    Random.Range(spawnAreaMin.y, spawnAreaMax.y)  // Posición Y aleatoria
-                );
+                if (totalEnemies >= maxEnemies) break; // Evita exceder el límite de enemigos
 
-                // Obtiene un enemigo del pool y lo coloca en la posición generada
-                GameObject enemy = GetFromPool(spawnPosition, Quaternion.identity);
+                if (waypoints.Length == 0) 
+                {
+                    Debug.LogWarning("No hay waypoints asignados en el PoolEnemies.");
+                    yield break;
+                }
+
+                // Seleccionar un waypoint aleatorio
+                Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
+                
+                // Obtener un enemigo del pool
+                GameObject enemy = GetFromPool(spawnPoint.position, Quaternion.identity);
+                if (enemy != null)
+                {
+                    totalEnemies++;
+                }
             }
         }
     }

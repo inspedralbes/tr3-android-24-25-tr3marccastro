@@ -1,0 +1,13 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+             xmlns:engine="UnityEngine.UIElements"
+             xmlns:editor="UnityEditor.UIElements">
+    
+    <engine:Style src="project://database/Assets/UI%20Toolkit/GameOverMenuStyle.uss" />
+
+    <engine:VisualElement name="gameOverScreen">
+        <engine:Label name="gameOverLabel" text="GAME OVER" />
+        <engine:Button name="retryButton" text="Reintentar" />
+        <engine:Button name="mainMenuButton" text="Menú Principal" />
+    </engine:VisualElement>
+
+</engine:UXML>

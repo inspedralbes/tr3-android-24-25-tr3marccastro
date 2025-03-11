@@ -4,6 +4,7 @@
         <engine:TextField name="usernameField" label="Username" placeholder-text="Introduce tu nombre de usuario" />
         <engine:TextField name="passwordField" label="Password" placeholder-text="Introduce tu contraseña" isPasswordField="true" />
         <engine:Button name="loginButton" text="Login" class="button" />
+        <engine:Button name="registerButton" text="Register" class="button" />
         <engine:Label name="errorLabel" style="color: red; display: none;" />
         <engine:Button text="Back" name="backButton" class="button" />
     </engine:VisualElement>

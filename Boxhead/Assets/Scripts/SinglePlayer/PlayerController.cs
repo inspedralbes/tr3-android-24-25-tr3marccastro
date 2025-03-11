@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     // 🔴 Variables de vida
     public float maxHealth = 100f;
     private float currentHealth;
+    public GameOverMenu gameOverMenu;
 
     void Start()
     {
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("¡Jugador muerto!");
-        gameObject.SetActive(false); // Desactiva el jugador
+        gameOverMenu.ShowGameOver();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

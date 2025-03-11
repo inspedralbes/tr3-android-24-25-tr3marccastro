@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private int _health = 3; // Salud del zombie
-    [SerializeField] private float moveSpeed = 3f; // Velocidad de movimiento del zombie
+    public int _health = 3; // Salud del zombie
+    public float moveSpeed = 3f; // Velocidad de movimiento del zombie
     private Transform playerTransform; // Referencia al transform del jugador
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -47,7 +47,10 @@ public class EnemyBase : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Cuando el zombie colisiona, recibe 1 de daño
-        GetDamage(1);
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            // Cuando el zombie colisiona, recibe 1 de daño
+            GetDamage(1);
+        }
     }
 }
