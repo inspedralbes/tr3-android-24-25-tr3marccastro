@@ -11,7 +11,7 @@ public class RegisterMenu : MonoBehaviour
     private Button registerButton, backButton;
     private Label errorLabel;
 
-    private string apiUrl = "http://localhost:3000/api/register"; // URL del backend
+    private string apiUrl = "http://localhost:3001/api/register"; // URL del backend
 
     void OnEnable()
     {
@@ -54,14 +54,15 @@ public class RegisterMenu : MonoBehaviour
     // Enviar la solicitud POST al backend
     private IEnumerator RegisterRequest(string username, string email, string password)
     {
-        if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
         {
-            Debug.Log("Por favor, ingresa usuario y contraseña.");
+            Debug.Log("Todos los campos son obligatorios.");
             yield break;
         }
 
         WWWForm form = new();
         form.AddField("username",  usernameField.value);
+        form.AddField("email", emailField.value);
         form.AddField("password", passwordField.value);
 
         UnityWebRequest request = UnityWebRequest.Post(apiUrl, form);
@@ -81,11 +82,6 @@ public class RegisterMenu : MonoBehaviour
             {
                 Debug.Log("Operación exitosa. Cargando la escena...");
                 SceneManager.LoadScene("MultiplayerScene");
-            }
-            else
-            {
-                // En caso de que el servidor no devuelva el resultado esperado
-                Debug.LogWarning("Respuesta inesperada: " + result);
             }
         }
         else
