@@ -2,8 +2,9 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    public int _health = 3; // Salud del zombie
-    public float moveSpeed = 3f; // Velocidad de movimiento del zombie
+    public int health = 3; // Salud del zombie
+    public float speed = 3f; // Velocidad de movimiento del zombie
+    public float damage = 10f;
     private Transform playerTransform; // Referencia al transform del jugador
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -32,14 +33,14 @@ public class EnemyBase : MonoBehaviour
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         if (rb != null)
         {
-            rb.linearVelocity = direction * moveSpeed;
+            rb.linearVelocity = direction * speed;
         }
     }
 
     public void GetDamage(int damage)
     {
-        _health -= damage;
-        if (_health <= 0)
+        health -= damage;
+        if (health <= 0)
         {
             PoolEnemies.Instance.ReturnToPool(gameObject);
         }
