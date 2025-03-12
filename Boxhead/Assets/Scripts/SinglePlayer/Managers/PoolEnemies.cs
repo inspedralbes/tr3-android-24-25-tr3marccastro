@@ -9,7 +9,7 @@ public class PoolEnemies : MonoBehaviour
 
     [SerializeField] private List<GameObject> pool = new List<GameObject>();
     [SerializeField] private GameObject prefabPool;
-    public int maxEnemies = 20;
+    public int maxEnemies = 2;
     [SerializeField] private float spawnInterval = 1f; // Tiempo entre spawns
     public int totalEnemies = 0;
     public int rounds = 0;
@@ -78,14 +78,6 @@ public class PoolEnemies : MonoBehaviour
     {
         while (true) // Bucle infinito controlado internamente
         {
-            if (totalEnemies >= maxEnemies) 
-            {
-                Debug.Log("Fin de la ronda " + rounds);
-                rounds++;
-                totalEnemies = 0;
-                yield return new WaitForSeconds(5f); // Pausa entre rondas
-                Debug.Log("Comienza la ronda " + rounds);
-            }
 
             yield return new WaitForSeconds(spawnInterval); // Espera antes de spawnear nuevos enemigos
 

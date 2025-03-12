@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 2028729943669122526}
   - component: {fileID: 3102814809676586624}
   - component: {fileID: 7017073442541750457}
-  - component: {fileID: 6995617758234739701}
   - component: {fileID: 849492866987409923}
+  - component: {fileID: 9029277706080506916}
+  - component: {fileID: -653093390368994313}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -140,20 +141,6 @@ PolygonCollider2D:
       - {x: -0.5, y: -0.28866667}
       - {x: 0.5, y: -0.28866667}
   m_UseDelaunayMesh: 0
---- !u!114 &6995617758234739701
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005420952513992792}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d7797547731425d986ab2967eb8b233, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 3
-  moveSpeed: 3
 --- !u!50 &849492866987409923
 Rigidbody2D:
   serializedVersion: 5
@@ -181,3 +168,33 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &9029277706080506916
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005420952513992792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6b859e78b03f2d3e806f09245d0dc11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  speed: 1
+  damage: 10
+--- !u!114 &-653093390368994313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2005420952513992792}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d7797547731425d986ab2967eb8b233, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  speed: 3
+  damage: 10

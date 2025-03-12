@@ -74,7 +74,7 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("¡Jugador muerto!");
-        gameOverMenu.ShowGameOver();
+        // gameOverMenu.ShowGameOver();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
