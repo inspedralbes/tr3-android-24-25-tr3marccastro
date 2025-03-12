@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public LifeBar lifeBar;
 
     // 🔴 Variables de vida
-    public float maxHealth = 100f;
+    public int maxHealth = 100;
     private float currentHealth;
     public GameOverMenu gameOverMenu;
 
@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // 🔴 Método para recibir daño y actualizar la barra
-    public void TakeDamage(float damage)
+    public void TakeDamagePlayer(float damage)
     {
         currentHealth -= damage;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
@@ -75,15 +75,5 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("¡Jugador muerto!");
         // gameOverMenu.ShowGameOver();
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-            Debug.Log("Daño recibido");
-            TakeDamage(10);
-        }
-        
     }
 }

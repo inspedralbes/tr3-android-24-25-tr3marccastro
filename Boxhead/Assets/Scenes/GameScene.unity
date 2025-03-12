@@ -266,7 +266,7 @@ Transform:
   m_GameObject: {fileID: 288661502}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.15, y: 6.71, z: 0}
+  m_LocalPosition: {x: -2.62, y: 3.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -469,7 +469,7 @@ Transform:
   m_GameObject: {fileID: 788277608}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.72, y: -0.27, z: 0}
+  m_LocalPosition: {x: -9.77, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -751,7 +751,7 @@ Transform:
   m_GameObject: {fileID: 1059658756}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.94, y: -0.61, z: 0}
+  m_LocalPosition: {x: 5.65, y: -0.28, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1088,6 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d3e84529267b00af1793d1584fce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyStatsManager: {fileID: 5172621748137671641, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
 --- !u!4 &1547257453
 Transform:
   m_ObjectHideFlags: 0
@@ -1128,7 +1129,7 @@ Transform:
   m_GameObject: {fileID: 1684045547}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.88, y: -6.53, z: 0}
+  m_LocalPosition: {x: -1.97, y: -4.71, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1151,7 +1152,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1684347660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1215,7 +1216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1739124218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1294,9 +1295,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pool: []
   prefabPool: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
-  maxEnemies: 2
+  maxEnemies: 4
   spawnInterval: 1
-  totalEnemies: 0
+  totalEnemies: 4
   rounds: 0
   waypoints:
   - {fileID: 288661503}

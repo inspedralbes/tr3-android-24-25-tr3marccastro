@@ -56,8 +56,8 @@ public class PoolEnemies : MonoBehaviour
         GameObject enemy = pool[0];
         pool.RemoveAt(0);
 
-        enemy.transform.position = position;
-        enemy.transform.rotation = rotation;
+        //enemy.GetComponent<EnemyStatsManager>().Initialized();
+        enemy.transform.SetPositionAndRotation(position, rotation);
         enemy.transform.parent = null;
         enemy.SetActive(true);
 
@@ -70,6 +70,7 @@ public class PoolEnemies : MonoBehaviour
         enemy.transform.parent = transform;
         enemy.transform.position = Vector3.zero;
         enemy.transform.rotation = Quaternion.identity;
+
         pool.Add(enemy);
     }
 
@@ -78,14 +79,13 @@ public class PoolEnemies : MonoBehaviour
     {
         while (true) // Bucle infinito controlado internamente
         {
-
             yield return new WaitForSeconds(spawnInterval); // Espera antes de spawnear nuevos enemigos
 
             int numberOfEnemiesToSpawn = Random.Range(1, 6);
 
             for (int i = 0; i < numberOfEnemiesToSpawn; i++)
             {
-                if (totalEnemies >= maxEnemies) break; // Evita exceder el límite de enemigos
+                // if (totalEnemies >= maxEnemies) break; // Evita exceder el límite de enemigos
 
                 if (waypoints.Length == 0) 
                 {
@@ -98,10 +98,10 @@ public class PoolEnemies : MonoBehaviour
                 
                 // Obtener un enemigo del pool
                 GameObject enemy = GetFromPool(spawnPoint.position, Quaternion.identity);
-                if (enemy != null)
-                {
-                    totalEnemies++;
-                }
+                //if (enemy != null)
+                //{
+                //    totalEnemies++;
+                //}
             }
         }
     }

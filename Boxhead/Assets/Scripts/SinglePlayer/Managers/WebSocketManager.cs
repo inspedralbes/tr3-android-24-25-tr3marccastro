@@ -7,7 +7,7 @@ using NativeWebSocket;
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocket websocket;
-    private EnemyStatsManager enemyStatsManager;
+    public EnemyStatsManager enemyStatsManager;
 
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
@@ -61,13 +61,21 @@ public class WebSocketManager : MonoBehaviour
     private void ProcessMessage(string message) {
         EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
 
-        Debug.Log(stats.speed);
+        EnemyStatsManager[] allEnemies = FindObjectsByType<EnemyStatsManager>(FindObjectsSortMode.None);
+
+        foreach (var enemy in allEnemies)
+        {
+            enemy.UpdateStats(stats.health, stats.speed, stats.damage);
+        }
+
+        Debug.Log($"Estadísticas aplicadas a {allEnemies.Length} enemigos.");
     }
 
     private async void OnApplicationQuit()
     {
         if (websocket != null)
         {
+            // enemyStatsManager.UpdateStats(1, 1);
             await websocket.Close();
         }
     }
@@ -75,6 +83,7 @@ public class WebSocketManager : MonoBehaviour
     [System.Serializable]
     public class EnemyStats
     {
+        public int health;
         public float speed;
         public int damage;
     }

@@ -4,6 +4,7 @@ public class PlayerBullet : MonoBehaviour
 {
     public float speed = 10f;
     public float lifetime = 2f;
+    private int damageBullet = 1;
 
     void Update()
     {
@@ -21,7 +22,18 @@ public class PlayerBullet : MonoBehaviour
     }
 
     private void OnCollisionEnter2D(Collision2D collision) {
-        Vector3 position = collision.collider.ClosestPoint(transform.position);
+        // Si la bala colisiona con un enemigo, le aplica el daño
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // Llamamos al método TakeDamage() en el enemigo
+            EnemyStatsManager enemy = collision.gameObject.GetComponent<EnemyStatsManager>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damageBullet); // Aplica el daño de la bala al enemigo
+            }
+        }
+
+        // Se devuelve al pool la bala después de la colisión (con cualquier objeto)
         PoolBullets.Instance.ReturnToPool(gameObject);
     }
 
