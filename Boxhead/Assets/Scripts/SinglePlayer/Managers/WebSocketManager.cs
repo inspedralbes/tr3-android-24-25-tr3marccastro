@@ -7,7 +7,8 @@ using NativeWebSocket;
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocket websocket;
-    public ZombieController zombieController;
+    // public ZombieController zombieController;
+    public EnemyStatsManager statsManager;
 
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
@@ -59,6 +60,12 @@ public class WebSocketManager : MonoBehaviour
     }
 
     private void ProcessMessage(string message) {
+        EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
+
+        // Actualizamos las estadísticas globales a través del EnemyStatsManager
+        statsManager.UpdateStats(stats.health, stats.speed, stats.damage);
+
+        /*
         // Convertir el mensaje JSON a un objeto EnemyStats
         EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
 
@@ -90,6 +97,7 @@ public class WebSocketManager : MonoBehaviour
         }
 
         Debug.Log($"Estadísticas aplicadas a {allEnemies.Length} enemigos.");
+        */
     }
 
     private async void OnApplicationQuit()

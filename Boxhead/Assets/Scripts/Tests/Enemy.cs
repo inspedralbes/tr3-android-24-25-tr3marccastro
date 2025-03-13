@@ -2,38 +2,72 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int health = 3; // Salud inicial del enemigo
     private int currentHealth;
+    private float currentSpeed;
+    private int currentDamage;
+    private Rigidbody2D rb;
 
-    private void OnEnable()
+    void Awake()
     {
-        Initialize(); // Restaurar vida al activarse
-    }
+        // Buscar el EnemyStatsManager en la escena
+        EnemyStatsManager statsManager = FindObjectOfType<EnemyStatsManager>();
 
-    // M�todo para inicializar el enemigo, lo usas para poner la salud a su valor inicial cuando se crea
-    public void Initialize()
-    {
-        currentHealth = health; // Establecer la salud inicial
-    }
-
-    // M�todo para aplicar da�o al enemigo
-    public void TakeDamage(int damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
+        if (statsManager != null)
         {
-            Die(); // Si la salud llega a 0, el enemigo muere
+            // Obtenemos las estadísticas del Manager
+            (currentHealth, currentSpeed, currentDamage) = statsManager.GetStats();
+            Debug.Log($"Hola gente:222222 Estadísticas iniciales del zombie: Health = {currentHealth}, Speed = {currentSpeed}, Damage = {currentDamage}");
+        }
+        else
+        {
+            Debug.LogError("No se encontró el EnemyStatsManager en la escena.");
+        }
+
+        // Inicializar el Rigidbody
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+
+    void Update()
+    {
+        // Aquí puedes agregar la lógica para mover al zombie y demás comportamiento
+        // Usamos currentSpeed para mover al enemigo, por ejemplo
+        MoveZombie();
+    }
+
+    void MoveZombie()
+    {
+        // Lógica para mover el zombie
+        // Por ejemplo, usando currentSpeed para la velocidad
+        if (rb != null)
+        {
+            rb.linearVelocity = new Vector2(0, -currentSpeed); // Mueve el zombie hacia abajo como ejemplo
         }
     }
 
-    // M�todo que maneja la muerte del enemigo
+    // Método para que el enemigo reciba daño
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
     private void Die()
     {
-        // Puedes agregar l�gica adicional aqu�, como animaciones o efectos
-        Debug.Log("Enemigo muerto!");
+        Debug.Log("El enemigo ha muerto");
+        EnemyPoolManager.Instance.ReturnToPool(gameObject);
+    }
 
-        // Devolver el enemigo al pool para reutilizarlo
-        // PoolEnemies.Instance.ReturnToPool(gameObject); // Aseg�rate de tener un pool para los enemigos tambi�n
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        // Si la bala colisiona con un enemigo, le aplica el daño
+        if (collision.gameObject.CompareTag("Bullet"))
+        {
+            // Llamamos al método TakeDamage() en el enemigo
+            TakeDamage(1);
+        }
     }
 }

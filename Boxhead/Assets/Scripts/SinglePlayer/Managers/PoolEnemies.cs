@@ -45,10 +45,11 @@ public class PoolEnemies : MonoBehaviour
         for (int i = 0; i < zombieCount; i++) {
             AddToPool(Instantiate(prefabZombie), zombiePool, "Zombie", i);
         }
-            
+        /* 
         for (int i = 0; i < dogZombieCount; i++) {
             AddToPool(Instantiate(prefabDogZombie), dogZombiePool, "DogZombie", i);
         }
+        */
     }
 
     private void AddToPool(GameObject enemy, List<GameObject> pool, string name, int index)
@@ -77,18 +78,20 @@ public class PoolEnemies : MonoBehaviour
         GameObject enemy = pool[0];
         pool.RemoveAt(0);
 
+        /*
         if (enemy.TryGetComponent<ZombieController>(out ZombieController zombie))
         {
-            zombie.Initialized();
+            zombie.InitializeStats();
         }
         else if (enemy.TryGetComponent<DogZombieController>(out DogZombieController dogZombie))
         {
-            dogZombie.Initialized();
+            dogZombie.InitializeStats();
         }
         else
         {
             Debug.LogWarning("El enemigo no tiene un controlador válido: " + enemy.name);
         }
+        */
 
         enemy.transform.SetPositionAndRotation(position, rotation);
         enemy.transform.parent = null;
@@ -140,7 +143,7 @@ public class PoolEnemies : MonoBehaviour
                 Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
                 GameObject zombie = GetZombie(spawnPoint.position, Quaternion.identity);
             }
-
+            /*
             // Si ha pasado el tiempo suficiente para spawn de dogzombies, generar dogzombies
             if (dogZombieSpawnTime >= 5f)  // 5 segundos para spawn de dogzombies, puedes ajustar este valor
             {
@@ -163,6 +166,7 @@ public class PoolEnemies : MonoBehaviour
                 // Resetear el temporizador para el siguiente ciclo de dogzombies
                 dogZombieSpawnTime = 0f;
             }
+            */
         }
     }
 }
