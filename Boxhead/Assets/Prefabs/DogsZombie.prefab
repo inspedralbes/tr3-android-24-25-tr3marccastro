@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1265499276257142666}
   - component: {fileID: 7101317489431778526}
   - component: {fileID: 3791832468117046500}
-  - component: {fileID: -7971799158798967306}
+  - component: {fileID: -2747003173500889868}
   m_Layer: 6
   m_Name: DogsZombie
   m_TagString: DogZombie
@@ -153,7 +153,7 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 0.5
---- !u!114 &-7971799158798967306
+--- !u!114 &-2747003173500889868
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -162,9 +162,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 744409591397940685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03754266b72b08142a3bba3252052e50, type: 3}
+  m_Script: {fileID: 11500000, guid: a5fc3d57f1e70c4498ab09d02cb11883, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  speed: 5
-  damage: 20

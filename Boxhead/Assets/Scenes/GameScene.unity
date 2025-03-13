@@ -865,9 +865,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4725eac002a285b4b982b0afa1640bc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 3
-  speed: 1
-  damage: 10
 --- !u!4 &1071743951
 Transform:
   m_ObjectHideFlags: 0
@@ -1229,7 +1226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f3d3e84529267b00af1793d1584fce5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statsManager: {fileID: 0}
+  statsManager: {fileID: 1071743950}
 --- !u!1 &1684045547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1473,8 +1470,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9200bd48c725613268d45e1345b59f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 8075204700732180198, guid: 06258878b224c658688fb6ff5e45de36, type: 3}
-  poolSize: 2
+  zombiePrefab: {fileID: 8075204700732180198, guid: 06258878b224c658688fb6ff5e45de36, type: 3}
+  dogZombiePrefab: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
+  zombiePoolSize: 10
+  dogZombiePoolSize: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

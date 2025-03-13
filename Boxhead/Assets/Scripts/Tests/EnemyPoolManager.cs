@@ -4,9 +4,18 @@ using UnityEngine;
 public class EnemyPoolManager : MonoBehaviour
 {
     public static EnemyPoolManager Instance; // Singleton para acceso global
-    public GameObject enemyPrefab; // Prefab del enemigo
-    public int poolSize = 10; // Tamaño del pool
-    private Queue<GameObject> enemyPool = new Queue<GameObject>();
+
+    // Prefabs para los diferentes tipos de enemigos
+    public GameObject zombiePrefab;
+    public GameObject dogZombiePrefab;
+
+    // Tamaños de los pools para cada tipo de enemigo
+    public int zombiePoolSize = 10;
+    public int dogZombiePoolSize = 10;
+
+    // Pool de enemigos
+    private List<GameObject> zombiePool = new List<GameObject>();
+    private List<GameObject> dogZombiePool = new List<GameObject>();
 
     private void Awake()
     {
@@ -16,36 +25,106 @@ public class EnemyPoolManager : MonoBehaviour
 
     private void Start()
     {
-        // Crear enemigos iniciales en el pool
-        for (int i = 0; i < poolSize; i++)
+        // Verificar si los prefabs están asignados
+        if (zombiePrefab == null)
         {
-            GameObject enemy = Instantiate(enemyPrefab);
-            enemy.SetActive(false);
-            enemyPool.Enqueue(enemy);
+            Debug.LogError("Zombie Prefab no asignado en el Inspector.");
+            return;
+        }
+
+        if (dogZombiePrefab == null)
+        {
+            Debug.LogError("Dog Zombie Prefab no asignado en el Inspector.");
+            return;
+        }
+
+        // Crear enemigos iniciales en el pool
+        CreateEnemyPool(zombiePoolSize, dogZombiePoolSize);
+    }
+
+    // Función para crear los pools de enemigos
+    private void CreateEnemyPool(int zombieCount, int dogZombieCount)
+    {
+        // Crear zombies
+        for (int i = 0; i < zombieCount; i++)
+        {
+            AddToPool(Instantiate(zombiePrefab), zombiePool, "Zombie", i);
+        }
+
+        // Crear dog zombies
+        for (int i = 0; i < dogZombieCount; i++)
+        {
+            AddToPool(Instantiate(dogZombiePrefab), dogZombiePool, "DogZombie", i);
         }
     }
 
-    public GameObject GetEnemy(Vector3 position, Quaternion rotation)
+    // Función para agregar enemigos al pool
+    private void AddToPool(GameObject enemy, List<GameObject> pool, string name, int index)
     {
-        if (enemyPool.Count > 0)
+        // Asegurarse de que el enemigo esté desactivado antes de agregarlo al pool
+        enemy.SetActive(false);
+
+        // Hacer que el enemigo sea hijo de este objeto para organizarlo en la jerarquía
+        enemy.transform.parent = transform;
+
+        // Asignar un nombre único al enemigo
+        enemy.name = name + "_" + index;
+
+        // Agregar el enemigo al pool
+        pool.Add(enemy);
+    } 
+
+    // Obtener un enemigo del pool por tipo (Zombie o DogZombie)
+    public GameObject GetEnemy(string enemyType, Vector3 position, Quaternion rotation)
+    {
+        if (string.IsNullOrEmpty(enemyType))
         {
-            GameObject enemy = enemyPool.Dequeue();
+            Debug.LogError("enemyType no puede ser null o vacío.");
+            return null;
+        }
+
+        if (zombiePool == null || zombiePool.Count == 0)
+        {
+            Debug.LogError("El pool de enemigos está vacío o no se ha inicializado.");
+            return null;
+        }
+
+        GameObject enemy = null;
+
+        // Seleccionar el pool correcto según el tipo de enemigo
+        if (enemyType == "Zombie" && zombiePool.Count > 0)
+        {
+            enemy = zombiePool[0];
+            zombiePool.RemoveAt(0);
+        }
+        else if (enemyType == "DogZombie" && dogZombiePool.Count > 0)
+        {
+            enemy = dogZombiePool[0];
+            dogZombiePool.RemoveAt(0);
+        }
+
+        if (enemy != null)
+        {
             enemy.transform.position = position;
             enemy.transform.rotation = rotation;
             enemy.SetActive(true);
-            return enemy;
+        }
+
+        return enemy;
+    }
+
+    // Devolver un enemigo al pool
+    public void ReturnToPool(GameObject enemy, bool isZombie)
+    {
+        enemy.SetActive(false);
+
+        if (isZombie)
+        {
+            zombiePool.Add(enemy);
         }
         else
         {
-            // Si el pool está vacío, crea uno nuevo (opcional)
-            GameObject enemy = Instantiate(enemyPrefab, position, rotation);
-            return enemy;
+            dogZombiePool.Add(enemy);
         }
-    }
-
-    public void ReturnToPool(GameObject enemy)
-    {
-        enemy.SetActive(false);
-        enemyPool.Enqueue(enemy);
     }
 }

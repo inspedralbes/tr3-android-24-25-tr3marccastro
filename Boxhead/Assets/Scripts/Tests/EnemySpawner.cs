@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -12,6 +13,18 @@ public class EnemySpawner : MonoBehaviour
     void SpawnEnemy()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
-        EnemyPoolManager.Instance.GetEnemy(spawnPoint.position, Quaternion.identity);
+        EnemyPoolManager.Instance.GetEnemy("Zombie", spawnPoint.position, Quaternion.identity);
+
+        StartCoroutine(SpawnDogZombieWithDelay());
     }
+    IEnumerator SpawnDogZombieWithDelay()
+    {
+        // Esperamos 3 segundos
+        yield return new WaitForSeconds(3f);
+
+        // Instanciamos el DogZombie después del retraso
+        Transform spawnPoint2 = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        EnemyPoolManager.Instance.GetEnemy("DogZombie", spawnPoint2.position, Quaternion.identity);
+    }
+
 }

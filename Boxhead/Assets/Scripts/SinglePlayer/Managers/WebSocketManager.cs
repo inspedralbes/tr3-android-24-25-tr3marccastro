@@ -63,41 +63,14 @@ public class WebSocketManager : MonoBehaviour
         EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
 
         // Actualizamos las estadísticas globales a través del EnemyStatsManager
-        statsManager.UpdateStats(stats.health, stats.speed, stats.damage);
-
-        /*
-        // Convertir el mensaje JSON a un objeto EnemyStats
-        EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
-
-        // Declaramos la variable fuera del bloque condicional
-        MonoBehaviour[] allEnemies;
-
-        // Dependiendo del nombre del enemigo, encontramos los enemigos correspondientes
-        if (stats.name == "Zombie")
+        if (statsManager != null)
         {
-            allEnemies = FindObjectsByType<ZombieController>(FindObjectsSortMode.None);
+            statsManager.UpdateEnemyStats(stats.name, stats.health, stats.speed, stats.damage);
         }
-        else 
+        else
         {
-            allEnemies = FindObjectsByType<DogZombieController>(FindObjectsSortMode.None);
+            Debug.LogWarning("Problema");
         }
-
-        // Iteramos sobre los enemigos encontrados y actualizamos sus estadísticas
-        foreach (var enemy in allEnemies)
-        {
-            // Asegurarse de que la variable enemy sea del tipo correcto antes de llamarle a UpdateStats
-            if (enemy is ZombieController zombie)
-            {
-                zombie.UpdateStats(stats.health, stats.speed, stats.damage);
-            }
-            else if (enemy is DogZombieController dogZombie)
-            {
-                dogZombie.UpdateStats(stats.health, stats.speed, stats.damage);
-            }
-        }
-
-        Debug.Log($"Estadísticas aplicadas a {allEnemies.Length} enemigos.");
-        */
     }
 
     private async void OnApplicationQuit()
