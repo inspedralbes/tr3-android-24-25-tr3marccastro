@@ -1068,7 +1068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1547257453}
-  - component: {fileID: 1547257452}
+  - component: {fileID: 1547257454}
   m_Layer: 0
   m_Name: WebSocketManager
   m_TagString: Untagged
@@ -1076,19 +1076,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1547257452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1547257451}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3d3e84529267b00af1793d1584fce5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyStatsManager: {fileID: 5172621748137671641, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
 --- !u!4 &1547257453
 Transform:
   m_ObjectHideFlags: 0
@@ -1104,6 +1091,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1547257454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1547257451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f3d3e84529267b00af1793d1584fce5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zombieController: {fileID: 0}
 --- !u!1 &1684045547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,7 +1216,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1739124218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1293,11 +1293,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df6bc4a33fc179a5986bea30da2b9103, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pool: []
-  prefabPool: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
-  maxEnemies: 4
+  prefabZombie: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
+  prefabDogZombie: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
+  zombieCount: 10
+  dogZombieCount: 5
   spawnInterval: 1
-  totalEnemies: 4
+  totalEnemies: 0
   rounds: 0
   waypoints:
   - {fileID: 288661503}

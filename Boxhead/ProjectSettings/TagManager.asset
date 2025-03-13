@@ -4,8 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - Enemy
+  - Zombie
   - Bullet
+  - DogZombie
   layers:
   - Default
   - TransparentFX
@@ -13,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Zombie
+  - Monsters
   - Bullet
   - Player
   - 

@@ -23,14 +23,22 @@ public class PlayerBullet : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision) {
         // Si la bala colisiona con un enemigo, le aplica el daño
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Zombie"))
         {
             // Llamamos al método TakeDamage() en el enemigo
-            EnemyStatsManager enemy = collision.gameObject.GetComponent<EnemyStatsManager>();
+            ZombieController enemy = collision.gameObject.GetComponent<ZombieController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damageBullet); // Aplica el daño de la bala al enemigo
             }
+        }
+        else if(collision.gameObject.CompareTag("DogZombie")) {
+            DogZombieController enemy = collision.gameObject.GetComponent<DogZombieController>();
+            if (enemy != null)
+            {
+                enemy.TakeDamage(damageBullet); // Aplica el daño de la bala al enemigo
+            }
+            else Debug.Log("No existe el componente");
         }
 
         // Se devuelve al pool la bala después de la colisión (con cualquier objeto)

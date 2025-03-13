@@ -5,13 +5,13 @@ using System.Net.WebSockets;
 using System.Threading;
 using System.Threading.Tasks;
 
-public class EnemyStatsManager : MonoBehaviour
+public class DogZombieController : MonoBehaviour
 {
-    public int health = 3;
+    public int health = 1;
     private int currentHealth;
-    public float speed = 1;
+    public float speed = 5;
     private float currentspeed;
-    public int damage = 10;
+    public int damage = 20;
     private int currentdamage;
     private Transform playerTransform; // Referencia al transform del jugador
     private Rigidbody2D rb;
@@ -47,27 +47,15 @@ public class EnemyStatsManager : MonoBehaviour
         if (playerTransform != null)
         {
             Vector2 direction = (playerTransform.position - transform.position).normalized;
-            MoveZombie(direction);
+            MoveDogZombie(direction);
         }
     }
 
-    void MoveZombie(Vector2 direction)
+    void MoveDogZombie(Vector2 direction)
     {
         if (rb != null)
         {
             rb.linearVelocity = direction * currentspeed; // Corregido: usar rb.velocity
-        }
-    }
-
-    public void GetDamage(int damageBullet)
-    {
-        if (currentHealth == 0)
-        {
-            PoolEnemies.Instance.ReturnToPool(gameObject);
-        }
-        else
-        {
-            currentHealth -= damageBullet;
         }
     }
 
@@ -87,7 +75,7 @@ public class EnemyStatsManager : MonoBehaviour
         Debug.Log("Enemigo muerto!");
 
         // Devolver el enemigo al pool para reutilizarlo
-        PoolEnemies.Instance.ReturnToPool(gameObject); // Asegúrate de tener un pool para los enemigos también
+        PoolEnemies.Instance.ReturnToPool(gameObject, false); // Asegúrate de tener un pool para los enemigos también
     }
 
     public void UpdateStats(int newHealth, float newSpeed, int newDamage)
@@ -96,7 +84,7 @@ public class EnemyStatsManager : MonoBehaviour
         if (newSpeed > 0) speed = newSpeed;
         if (newDamage > 0) damage = newDamage;
 
-        Debug.Log("Estadísticas actualizadas: Health = " + health + ", Speed = " + speed + ", Damage = " + damage);
+        Debug.Log("Estadísticas actualizadas de DogZombieController: Health = " + health + ", Speed = " + speed + ", Damage = " + damage);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

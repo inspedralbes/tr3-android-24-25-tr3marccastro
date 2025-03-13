@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
 public class PoolEnemies : MonoBehaviour
 {
     private static PoolEnemies _instance;
@@ -13,7 +14,7 @@ public class PoolEnemies : MonoBehaviour
     [SerializeField] private GameObject prefabDogZombie;
     public int zombieCount = 10;
     public int dogZombieCount = 5;
-    // [SerializeField] private int totalEnemies = 0;
+    [SerializeField] private int totalEnemies = 0, maxInScreen = 0;
     [SerializeField] private float spawnInterval = 1f; // Tiempo entre spawns
     public int rounds = 0;
 
@@ -110,26 +111,30 @@ public class PoolEnemies : MonoBehaviour
         else {
             dogZombiePool.Add(enemy);
         }
+        maxInScreen--;
     }
 
     // 🔴 Corutina modificada para usar los waypoints
     private IEnumerator SpawnEnemies()
     {
-        float dogZombieSpawnTime = 0f;  // Temporizador para el spawn de dogzombies
 
         while (true)
         {
-            // Aumentar el tiempo para el spawn de dogzombies
-            dogZombieSpawnTime += spawnInterval;
+            // Verificar si se ha llegado al número máximo de enemigos en esta ronda
+            if (maxInScreen == 0)
+            {
+                Debug.Log("Fin de la ronda " + rounds);
+                rounds++;
+                totalEnemies = 0;
+                yield return new WaitForSeconds(5f); // Pausa entre rondas
+                Debug.Log("Comienza la ronda " + rounds);
+            }
 
-            // Esperar un intervalo general de zombies
             yield return new WaitForSeconds(spawnInterval);
 
-            // Generar un número aleatorio de zombies (entre 1 y 6 por spawn)
-            int zombiesToSpawn = Random.Range(3, 6);
+            int numberOfEnemiesToSpawn = Random.Range(1, 6);
 
-            // Spawnear los zombies
-            for (int i = 0; i < zombiesToSpawn; i++)
+            for (int i = 0; i < numberOfEnemiesToSpawn; i++)
             {
                 if (waypoints.Length == 0)
                 {
@@ -138,31 +143,30 @@ public class PoolEnemies : MonoBehaviour
                 }
 
                 Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
-                GameObject zombie = GetZombie(spawnPoint.position, Quaternion.identity);
-            }
 
-            // Si ha pasado el tiempo suficiente para spawn de dogzombies, generar dogzombies
-            if (dogZombieSpawnTime >= 5f)  // 5 segundos para spawn de dogzombies, puedes ajustar este valor
-            {
-                // Generar entre 0 y la cantidad máxima de dogzombies
-                int dogZombiesToSpawn = Random.Range(0, dogZombieCount + 1); // de 0 a dogZombieCount
+                GameObject enemy = null;
 
-                // Spawnear los dogzombies
-                for (int i = 0; i < dogZombiesToSpawn; i++)
+                if (rounds % 2 == 1 && totalEnemies <= zombieCount)  // Si la ronda es par, spawn solo Zombies
                 {
-                    if (waypoints.Length == 0)
+                    enemy = GetZombie(spawnPoint.position, Quaternion.identity);
+                    if (enemy != null)
                     {
-                        Debug.LogWarning("No hay waypoints asignados.");
-                        yield break;
+                        totalEnemies++;  // Incrementar el contador de zombies vivos
+                        maxInScreen++;
                     }
-
-                    Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
-                    GameObject dogZombie = GetDogZombie(spawnPoint.position, Quaternion.identity);
                 }
-
-                // Resetear el temporizador para el siguiente ciclo de dogzombies
-                dogZombieSpawnTime = 0f;
+                else if(totalEnemies <= dogZombieCount)  // Si la ronda es impar, spawn solo DogZombies
+                {
+                    enemy = GetDogZombie(spawnPoint.position, Quaternion.identity);
+                    if (enemy != null)
+                    {
+                        totalEnemies++;  // Incrementar el contador de dogzombies vivos
+                        maxInScreen++;
+                    }
+                }
+                else break;
             }
         }
     }
 }
+*/

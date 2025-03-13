@@ -10,13 +10,13 @@ public class Enemy : MonoBehaviour
         Initialize(); // Restaurar vida al activarse
     }
 
-    // Método para inicializar el enemigo, lo usas para poner la salud a su valor inicial cuando se crea
+    // Mï¿½todo para inicializar el enemigo, lo usas para poner la salud a su valor inicial cuando se crea
     public void Initialize()
     {
         currentHealth = health; // Establecer la salud inicial
     }
 
-    // Método para aplicar daño al enemigo
+    // Mï¿½todo para aplicar daï¿½o al enemigo
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -27,13 +27,13 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    // Método que maneja la muerte del enemigo
+    // Mï¿½todo que maneja la muerte del enemigo
     private void Die()
     {
-        // Puedes agregar lógica adicional aquí, como animaciones o efectos
+        // Puedes agregar lï¿½gica adicional aquï¿½, como animaciones o efectos
         Debug.Log("Enemigo muerto!");
 
         // Devolver el enemigo al pool para reutilizarlo
-        PoolEnemies.Instance.ReturnToPool(gameObject); // Asegúrate de tener un pool para los enemigos también
+        // PoolEnemies.Instance.ReturnToPool(gameObject); // Asegï¿½rate de tener un pool para los enemigos tambiï¿½n
     }
 }

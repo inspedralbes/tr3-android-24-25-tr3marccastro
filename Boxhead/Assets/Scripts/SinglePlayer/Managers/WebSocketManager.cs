@@ -7,7 +7,7 @@ using NativeWebSocket;
 public class WebSocketManager : MonoBehaviour
 {
     private WebSocket websocket;
-    public EnemyStatsManager enemyStatsManager;
+    public ZombieController zombieController;
 
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
@@ -59,13 +59,34 @@ public class WebSocketManager : MonoBehaviour
     }
 
     private void ProcessMessage(string message) {
+        // Convertir el mensaje JSON a un objeto EnemyStats
         EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
 
-        EnemyStatsManager[] allEnemies = FindObjectsByType<EnemyStatsManager>(FindObjectsSortMode.None);
+        // Declaramos la variable fuera del bloque condicional
+        MonoBehaviour[] allEnemies;
 
+        // Dependiendo del nombre del enemigo, encontramos los enemigos correspondientes
+        if (stats.name == "Zombie")
+        {
+            allEnemies = FindObjectsByType<ZombieController>(FindObjectsSortMode.None);
+        }
+        else 
+        {
+            allEnemies = FindObjectsByType<DogZombieController>(FindObjectsSortMode.None);
+        }
+
+        // Iteramos sobre los enemigos encontrados y actualizamos sus estadísticas
         foreach (var enemy in allEnemies)
         {
-            enemy.UpdateStats(stats.health, stats.speed, stats.damage);
+            // Asegurarse de que la variable enemy sea del tipo correcto antes de llamarle a UpdateStats
+            if (enemy is ZombieController zombie)
+            {
+                zombie.UpdateStats(stats.health, stats.speed, stats.damage);
+            }
+            else if (enemy is DogZombieController dogZombie)
+            {
+                dogZombie.UpdateStats(stats.health, stats.speed, stats.damage);
+            }
         }
 
         Debug.Log($"Estadísticas aplicadas a {allEnemies.Length} enemigos.");
@@ -83,6 +104,7 @@ public class WebSocketManager : MonoBehaviour
     [System.Serializable]
     public class EnemyStats
     {
+        public string name;
         public int health;
         public float speed;
         public int damage;
