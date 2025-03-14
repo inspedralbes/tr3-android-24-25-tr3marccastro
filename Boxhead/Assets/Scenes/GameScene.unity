@@ -1422,7 +1422,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
   dogZombiePrefab: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
-  zombiePoolSize: 10
+  zombiePoolSize: 30
   dogZombiePoolSize: 10
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

@@ -10,6 +10,9 @@ public class WebSocketManager : MonoBehaviour
     // public ZombieController zombieController;
     public EnemyStatsManager statsManager;
 
+    public EnemyStats tempZombie;
+    public EnemyStats tempDogZombie;
+
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
 

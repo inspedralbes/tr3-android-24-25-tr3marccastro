@@ -83,6 +83,7 @@ public class RegisterMenu : MonoBehaviour
                 Debug.Log("Operación exitosa. Cargando la escena...");
                 SceneManager.LoadScene("MultiplayerScene");
             }
+            else ShowError("Existe el usuario");
         }
         else
         {
@@ -94,7 +95,6 @@ public class RegisterMenu : MonoBehaviour
     // Mostrar el mensaje de error
     private void ShowError(string message)
     {
-        Debug.Log("Hola");
         errorLabel.text = message;
         errorLabel.style.display = DisplayStyle.Flex;
     }

@@ -19,7 +19,7 @@ public class EnemySpawner : MonoBehaviour
             // Esperar un intervalo general de zombies
             yield return new WaitForSeconds(spawnInterval);
 
-            // Generar un número aleatorio de zombies (entre 1 y 6 por spawn)
+            // Generar un nï¿½mero aleatorio de zombies (entre 1 y 6 por spawn)
             int zombiesToSpawn = Random.Range(3, 6);
 
             // Spawnear los zombies
@@ -33,6 +33,14 @@ public class EnemySpawner : MonoBehaviour
 
                 Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
                 EnemyPoolManager.Instance.GetEnemy("Zombie", spawnPoint.position, Quaternion.identity);
+                
+                /*
+                if (!zombie)
+                {
+                    Debug.LogWarning("No se pudo obtener un Zombie del pool.");
+                    continue; // Sigue intentando con los demÃ¡s
+                }
+                */
             }
 
             StartCoroutine(SpawnDogZombieWithDelay());
@@ -44,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         // Esperamos 3 segundos
         yield return new WaitForSeconds(3f);
 
-        // Instanciamos el DogZombie después del retraso
+        // Instanciamos el DogZombie despuï¿½s del retraso
         Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
         EnemyPoolManager.Instance.GetEnemy("DogZombie", spawnPoint.position, Quaternion.identity);
     }

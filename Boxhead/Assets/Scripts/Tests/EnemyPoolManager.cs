@@ -77,17 +77,21 @@ public class EnemyPoolManager : MonoBehaviour
     // Obtener un enemigo del pool por tipo (Zombie o DogZombie)
     public GameObject GetEnemy(string enemyType, Vector3 position, Quaternion rotation)
     {
+        if (zombiePool.Count <= 0 && dogZombiePool.Count <= 0) return null;
+        
         if (string.IsNullOrEmpty(enemyType))
         {
             Debug.LogError("enemyType no puede ser null o vacío.");
             return null;
         }
 
+        /*
         if (zombiePool == null || zombiePool.Count == 0)
         {
             Debug.LogError("El pool de enemigos está vacío o no se ha inicializado.");
             return null;
         }
+        */
 
         GameObject enemy = null;
 
@@ -107,6 +111,7 @@ public class EnemyPoolManager : MonoBehaviour
         {
             enemy.transform.position = position;
             enemy.transform.rotation = rotation;
+            enemy.transform.parent = null;
             enemy.SetActive(true);
         }
 

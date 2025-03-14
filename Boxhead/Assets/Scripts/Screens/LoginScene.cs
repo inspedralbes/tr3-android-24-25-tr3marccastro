@@ -24,6 +24,7 @@ public class LoginManager : MonoBehaviour
         root.Q<Button>("backButton").clicked += () => SceneManager.LoadScene("MainMenu");
     }
 
+    // Metodo 1
     private IEnumerator LoginRequest()
     {
         if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
@@ -89,91 +90,69 @@ public class LoginManager : MonoBehaviour
         errorLabel.style.display = DisplayStyle.Flex;
     }
 
-    // Clase para enviar datos de login en JSON
-    [System.Serializable]
-    public class LoginData
-    {
-        public string username;
-        public string password;
+    /*
+    // Metodo 2
+    private IEnumerator LoginRequest() {
+
+        if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
+        {
+            Debug.Log("Por favor, ingresa usuario y contraseña.");
+            yield break;
+        }
+
+        var dataToPost = new LoginData { username = usernameField.value, password = passwordField.value };
+        var request = CreateRequest(apiUrl, RequestType.POST, dataToPost);
+        
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success) {
+            string result = request.downloadHandler.text;
+            Debug.Log("Respuesta del servidor: " + result);
+
+            if (result.Contains("success")) {
+                Debug.Log("Login exitoso, cargando escena...");
+                SceneManager.LoadScene("MultiplayerScene");
+            } else {
+                Debug.LogWarning("Usuario o contraseña incorrectos.");
+            }
+        } else {
+            Debug.LogError("Error de conexión: " + request.error);
+        }
     }
 
-    // Clase para recibir respuesta del servidor
-    [System.Serializable]
-    public class ResponseData
-    {
-        public string message;
+    private UnityWebRequest CreateRequest(string path, RequestType type = RequestType.GET, object data = null) {
+        var request = new UnityWebRequest(path, type.ToString());
+
+        if (data != null) {
+            string jsonData = JsonUtility.ToJson(data);
+            var bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
+            request.SetRequestHeader("Content-Type", "application/json");
+        }
+
+        request.downloadHandler = new DownloadHandlerBuffer();
+        return request;
     }
+    */
 }
 
-    
+public enum RequestType {
+    GET = 0,
+    POST = 1,
+    PUT = 2
+}
 
-    
+// Clase para enviar datos de login en JSON
+[System.Serializable]
+public class LoginData
+{
+    public string username;
+    public string password;
+}
 
-    //private IEnumerator LoginRequest()
-    //{
-    //    if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
-    //    {
-    //        ShowError("Por favor, ingresa usuario y contraseña.");
-    //        yield break;
-    //    }
-
-    //    string jsonData = JsonUtility.ToJson(new LoginData(usernameField.value, passwordField.value));
-    //    byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
-
-    //    using UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
-    //    {
-    //        uploadHandler = new UploadHandlerRaw(jsonBytes),
-    //        downloadHandler = new DownloadHandlerBuffer()
-    //    };
-    //    request.SetRequestHeader("Content-Type", "application/json");
-
-    //    yield return request.SendWebRequest();
-
-    //    if (request.result == UnityWebRequest.Result.Success)
-    //    {
-    //        string jsonResponse = request.downloadHandler.text;
-    //        Debug.Log("Respuesta del servidor: " + jsonResponse);
-
-    //        LoginResponse response = JsonUtility.FromJson<LoginResponse>(jsonResponse);
-
-    //        if (response.status == "success")
-    //        {
-    //            // Si el login es exitoso, carga la escena del multiplayer
-    //            SceneManager.LoadScene("MultiplayerScene");
-    //        }
-    //        else
-    //        {
-    //            // Si el login falla, muestra el error
-    //            ShowError(response.message);
-    //        }
-    //    }
-    //    else
-    //    {
-    //        // Si hay error de conexión, muestra el error
-    //        ShowError("Error de conexión: " + request.error);
-    //    }
-    //}
-
-    //private void ShowError(string message)
-    //{
-    //    errorLabel.text = message;
-    //    errorLabel.style.display = DisplayStyle.Flex;
-    //}
-
-    //[System.Serializable]
-    //private class LoginData
-    //{
-    //    public string username, password;
-    //    public LoginData(string username, string password)
-    //    {
-    //        this.username = username;
-    //        this.password = password;
-    //    }
-    //}
-
-    //[System.Serializable]
-    //private class LoginResponse
-    //{
-    //    public string status;
-    //    public string message;
-    //}
+// Clase para recibir respuesta del servidor
+[System.Serializable]
+public class ResponseData
+{
+    public string message;
+}
