@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
-        GameObject bullet = PoolBullets.Instance.GetFromPool(firePoint.position, firePoint.rotation);
+        GameObject bullet = PoolBulletsManager.Instance.GetFromPool(firePoint.position, firePoint.rotation);
         if (bullet != null)
         {
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
@@ -74,6 +74,6 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("¡Jugador muerto!");
-        // gameOverMenu.ShowGameOver();
+        gameOverMenu.ShowGameOver();
     }
 }

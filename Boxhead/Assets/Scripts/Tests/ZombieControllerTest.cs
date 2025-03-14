@@ -54,7 +54,7 @@ public class ZombieControllerTest : MonoBehaviour
     private void Die()
     {
         Debug.Log("Zombie muerto!");
-        PoolEnemies.Instance.ReturnToPool(gameObject, true);
+        EnemyPoolManager.Instance.ReturnToPool(gameObject, true);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

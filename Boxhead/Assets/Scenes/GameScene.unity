@@ -149,7 +149,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 288661503}
-  - {fileID: 184431183}
   - {fileID: 788277609}
   - {fileID: 1684045548}
   - {fileID: 1059658757}
@@ -186,7 +185,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnPoints:
   - {fileID: 288661503}
-  - {fileID: 184431183}
+  - {fileID: 0}
+  spawnInterval: 1
+  waypoints:
+  - {fileID: 288661503}
+  - {fileID: 788277609}
+  - {fileID: 1684045548}
+  - {fileID: 1059658757}
 --- !u!4 &111993158
 Transform:
   m_ObjectHideFlags: 0
@@ -288,37 +293,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &184431182
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 184431183}
-  m_Layer: 0
-  m_Name: Waypoint (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &184431183
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 184431182}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: 3.76, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 110570510}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &288661502
 GameObject:
@@ -1339,7 +1313,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1739124218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1395,39 +1369,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2069454543}
-  - component: {fileID: 2069454541}
   - component: {fileID: 2069454544}
   - component: {fileID: 2069454545}
   m_Layer: 0
-  m_Name: Pool
+  m_Name: PoolManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2069454541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2069454540}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df6bc4a33fc179a5986bea30da2b9103, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  prefabZombie: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
-  prefabDogZombie: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
-  zombieCount: 10
-  dogZombieCount: 5
-  spawnInterval: 1
-  rounds: 0
-  waypoints:
-  - {fileID: 288661503}
-  - {fileID: 788277609}
-  - {fileID: 1684045548}
-  - {fileID: 1059658757}
 --- !u!4 &2069454543
 Transform:
   m_ObjectHideFlags: 0
@@ -1470,7 +1420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9200bd48c725613268d45e1345b59f19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombiePrefab: {fileID: 8075204700732180198, guid: 06258878b224c658688fb6ff5e45de36, type: 3}
+  zombiePrefab: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
   dogZombiePrefab: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
   zombiePoolSize: 10
   dogZombiePoolSize: 10

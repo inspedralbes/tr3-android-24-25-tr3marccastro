@@ -42,11 +42,11 @@ public class PlayerBullet : MonoBehaviour
         }
 
         // Se devuelve al pool la bala después de la colisión (con cualquier objeto)
-        PoolBullets.Instance.ReturnToPool(gameObject);
+        PoolBulletsManager.Instance.ReturnToPool(gameObject);
     }
 
     void ReturnToPool()
     {
-        PoolBullets.Instance.ReturnToPool(gameObject);
+        PoolBulletsManager.Instance.ReturnToPool(gameObject);
     }
 }

@@ -5,6 +5,12 @@ public class EnemyStatsManager : MonoBehaviour
     public static EnemyStats ZombieStats = new(3, 1f, 10);
     public static EnemyStats DogStats = new(5, 2f, 15);
 
+    void Awake()
+    {
+        UpdateEnemyStats("Zombie", 3, 1f, 10);
+        UpdateEnemyStats("DogZombie", 3, 1f, 10);
+    }
+
     public void UpdateEnemyStats(string enemyType, int newHealth, float newSpeed, int newDamage)
     {
         if (enemyType == "Zombie")

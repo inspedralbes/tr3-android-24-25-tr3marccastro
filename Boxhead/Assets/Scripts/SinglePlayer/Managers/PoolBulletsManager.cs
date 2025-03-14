@@ -1,12 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PoolBullets : MonoBehaviour
+public class PoolBulletsManager : MonoBehaviour
 {
 
-    private static PoolBullets _instance;
+    private static PoolBulletsManager _instance;
 
-    public static PoolBullets Instance {get {return _instance;}}
+    public static PoolBulletsManager Instance {get {return _instance;}}
 
     [SerializeField] private List<GameObject> pool = new List<GameObject>(); // Lista del pool
     
