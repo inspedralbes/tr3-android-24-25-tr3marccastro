@@ -7,6 +7,17 @@ public class ZombieController : MonoBehaviour
     private int currentDamage;
     private Transform playerTransform;
     private Rigidbody2D rb;
+    [SerializeField] private EnemySpawner enemySpawner;
+
+    private void Awake()
+    {
+        enemySpawner = FindAnyObjectByType<EnemySpawner>();
+
+        if (enemySpawner == null)
+        {
+            Debug.LogError("EnemySpawner no encontrado en la escena.");
+        }
+    }
 
     private void OnEnable()
     {
@@ -56,6 +67,7 @@ public class ZombieController : MonoBehaviour
     {
         Debug.Log("Zombie muerto!");
         EnemyPoolManager.Instance.ReturnToPool(gameObject, true);
+        enemySpawner.EnemyDied();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

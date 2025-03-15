@@ -109,8 +109,7 @@ public class EnemyPoolManager : MonoBehaviour
 
         if (enemy != null)
         {
-            enemy.transform.position = position;
-            enemy.transform.rotation = rotation;
+            enemy.transform.SetPositionAndRotation(position, rotation);
             enemy.transform.parent = null;
             enemy.SetActive(true);
         }
@@ -122,6 +121,9 @@ public class EnemyPoolManager : MonoBehaviour
     public void ReturnToPool(GameObject enemy, bool isZombie)
     {
         enemy.SetActive(false);
+        enemy.transform.parent = transform;
+        enemy.transform.position = Vector3.zero;
+        enemy.transform.rotation = Quaternion.identity;
 
         if (isZombie)
         {

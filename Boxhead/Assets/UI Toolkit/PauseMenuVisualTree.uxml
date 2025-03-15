@@ -1,7 +1,7 @@
 <engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
     <Style src="project://database/Assets/UI%20Toolkit/PauseMenuStyle.uss?fileID=7433441132597879392&amp;guid=3f8e8f7d719f16f988367a2ebb1f177f&amp;type=3#PauseMenuStyle" />
     <engine:VisualElement name="pauseMenu" style="flex-grow: 1; top: 1px; left: 1px;">
-        <engine:Button text="Resum" name="resumeButton" class="button" />
+        <engine:Button name="resumeButton" text="Resum" class="button" style="background-image: none; font-size: 18px; width: 200px; height: 50px;" />
         <engine:Button text="Exit" name="mainMenuButton" class="button" />
     </engine:VisualElement>
 </engine:UXML>

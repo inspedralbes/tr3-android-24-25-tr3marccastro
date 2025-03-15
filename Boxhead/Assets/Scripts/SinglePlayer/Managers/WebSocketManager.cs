@@ -6,12 +6,22 @@ using NativeWebSocket;
 
 public class WebSocketManager : MonoBehaviour
 {
+    public static WebSocketManager Instance;
     private WebSocket websocket;
     // public ZombieController zombieController;
     public EnemyStatsManager statsManager;
+    public EnemyStatsFromWebSocket statsSocket;
+
+    private bool isRoundPaused = false;
 
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+    }
 
     private async void Start()
     {
@@ -26,17 +36,17 @@ public class WebSocketManager : MonoBehaviour
         // Callback: Quan la connexió s’obre.
         websocket.OnOpen += () =>
         {
-            Debug.Log("WebSocket connectat!");
+            // Debug.Log("WebSocket connectat!");
         };
         // Callback: Quan es rep un error.
         websocket.OnError += (e) =>
         {
-            Debug.LogError("WebSocket error: " + e);
+            // Debug.LogError("WebSocket error: " + e);
         };
         // Callback: Quan la connexió es tanca.
         websocket.OnClose += (e) =>
         {
-            Debug.Log("WebSocket tancat!");
+            // Debug.Log("WebSocket tancat!");
         };
         // Callback: Quan es rep un missatge.
         websocket.OnMessage += (bytes) =>
@@ -60,16 +70,56 @@ public class WebSocketManager : MonoBehaviour
     }
 
     private void ProcessMessage(string message) {
-        EnemyStats stats = JsonUtility.FromJson<EnemyStats>(message);
 
-        // Actualizamos las estadísticas globales a través del EnemyStatsManager
-        if (statsManager != null)
+        if (string.IsNullOrEmpty(message))
         {
-            statsManager.UpdateEnemyStats(stats.name, stats.health, stats.speed, stats.damage);
+            Debug.LogWarning("Mensaje vacío o nulo recibido.");
+            return; // No proceses si el mensaje está vacío o nulo
+        }
+
+        statsSocket = JsonUtility.FromJson<EnemyStatsFromWebSocket>(message);
+
+        if (statsSocket == null)
+        {
+            Debug.LogWarning("Deserialización fallida. statsSocket es null.");
+            return; // Si no se deserializa correctamente, no procedas.
+        }
+
+        Debug.Log("Recibido mensaje con nombre: " + statsSocket.name);
+    }
+
+    public void ApplyStatsIfUpdated(int currentRound)
+    {
+        if (!string.IsNullOrEmpty(statsSocket.name))
+        {
+            Debug.Log("Aplicando estadísticas de Web Socket...");
+            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage);
+            Debug.Log("Estadísticas aplicadas.");
         }
         else
         {
-            Debug.LogWarning("Problema");
+            int newHealth = Mathf.RoundToInt(statsSocket.health * Mathf.Pow(1.1f, currentRound));
+            float newSpeed = statsSocket.speed * Mathf.Pow(1.05f, currentRound);
+            int newDamage = Mathf.RoundToInt(statsSocket.damage * Mathf.Pow(1.1f, currentRound));
+
+            // Actualizar estadísticas con valores incrementados
+            statsManager.UpdateEnemyStats(statsSocket.name, newHealth, newSpeed, newDamage);
+        }
+    }
+
+    // Esto debe ejecutarse durante la pausa entre rondas (10s de descanso)
+    public void SetRoundPause(bool pause, int currentRound)
+    {
+        Debug.Log(pause);
+        isRoundPaused = pause;
+        if (isRoundPaused)
+        {
+            ApplyStatsIfUpdated(currentRound); // Aplicamos las nuevas stats durante la pausa
+        }
+        else
+        {
+            if (statsSocket == null)
+                Debug.LogWarning("statsSocket es null, no se pueden aplicar las estadísticas.");
         }
     }
 
@@ -83,7 +133,7 @@ public class WebSocketManager : MonoBehaviour
     }
 
     [System.Serializable]
-    public class EnemyStats
+    public class EnemyStatsFromWebSocket
     {
         public string name;
         public int health;

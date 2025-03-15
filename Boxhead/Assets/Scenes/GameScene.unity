@@ -190,6 +190,7 @@ MonoBehaviour:
   - {fileID: 788277609}
   - {fileID: 1684045548}
   - {fileID: 1059658757}
+  maxScreen: 10
 --- !u!4 &111993158
 Transform:
   m_ObjectHideFlags: 0
@@ -1199,6 +1200,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   statsManager: {fileID: 1071743950}
+  statsSocket:
+    name: 
+    health: 0
+    speed: 0
+    damage: 0
 --- !u!1 &1684045547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,8 +1426,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zombiePrefab: {fileID: 2005420952513992792, guid: 88a9a8d7c79644067957e893a71c5536, type: 3}
   dogZombiePrefab: {fileID: 744409591397940685, guid: 4a3cd0321aa205d62af9124b18b9ae0a, type: 3}
-  zombiePoolSize: 30
-  dogZombiePoolSize: 10
+  zombiePoolSize: 100
+  dogZombiePoolSize: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
