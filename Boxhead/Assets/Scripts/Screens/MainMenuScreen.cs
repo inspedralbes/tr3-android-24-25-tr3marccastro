@@ -22,7 +22,7 @@ public class MainMenuScreen : MonoBehaviour
 
     private void StartGame()
     {
-        SceneManager.LoadScene("GameScene"); // Cambia "GameScene" por el nombre de tu escena
+        SceneManager.LoadScene("SinglePlayerGameScene"); // Cambia "GameScene" por el nombre de tu escena
     }
 
     private void MultiplayerGame() {

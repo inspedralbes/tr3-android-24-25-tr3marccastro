@@ -3,7 +3,8 @@ using UnityEngine.UI; // Necesario para UI
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float speed = 5f;
+    private float currentSpeed;
     private Rigidbody2D rb;
     public Transform firePoint;
     public LifeBar lifeBar;
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;
+        currentSpeed = speed;
         lifeBar.SetMaxHealth(maxHealth);
     }
 
@@ -25,7 +27,7 @@ public class PlayerController : MonoBehaviour
         float moveX = Input.GetAxis("Horizontal");
         float moveY = Input.GetAxis("Vertical");
 
-        Vector2 movement = new Vector2(moveX, moveY) * moveSpeed;
+        Vector2 movement = new Vector2(moveX, moveY) * currentSpeed;
         rb.linearVelocity = movement;
 
         // Obtener la posición del ratón en el mundo
@@ -76,4 +78,17 @@ public class PlayerController : MonoBehaviour
         Debug.Log("¡Jugador muerto!");
         gameOverMenu.ShowGameOver();
     }
+
+    public void UpdateStatsPlayer(int newHealth, float newSpeed)
+    {
+        maxHealth = newHealth;
+        currentHealth = newHealth; // Restaurar vida al máximo con la nueva estadística
+        currentSpeed = newSpeed;
+
+        lifeBar.SetMaxHealth(maxHealth);
+        lifeBar.ActualizarVida(currentHealth); // Refrescar la barra de vida en UI
+
+        Debug.Log("📌 Estadísticas del jugador actualizadas: Vida = " + maxHealth + " | Velocidad = " + currentSpeed);
+    }
+
 }

@@ -10,7 +10,8 @@ public class WebSocketManager : MonoBehaviour
     private WebSocket websocket;
     // public ZombieController zombieController;
     public EnemyStatsManager statsManager;
-    public EnemyStatsFromWebSocket statsSocket;
+    public PlayerController playerController;
+    public CharacterStatsFromWebSocket statsSocket;
 
     private bool isRoundPaused = false;
 
@@ -77,7 +78,7 @@ public class WebSocketManager : MonoBehaviour
             return; // No proceses si el mensaje está vacío o nulo
         }
 
-        statsSocket = JsonUtility.FromJson<EnemyStatsFromWebSocket>(message);
+        statsSocket = JsonUtility.FromJson<CharacterStatsFromWebSocket>(message);
 
         if (statsSocket == null)
         {
@@ -90,11 +91,18 @@ public class WebSocketManager : MonoBehaviour
 
     public void ApplyStatsIfUpdated(int currentRound)
     {
-        if (!string.IsNullOrEmpty(statsSocket.name))
+        if(!string.IsNullOrEmpty(statsSocket.name)) 
         {
-            Debug.Log("Aplicando estadísticas de Web Socket...");
-            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage);
-            Debug.Log("Estadísticas aplicadas.");
+            if (statsSocket.name != "Player")
+            {
+                Debug.Log("Aplicando estadísticas de Web Socket...");
+                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage);
+                Debug.Log("Estadísticas aplicadas.");
+            }
+            else {
+                Debug.Log("Aplicando estadísticas de Web Socket al Player...");
+                playerController.UpdateStatsPlayer(statsSocket.health, statsSocket.speed);
+            }
         }
         else
         {
@@ -118,8 +126,7 @@ public class WebSocketManager : MonoBehaviour
         }
         else
         {
-            if (statsSocket == null)
-                Debug.LogWarning("statsSocket es null, no se pueden aplicar las estadísticas.");
+            if (statsSocket == null) Debug.LogWarning("statsSocket es null, no se pueden aplicar las estadísticas.");
         }
     }
 
@@ -133,7 +140,7 @@ public class WebSocketManager : MonoBehaviour
     }
 
     [System.Serializable]
-    public class EnemyStatsFromWebSocket
+    public class CharacterStatsFromWebSocket
     {
         public string name;
         public int health;
