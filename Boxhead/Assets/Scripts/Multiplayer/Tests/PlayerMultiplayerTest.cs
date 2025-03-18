@@ -7,7 +7,7 @@ public class PlayerMultiplayerTest : NetworkBehaviour
     private Rigidbody2D rb;
 
     public GameObject bulletPrefab;        // Prefab de la bala
-    public Transform shootingPoint;        // Punto desde donde se disparará la bala
+    public Transform shootingPoint;        // Punto desde donde se dispararï¿½ la bala
     public float fireRate = 0.5f;          // Frecuencia de disparo
     private float nextFireTime = 0f;       // Control de la frecuencia de disparo
 
@@ -18,19 +18,19 @@ public class PlayerMultiplayerTest : NetworkBehaviour
 
     private void Update()
     {
-        if (!isLocalPlayer) return;  // Asegúrate de que solo el jugador local puede moverse
+        if (!isLocalPlayer) return;  // Asegï¿½rate de que solo el jugador local puede moverse
 
         // Movimiento
         MovePlayer();
 
-        // Rotación hacia el ratón
+        // Rotaciï¿½n hacia el ratï¿½n
         RotateTowardsMouse();
 
         // Disparo
         if (Input.GetButton("Fire1") && Time.time >= nextFireTime)
         {
             nextFireTime = Time.time + fireRate;
-            CmdShoot();  // Llamar al método para disparar en el servidor
+            CmdShoot();  // Llamar al mï¿½todo para disparar en el servidor
         }
     }
 
@@ -46,26 +46,26 @@ public class PlayerMultiplayerTest : NetworkBehaviour
 
     private void RotateTowardsMouse()
     {
-        // Obtener la posición del ratón en el mundo
+        // Obtener la posiciï¿½n del ratï¿½n en el mundo
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;  // Mantener en el plano 2D
 
-        // Calcular la dirección hacia el ratón
+        // Calcular la direcciï¿½n hacia el ratï¿½n
         Vector3 direction = mousePosition - transform.position;
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
 
-        // Rotar el jugador hacia el ratón
+        // Rotar el jugador hacia el ratï¿½n
         transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
     }
 
-    // Método que se ejecuta en el servidor para crear la bala
+    // Mï¿½todo que se ejecuta en el servidor para crear la bala
     [Command]
     void CmdShoot()
     {
-        RpcShoot();  // Llamar al método RPC para todos los clientes
+        RpcShoot();  // Llamar al mï¿½todo RPC para todos los clientes
     }
 
-    // Método RPC que se ejecuta en todos los clientes
+    // Mï¿½todo RPC que se ejecuta en todos los clientes
     [ClientRpc]
     void RpcShoot()
     {

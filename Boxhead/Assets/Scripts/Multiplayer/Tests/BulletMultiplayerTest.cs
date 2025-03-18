@@ -4,23 +4,38 @@ using Mirror;
 public class BulletMultiplayerTest : NetworkBehaviour
 {
     public float speed = 10f;
-    public float lifespan = 3f;  // Tiempo que la bala vivirá antes de ser destruida
+    public float lifespan = 3f;  // Tiempo que la bala vivirï¿½ antes de ser destruida
+    public float damage = 10f;
+    private Rigidbody2D rb;
 
     private void Start()
     {
-        // Destruir la bala después de un tiempo (lifetime)
+        rb = GetComponent<Rigidbody2D>();
+        // Destruir la bala despuï¿½s de un tiempo (lifetime)
         Destroy(gameObject, lifespan);
     }
 
     private void Update()
     {
         // Mover la bala hacia adelante
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        rb.velocity = transform.right * speed;
+    }
+    
+    [Server] // Solo el servidor maneja la colisiÃ³n
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        Debug.Log("Bala impactÃ³ contra: " + collision.gameObject.name);
+
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerHealth>().TakeDamage(damage);
+            DestroyBullet();
+        }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    [Server] // MÃ©todo seguro para destruir en red
+    void DestroyBullet()
     {
-        // Destruir la bala al chocar con cualquier objeto
-        Destroy(gameObject);
+        NetworkServer.Destroy(gameObject);
     }
 }

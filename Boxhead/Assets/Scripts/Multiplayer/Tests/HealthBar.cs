@@ -3,16 +3,16 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    public Image healthBarImage;  // Referencia a la imagen de la barra de vida
-    public float maxHealth = 100f;  // Salud máxima del jugador
+    [SerializeField] private Image healthBarImage;  // Referencia a la imagen de la barra de vida
+    public float maxHealth = 100f;  // Salud mï¿½xima del jugador
     private float currentHealth;  // Salud actual del jugador
 
     void Start()
     {
-        currentHealth = maxHealth;  // Inicializamos la salud del jugador con el valor máximo
+        currentHealth = maxHealth;  // Inicializamos la salud del jugador con el valor mï¿½ximo
     }
 
-    // Método que se llama cuando el jugador recibe daño
+    // Mï¿½todo que se llama cuando el jugador recibe daï¿½o
     public void TakeDamage(float amount)
     {
         currentHealth -= amount;
@@ -20,11 +20,11 @@ public class HealthBar : MonoBehaviour
         UpdateHealthBar();
     }
 
-    // Método para curar al jugador
+    // Mï¿½todo para curar al jugador
     public void Heal(float amount)
     {
         currentHealth += amount;
-        if (currentHealth > maxHealth) currentHealth = maxHealth;  // Asegurarnos de que la salud no supere el máximo
+        if (currentHealth > maxHealth) currentHealth = maxHealth;  // Asegurarnos de que la salud no supere el mï¿½ximo
         UpdateHealthBar();
     }
 
