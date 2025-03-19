@@ -21,7 +21,7 @@ public class DogZombieControllerTest : MonoBehaviour
 
     private void OnEnable()
     {
-        // Cargar estadísticas cada vez que el enemigo se activa
+        // Cargar estadï¿½sticas cada vez que el enemigo se activa
         UpdateStats();
     }
 
@@ -80,11 +80,11 @@ public class DogZombieControllerTest : MonoBehaviour
 
     private void UpdateStats()
     {
-        // Obtener las estadísticas más recientes del EnemyStatsManager
+        // Obtener las estadï¿½sticas mï¿½s recientes del EnemyStatsManager
         currentHealth = EnemyStatsManager.DogStats.health;
         currentSpeed = EnemyStatsManager.DogStats.speed;
         currentDamage = EnemyStatsManager.DogStats.damage;
 
-        Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
+        Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daï¿½o=" + currentDamage);
     }
 }

@@ -7,6 +7,7 @@ public class ZombieController : MonoBehaviour
     private int currentDamage;
     private Transform playerTransform;
     private Rigidbody2D rb;
+    private SpriteRenderer enemyRenderer;
     [SerializeField] private EnemySpawner enemySpawner;
 
     private void Awake()
@@ -17,6 +18,8 @@ public class ZombieController : MonoBehaviour
         {
             Debug.LogError("EnemySpawner no encontrado en la escena.");
         }
+
+        enemyRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void OnEnable()
@@ -91,6 +94,17 @@ public class ZombieController : MonoBehaviour
         currentSpeed = EnemyStatsManager.ZombieStats.speed;
         currentDamage = EnemyStatsManager.ZombieStats.damage;
 
-        Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
+        // Convertir el color hexadecimal a un Color de Unity
+        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.ZombieStats.color, out Color newColor))  // Asegúrate de agregar el `#` para que sea válido
+        {
+            Debug.Log(newColor);
+            enemyRenderer.color = newColor;
+        }
+        else
+        {
+            Debug.LogWarning("Color inválido: " + EnemyStatsManager.ZombieStats.color);
+        }
+
+        Debug.Log("Zombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }
 }

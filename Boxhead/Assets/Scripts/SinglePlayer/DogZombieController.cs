@@ -7,6 +7,7 @@ public class DogZombieController : MonoBehaviour
     private int currentDamage;
     private Transform playerTransform;
     private Rigidbody2D rb;
+    private Renderer enemyRenderer;
     [SerializeField] private EnemySpawner enemySpawner;
 
     private void Awake()
@@ -17,6 +18,8 @@ public class DogZombieController : MonoBehaviour
         {
             Debug.LogError("EnemySpawner no encontrado en la escena.");
         }
+
+        enemyRenderer = GetComponent<Renderer>();
     }
 
     private void OnEnable()
@@ -90,6 +93,16 @@ public class DogZombieController : MonoBehaviour
         currentHealth = EnemyStatsManager.DogStats.health;
         currentSpeed = EnemyStatsManager.DogStats.speed;
         currentDamage = EnemyStatsManager.DogStats.damage;
+
+        // Convertir el color hexadecimal a un Color de Unity
+        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.DogStats.color, out Color newColor))  // Asegúrate de agregar el `#` para que sea válido
+        {
+            enemyRenderer.material.color = newColor;
+        }
+        else
+        {
+            Debug.LogWarning("Color inválido: " + EnemyStatsManager.DogStats.color);
+        }
 
         Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }

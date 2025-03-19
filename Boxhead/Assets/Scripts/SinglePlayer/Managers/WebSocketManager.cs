@@ -16,7 +16,7 @@ public class WebSocketManager : MonoBehaviour
     private bool isRoundPaused = false;
 
     // Dirección del servidor WebSocket
-    private string serverUrl = "ws://localhost:3001"; // Cambia a la URL de tu servidor WebSocket
+    private string serverUrl = "ws://localhost:3002"; // Cambia a la URL de tu servidor WebSocket
 
     private void Awake()
     {
@@ -96,7 +96,7 @@ public class WebSocketManager : MonoBehaviour
             if (statsSocket.name != "Player")
             {
                 Debug.Log("Aplicando estadísticas de Web Socket...");
-                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage);
+                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, currentRound);
                 Debug.Log("Estadísticas aplicadas.");
             }
             else {
@@ -106,12 +106,8 @@ public class WebSocketManager : MonoBehaviour
         }
         else
         {
-            int newHealth = Mathf.RoundToInt(statsSocket.health * Mathf.Pow(1.1f, currentRound));
-            float newSpeed = statsSocket.speed * Mathf.Pow(1.05f, currentRound);
-            int newDamage = Mathf.RoundToInt(statsSocket.damage * Mathf.Pow(1.1f, currentRound));
-
             // Actualizar estadísticas con valores incrementados
-            statsManager.UpdateEnemyStats(statsSocket.name, newHealth, newSpeed, newDamage);
+            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, currentRound);
         }
     }
 
@@ -146,5 +142,6 @@ public class WebSocketManager : MonoBehaviour
         public int health;
         public float speed;
         public int damage;
+        public string color;
     }
 }
