@@ -14,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - Monsters
-  - Bullet
-  - Player
+  - Background
+  - Characters
+  - Obstacle
   - 
   - 
   - 
@@ -43,6 +43,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Obstacles
+    uniqueID: 1407434071
+    locked: 0
+  - name: Characters
+    uniqueID: 1204306175
     locked: 0
   m_RenderingLayers:
   - Default
