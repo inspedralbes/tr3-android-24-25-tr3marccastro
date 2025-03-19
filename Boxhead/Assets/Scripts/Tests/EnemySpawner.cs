@@ -10,7 +10,8 @@ public class EnemySpawner : MonoBehaviour
 
     private int enemiesKilled = 0;
     private int totalEnemies = 0;
-    private int round = 0;
+    public int round = 0;
+    public int kills = 0;
 
     void Start()
     {
@@ -52,6 +53,7 @@ public class EnemySpawner : MonoBehaviour
     public void EnemyDied()
     {
         enemiesKilled++;
+        kills++;
 
         if (enemiesKilled >= maxScreen)
         {

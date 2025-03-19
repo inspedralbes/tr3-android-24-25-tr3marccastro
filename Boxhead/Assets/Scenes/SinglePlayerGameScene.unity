@@ -191,6 +191,8 @@ MonoBehaviour:
   - {fileID: 1684045548}
   - {fileID: 1059658757}
   maxScreen: 10
+  round: 0
+  kills: 0
 --- !u!4 &111993158
 Transform:
   m_ObjectHideFlags: 0
@@ -1201,6 +1203,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statsManager: {fileID: 1071743950}
   playerController: {fileID: 418390172}
+  statsSocket:
+    name: 
+    health: 0
+    speed: 0
+    damage: 0
 --- !u!1 &1684045547
 GameObject:
   m_ObjectHideFlags: 0
@@ -1296,6 +1303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c063fd34f0e462179c5252c01511806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemySpawner: {fileID: 111993157}
 --- !u!1 &1739124217
 GameObject:
   m_ObjectHideFlags: 0

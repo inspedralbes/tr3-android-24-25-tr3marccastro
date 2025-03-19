@@ -1,8 +1,9 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Networking;
-using System.Collections;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
+using System.Collections;
+using System.Text;
 
 public class RegisterMenu : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class RegisterMenu : MonoBehaviour
     private Button registerButton, backButton;
     private Label errorLabel;
 
-    private string apiUrl = "http://localhost:3001/api/register"; // URL del backend
+    private string apiUrl = "http://localhost:3002/api/register"; // URL del backend
 
     void OnEnable()
     {
@@ -54,41 +55,55 @@ public class RegisterMenu : MonoBehaviour
     // Enviar la solicitud POST al backend
     private IEnumerator RegisterRequest(string username, string email, string password)
     {
-        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(email) || string.IsNullOrEmpty(password))
+        // Crear el objeto JSON manualmente
+        RegisterData registerData = new()
         {
-            Debug.Log("Todos los campos son obligatorios.");
-            yield break;
-        }
+            username = usernameField.value,
+            email = emailField.value,
+            password = passwordField.value
+        };
 
-        WWWForm form = new();
-        form.AddField("username",  usernameField.value);
-        form.AddField("email", emailField.value);
-        form.AddField("password", passwordField.value);
+        string jsonData = JsonUtility.ToJson(registerData);
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest request = UnityWebRequest.Post(apiUrl, form);
+        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(jsonBytes),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+
+        request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            // Obtener el resultado de la respuesta
             string result = request.downloadHandler.text;
+            Debug.Log("Respuesta del servidor: " + result);
 
-            // Depuración
-            Debug.Log("Resultado recibido del servidor: " + result);
-
-            // Comprobamos si el resultado es lo que esperamos
-            if (result.Contains("success"))
+            try
             {
-                Debug.Log("Operación exitosa. Cargando la escena...");
-                SceneManager.LoadScene("MultiplayerScene");
+                ResponseRegisterData response = JsonUtility.FromJson<ResponseRegisterData>(result);
+
+                if (response.message == "success")
+                {
+                    Debug.Log("Resgistro exitoso.");
+                    SceneManager.LoadScene("MultiplayerScene");
+                }
+                else
+                {
+                    ShowError(response.message);
+                }
             }
-            else ShowError("Existe el usuario");
+            catch (System.Exception e)
+            {
+                ShowError("Error en la respuesta del servidor.");
+                Debug.LogError("Error al procesar la respuesta JSON: " + e.Message);
+            }
         }
         else
         {
-            // Manejo detallado del error de la conexión
-            Debug.LogError("Error de conexión: " + request.error);
+            ShowError("Error de conexión: " + request.error);
         }
     }
 
@@ -98,4 +113,18 @@ public class RegisterMenu : MonoBehaviour
         errorLabel.text = message;
         errorLabel.style.display = DisplayStyle.Flex;
     }
+}
+
+[System.Serializable]
+public class RegisterData
+{
+    public string username;
+    public string email;
+    public string password;
+}
+
+[System.Serializable]
+public class ResponseRegisterData
+{
+    public string message;
 }

@@ -9,7 +9,7 @@ public class LoginManager : MonoBehaviour
 {
     private TextField usernameField, passwordField;
     private Label errorLabel;
-    private string apiUrl = "http://localhost:3001/api/login";
+    private string apiUrl = "http://localhost:3002/api/login";
 
     private void OnEnable()
     {
@@ -89,57 +89,6 @@ public class LoginManager : MonoBehaviour
         errorLabel.text = message;
         errorLabel.style.display = DisplayStyle.Flex;
     }
-
-    /*
-    // Metodo 2
-    private IEnumerator LoginRequest() {
-
-        if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
-        {
-            Debug.Log("Por favor, ingresa usuario y contraseña.");
-            yield break;
-        }
-
-        var dataToPost = new LoginData { username = usernameField.value, password = passwordField.value };
-        var request = CreateRequest(apiUrl, RequestType.POST, dataToPost);
-        
-        yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success) {
-            string result = request.downloadHandler.text;
-            Debug.Log("Respuesta del servidor: " + result);
-
-            if (result.Contains("success")) {
-                Debug.Log("Login exitoso, cargando escena...");
-                SceneManager.LoadScene("MultiplayerScene");
-            } else {
-                Debug.LogWarning("Usuario o contraseña incorrectos.");
-            }
-        } else {
-            Debug.LogError("Error de conexión: " + request.error);
-        }
-    }
-
-    private UnityWebRequest CreateRequest(string path, RequestType type = RequestType.GET, object data = null) {
-        var request = new UnityWebRequest(path, type.ToString());
-
-        if (data != null) {
-            string jsonData = JsonUtility.ToJson(data);
-            var bodyRaw = Encoding.UTF8.GetBytes(jsonData);
-            request.uploadHandler = new UploadHandlerRaw(bodyRaw);
-            request.SetRequestHeader("Content-Type", "application/json");
-        }
-
-        request.downloadHandler = new DownloadHandlerBuffer();
-        return request;
-    }
-    */
-}
-
-public enum RequestType {
-    GET = 0,
-    POST = 1,
-    PUT = 2
 }
 
 // Clase para enviar datos de login en JSON
