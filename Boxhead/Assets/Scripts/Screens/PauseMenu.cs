@@ -44,6 +44,7 @@ public class PauseMenu : MonoBehaviour
     private void ReturnToMainMenu()
     {
         Time.timeScale = 1; // Resetear el tiempo antes de cambiar de escena
+        EnemyStatsManager.Instance.ResetToDefault();
         SceneManager.LoadScene("MainMenu");
     }
 }

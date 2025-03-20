@@ -2,18 +2,41 @@ using UnityEngine;
 
 public class EnemyStatsManager : MonoBehaviour
 {
-    public static EnemyStats ZombieStats = new(3, 1f, 10, "FF0000");
-    public static EnemyStats DogStats = new(3, 2f, 15, "FF00D2");
+    public static EnemyStatsManager Instance { get; private set; }
 
-    /*
+    public static EnemyStats ZombieStats;
+    public static EnemyStats DogStats;
+
+    private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10, "FF0000");
+    private static readonly EnemyStats DefaultDogStats = new(3, 2f, 15, "FF00D2");
+
     void Awake()
     {
-        UpdateEnemyStats("Zombie", 3, 1f, 10, "FF0000");
-        UpdateEnemyStats("DogZombie", 3, 1f, 10, "FF00D2");
-    }
-    */
+        // Implementación del Singleton
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    public void UpdateEnemyStats(string enemyType, int newHealth, float newSpeed, int newDamage, string newColor, int currentRound)
+        // Inicializar las estadísticas
+        if (!PlayerPrefs.HasKey("GameInitialized"))
+        {
+            Debug.Log("Hola ge");
+            ResetToDefault();
+            PlayerPrefs.SetInt("GameInitialized", 1);
+            PlayerPrefs.Save();
+        }
+
+        LoadEnemyStats();
+    }
+
+    public void UpdateEnemyStats(string enemyType, int newHealth, float newSpeed, int newDamage, string newColor, bool save, int currentRound)
     {
         if (enemyType == "Zombie")
         {
@@ -38,6 +61,26 @@ public class EnemyStatsManager : MonoBehaviour
             DogStats.speed = DogStats.speed * Mathf.Pow(1.05f, currentRound);
             DogStats.damage = Mathf.RoundToInt(DogStats.damage * Mathf.Pow(1.1f, currentRound));
         }
+
+        if (save) SaveData(enemyType);
+    }
+
+    public void SaveData(string enemyType)
+    {
+        EnemyStatsPersistence.SaveEnemyStats(enemyType);
+    }
+
+    public void LoadEnemyStats()
+    {
+        EnemyStatsPersistence.LoadEnemyStats();
+    }
+
+    public void ResetToDefault()
+    {
+        ZombieStats = new EnemyStats(DefaultZombieStats.health, DefaultZombieStats.speed, DefaultZombieStats.damage, DefaultZombieStats.color);
+        DogStats = new EnemyStats(DefaultDogStats.health, DefaultDogStats.speed, DefaultDogStats.damage, DefaultDogStats.color);
+
+        EnemyStatsPersistence.SaveDefaultEnemyStats();
     }
 }
 

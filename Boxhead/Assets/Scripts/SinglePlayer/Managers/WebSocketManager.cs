@@ -86,7 +86,7 @@ public class WebSocketManager : MonoBehaviour
             return; // Si no se deserializa correctamente, no procedas.
         }
 
-        Debug.Log("Recibido mensaje con nombre: " + statsSocket.name);
+        Debug.Log("Recibido mensaje con nombre: " + statsSocket.save);
     }
 
     public void ApplyStatsIfUpdated(int currentRound)
@@ -96,7 +96,7 @@ public class WebSocketManager : MonoBehaviour
             if (statsSocket.name != "Player")
             {
                 Debug.Log("Aplicando estadísticas de Web Socket...");
-                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, currentRound);
+                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, statsSocket.save, currentRound);
                 Debug.Log("Estadísticas aplicadas.");
             }
             else {
@@ -107,7 +107,7 @@ public class WebSocketManager : MonoBehaviour
         else
         {
             // Actualizar estadísticas con valores incrementados
-            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, currentRound);
+            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, statsSocket.save, currentRound);
         }
     }
 
@@ -138,6 +138,7 @@ public class WebSocketManager : MonoBehaviour
     [System.Serializable]
     public class CharacterStatsFromWebSocket
     {
+        public bool save;
         public string name;
         public int health;
         public float speed;

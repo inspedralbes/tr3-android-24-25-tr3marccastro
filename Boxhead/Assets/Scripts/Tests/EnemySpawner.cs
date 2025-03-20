@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
 
     private int enemiesKilled = 0;
     private int totalEnemies = 0;
-    public int round = 0;
+    public int round = 1;
     public int kills = 0;
 
     void Start()

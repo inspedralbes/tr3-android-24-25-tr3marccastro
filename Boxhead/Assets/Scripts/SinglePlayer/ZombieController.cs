@@ -68,7 +68,6 @@ public class ZombieController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Zombie muerto!");
         EnemyPoolManager.Instance.ReturnToPool(gameObject, true);
         enemySpawner.EnemyDied();
     }
@@ -97,7 +96,6 @@ public class ZombieController : MonoBehaviour
         // Convertir el color hexadecimal a un Color de Unity
         if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.ZombieStats.color, out Color newColor))  // Asegúrate de agregar el `#` para que sea válido
         {
-            Debug.Log(newColor);
             enemyRenderer.color = newColor;
         }
         else

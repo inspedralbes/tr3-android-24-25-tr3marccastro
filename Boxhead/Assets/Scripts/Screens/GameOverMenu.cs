@@ -32,6 +32,7 @@ public class GameOverMenu : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
+        EnemyStatsManager.Instance.ResetToDefault();
         StartCoroutine(Results());
     }
 
@@ -83,6 +84,7 @@ public class GameOverMenu : MonoBehaviour
         else
         {
             Debug.Log("Error de conexión: " + request.error);
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

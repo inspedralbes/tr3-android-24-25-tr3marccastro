@@ -191,7 +191,7 @@ MonoBehaviour:
   - {fileID: 1684045548}
   - {fileID: 1059658757}
   maxScreen: 10
-  round: 0
+  round: 1
   kills: 0
 --- !u!4 &111993158
 Transform:
@@ -1204,10 +1204,12 @@ MonoBehaviour:
   statsManager: {fileID: 1071743950}
   playerController: {fileID: 418390172}
   statsSocket:
+    save: 
     name: 
     health: 0
     speed: 0
     damage: 0
+    color: 
 --- !u!1 &1684045547
 GameObject:
   m_ObjectHideFlags: 0
