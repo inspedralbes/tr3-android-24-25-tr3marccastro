@@ -8,11 +8,11 @@ public class DogZombieController : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private Renderer enemyRenderer;
-    [SerializeField] private EnemySpawner enemySpawner;
+    private EnemySpawner enemySpawner;
 
     private void Awake()
     {
-        enemySpawner = FindAnyObjectByType<EnemySpawner>();
+        enemySpawner = EnemySpawner.Instance;
 
         if (enemySpawner == null)
         {

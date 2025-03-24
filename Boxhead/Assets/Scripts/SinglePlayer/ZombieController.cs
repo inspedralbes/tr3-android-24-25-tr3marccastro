@@ -8,11 +8,11 @@ public class ZombieController : MonoBehaviour
     private Transform playerTransform;
     private Rigidbody2D rb;
     private SpriteRenderer enemyRenderer;
-    [SerializeField] private EnemySpawner enemySpawner;
+    private EnemySpawner enemySpawner;
 
     private void Awake()
     {
-        enemySpawner = FindAnyObjectByType<EnemySpawner>();
+        enemySpawner = EnemySpawner.Instance;
 
         if (enemySpawner == null)
         {

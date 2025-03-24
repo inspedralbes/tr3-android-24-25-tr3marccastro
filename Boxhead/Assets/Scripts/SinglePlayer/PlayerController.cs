@@ -76,6 +76,11 @@ public class PlayerController : MonoBehaviour
     void Die()
     {
         Debug.Log("¡Jugador muerto!");
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero; // Detiene el movimiento
+            rb.constraints = RigidbodyConstraints2D.FreezeAll; // Congela posición y rotación
+        }
         gameOverMenu.ShowGameOver();
     }
 

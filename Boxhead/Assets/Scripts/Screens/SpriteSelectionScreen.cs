@@ -8,6 +8,8 @@ public class SpriteSelectionScreen : MonoBehaviour
     private ScrollView spriteContainer;
     private Button closeButton;
     public GameObject targetObject;
+    private EnemySpawner enemySpawner;
+
 
     void OnEnable()
     {
@@ -18,6 +20,12 @@ public class SpriteSelectionScreen : MonoBehaviour
 
         // Configurar el evento del botón de cerrar
         closeButton.clicked += CloseScreen;
+
+        enemySpawner = FindFirstObjectByType<EnemySpawner>();
+        if (enemySpawner != null)
+        {
+            enemySpawner.gameObject.SetActive(false);
+        }
 
         // Recargar los sprites descargados desde PlayerPrefs
         StartCoroutine(LoadDownloadedSprites());
@@ -120,7 +128,13 @@ public class SpriteSelectionScreen : MonoBehaviour
         Debug.Log("Sprite seleccionado: " + localPath);
         // Aquí puedes aplicar el sprite al objeto del juego.
         ApplySelectedSprite(localPath, name);
+
         gameObject.SetActive(false);
+
+        if (enemySpawner != null)
+        {
+            enemySpawner.gameObject.SetActive(true);
+        }
     }
 
     private void ApplySelectedSprite(string localPath, string name)
@@ -168,6 +182,9 @@ public class SpriteSelectionScreen : MonoBehaviour
         // Aquí puedes ocultar o desactivar la pantalla de selección
         gameObject.SetActive(false); // Desactivar el objeto de la pantalla de selección de sprites
 
-        // Si quieres hacer una transición o volver al menú principal, puedes hacer otras acciones aquí
+        if (enemySpawner != null)
+        {
+            enemySpawner.gameObject.SetActive(true);
+        }
     }
 }

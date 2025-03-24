@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemySpawner : MonoBehaviour
 {
+    public static EnemySpawner Instance { get; private set; }
     public Transform[] spawnPoints; // Puntos donde aparecen los enemigos
     [SerializeField] private float spawnInterval = 2f;
     public Transform[] waypoints;
@@ -12,6 +13,14 @@ public class EnemySpawner : MonoBehaviour
     private int totalEnemies = 0;
     public int round = 1;
     public int kills = 0;
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject); // Evita duplicados
+    }
 
     void Start()
     {
