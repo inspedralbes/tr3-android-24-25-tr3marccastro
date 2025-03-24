@@ -10,10 +10,11 @@ public class ShopScreen : MonoBehaviour
     private VisualElement rootElement;
     private ScrollView itemsContainer;
     private string apiUrl = "http://localhost:3002/api/items"; // URL del servidor Node.js
+    public GameObject targetObject;
 
     private void Awake()
     {
-        PlayerSkin.DeleteAll();
+        PlayerSkins.DeleteAll();
     }
 
     void OnEnable()
@@ -65,8 +66,8 @@ public class ShopScreen : MonoBehaviour
         priceLabel.AddToClassList("price");
         itemElement.Add(priceLabel);
 
-        var buyButton = new Button(() => BuyItem(item)) { text = PlayerSkin.HasItem(item.id) ? "Comprado" : "Comprar" };
-        buyButton.SetEnabled(!PlayerSkin.HasItem(item.id));
+        var buyButton = new Button(() => BuyItem(item)) { text = PlayerSkins.HasItem(item.id) ? "Comprado" : "Comprar" };
+        buyButton.SetEnabled(!PlayerSkins.HasItem(item.id));
         buyButton.AddToClassList("buy-button");
         itemElement.Add(buyButton);
 
@@ -75,8 +76,7 @@ public class ShopScreen : MonoBehaviour
 
     private void BuyItem(Item item)
     {
-        Debug.Log("Comprando: " + item.name);
-        StartCoroutine(DownloadAndSaveAssetBundle(item.assetBundlePath, item.id, item.name));
+        StartCoroutine(DownloadAndSaveAssetBundle(item));
     }
 
     private IEnumerator LoadImage(string imageUrl, Image imageElement)
@@ -95,23 +95,33 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private IEnumerator DownloadAndSaveAssetBundle(string bundlePath, int itemId, string name)
+    private IEnumerator DownloadAndSaveAssetBundle(Item item)
     {
-        string fullBundleUrl = "http://localhost:3002" + bundlePath;
-        string localPath = Application.persistentDataPath + "/item_" + name + ".png";
-        Debug.Log("Cargando imagen desde: " + localPath);
+        string imageName = Path.GetFileNameWithoutExtension(item.imagePath);
+        string fullBundleUrl = "http://localhost:3002" + item.assetBundlePath;
+        string localPath = Application.persistentDataPath + "/item_" + item.name;
 
         UnityWebRequest bundleRequest = UnityWebRequest.Get(fullBundleUrl);
         yield return bundleRequest.SendWebRequest();
 
         if (bundleRequest.result == UnityWebRequest.Result.Success)
         {
-            // Guardar el archivo descargado en el directorio local
-            File.WriteAllBytes(localPath, bundleRequest.downloadHandler.data);
-            Debug.Log("Archivo guardado en: " + localPath);
+            // Obtener los datos binarios del AssetBundle
+            byte[] assetData = bundleRequest.downloadHandler.data;
 
-            // Verificar si el archivo es una imagen
-            StartCoroutine(VerifyIfImage(localPath, itemId));
+            // Comprobar si los datos son válidos
+            if (assetData != null && assetData.Length > 0)
+            {
+                // Guardar el AssetBundle en local como un archivo binario
+                File.WriteAllBytes(localPath, assetData);
+                Debug.Log("AssetBundle guardado en: " + localPath);
+                PlayerSkins.AddItem(item.id, imageName, localPath);
+                // StartCoroutine(ApplyImageToObject(localPath, targetObject));
+            }
+            else
+            {
+                Debug.LogError("No se recibieron datos válidos del AssetBundle.");
+            }
         }
         else
         {
@@ -119,30 +129,49 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private IEnumerator VerifyIfImage(string localPath, int itemId)
+    /*
+    private IEnumerator ApplyImageToObject(string localPath, GameObject target)
     {
-        // Intentar cargar el archivo como una textura
-        UnityWebRequest textureRequest = UnityWebRequestTexture.GetTexture("file://" + localPath);
-        yield return textureRequest.SendWebRequest();
+        // Cargar el AssetBundle desde el archivo local
+        AssetBundle bundle = AssetBundle.LoadFromFile(localPath);
 
-        if (textureRequest.result == UnityWebRequest.Result.Success)
+        Debug.Log(bundle);
+
+        if (bundle == null)
         {
-            // Si la carga es exitosa, asumimos que es una imagen
-            Texture2D texture = ((DownloadHandlerTexture)textureRequest.downloadHandler).texture;
-            Debug.Log("El archivo es una imagen válida.");
-            PlayerSkin.AddItem(itemId);
+            Debug.LogError("No se pudo cargar el AssetBundle desde la ruta: " + localPath);
+            yield break;
+        }
 
-            // Aquí puedes usar la imagen cargada, por ejemplo, asignarla a un sprite
-            // Sprite itemSprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            // Llamar a un método para aplicar el sprite al item
-            // ApplyItemSprite(itemId, itemSprite);
+        // Intentar obtener la textura del AssetBundle (asumiendo que la textura está con un nombre específico)
+        Texture2D texture = bundle.LoadAsset<Texture2D>("fanta");  // Asegúrate de que el nombre coincida con el que está en el AssetBundle
+
+        if (texture != null)
+        {
+            // Crear un sprite a partir de la textura
+            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+
+            // Obtener el SpriteRenderer del objeto y asignar el sprite
+            SpriteRenderer renderer = target.GetComponent<SpriteRenderer>();
+            if (renderer != null)
+            {
+                renderer.sprite = sprite;
+                Debug.Log("Imagen aplicada al objeto correctamente.");
+            }
+            else
+            {
+                Debug.LogError("El objeto no tiene un SpriteRenderer.");
+            }
         }
         else
         {
-            Debug.LogError("El archivo no es una imagen válida: " + textureRequest.error);
+            Debug.LogError("No se encontró la textura dentro del AssetBundle.");
         }
-    }
 
+        // Liberar el AssetBundle para evitar fugas de memoria
+        bundle.Unload(false);
+    }
+    */
 
     // Clases para deserializar los datos del servidor
     [System.Serializable]

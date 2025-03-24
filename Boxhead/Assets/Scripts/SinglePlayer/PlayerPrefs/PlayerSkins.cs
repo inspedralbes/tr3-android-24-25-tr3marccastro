@@ -1,52 +1,70 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public static class PlayerSkin
+public static class PlayerSkins
 {
     private const string OwnedItemsKey = "OwnedItems";
 
-    public static void AddItem(int itemId)
+    // Añadir un ítem con su ID y nombre de la imagen
+    public static void AddItem(int itemId, string nameImage, string assetBundlePath)
     {
-        List<int> ownedItems = GetOwnedItems();
-        if (!ownedItems.Contains(itemId))
+        List<ItemData> ownedItems = GetOwnedItems();
+        
+        // Verificar si el ítem ya está en la lista
+        if (!ownedItems.Exists(item => item.id == itemId))
         {
-            ownedItems.Add(itemId);
+            ownedItems.Add(new ItemData { id = itemId, name = nameImage, assetBundlePath = assetBundlePath });
             SaveOwnedItems(ownedItems);
         }
     }
 
+    // Verificar si el jugador tiene un ítem con el ID
     public static bool HasItem(int itemId)
     {
-        return GetOwnedItems().Contains(itemId);
+        List<ItemData> ownedItems = GetOwnedItems();
+        return ownedItems.Exists(item => item.id == itemId);
     }
 
-    public static List<int> GetOwnedItems()
+    // Obtener los ítems poseídos (con ID y nombre de imagen)
+    public static List<ItemData> GetOwnedItems()
     {
         string json = PlayerPrefs.GetString(OwnedItemsKey, "");
         if (string.IsNullOrEmpty(json))
         {
-            return new List<int>();
+            return new List<ItemData>();
         }
-        IntList intList = JsonUtility.FromJson<IntList>(json);
-        return intList != null ? intList.items : new List<int>();
+        ItemList itemList = JsonUtility.FromJson<ItemList>(json);
+        return itemList != null ? itemList.items : new List<ItemData>();
     }
 
-    private static void SaveOwnedItems(List<int> items)
+    // Guardar los ítems poseídos
+    private static void SaveOwnedItems(List<ItemData> items)
     {
-        IntList intList = new() { items = items };
-        string json = JsonUtility.ToJson(intList);
+        ItemList itemList = new ItemList() { items = items };
+        string json = JsonUtility.ToJson(itemList);
         PlayerPrefs.SetString(OwnedItemsKey, json);
         PlayerPrefs.Save();
     }
 
+    // Eliminar todos los ítems
     public static void DeleteAll()
     {
-        PlayerPrefs.DeleteAll();
+        PlayerPrefs.DeleteKey(OwnedItemsKey); // Eliminar solo los ítems, no todos los PlayerPrefs
     }
 
+    // Clase para representar el ítem (ID y nombre de la imagen) - Ahora es pública
     [System.Serializable]
-    private class IntList
+    public class ItemData
     {
-        public List<int> items;
+        public int id;
+        public string name;
+        public string assetBundlePath;
+    }
+
+    // Clase auxiliar para deserializar la lista de ítems
+    [System.Serializable]
+    private class ItemList
+    {
+        public List<ItemData> items;
     }
 }
