@@ -61,4 +61,6 @@ ExportedObj/
 .idea/
 *.sln.iml
 
+# Otros archivos
+AssetsBundles
 Build-Game
