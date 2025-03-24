@@ -4,29 +4,23 @@ using UnityEngine.SceneManagement; // Para cambiar de escena
 
 public class MainMenuScreen : MonoBehaviour
 {
+    private Button startButton, shopButton, multiplayerButton, exitButton;
     private void OnEnable()
     {
         // Obtener el root del documento UI
         var root = GetComponent<UIDocument>().rootVisualElement;
 
         // Encontrar los botones por su nombre
-        Button startButton = root.Q<Button>("StartButton");
-        Button exitButton = root.Q<Button>("ExitButton");
-        Button multiplayerButton = root.Q<Button>("MultiplayerButton");
+        startButton = root.Q<Button>("StartButton");
+        exitButton = root.Q<Button>("ExitButton");
+        multiplayerButton = root.Q<Button>("MultiplayerButton");
+        shopButton = root.Q<Button>("ShopButton");
 
         // Asignar eventos
-        startButton.clicked += StartGame;
-        multiplayerButton.clicked += MultiplayerGame;
+        startButton.clicked += () => SceneManager.LoadScene("SinglePlayerGameScene");
+        multiplayerButton.clicked += () => SceneManager.LoadScene("LoginScene");
+        shopButton.clicked += () => SceneManager.LoadScene("LoginScene");
         exitButton.clicked += ExitGame;
-    }
-
-    private void StartGame()
-    {
-        SceneManager.LoadScene("SinglePlayerGameScene"); // Cambia "GameScene" por el nombre de tu escena
-    }
-
-    private void MultiplayerGame() {
-        SceneManager.LoadScene("LoginScene");
     }
 
     private void ExitGame()

@@ -3,5 +3,6 @@
     <engine:VisualElement name="shopMenu">
         <engine:Label text="Tienda" style="font-size: 30px; margin-bottom: 20px; text-align: center;" />
         <engine:ScrollView name="itemsContainer" style="width: 500px; height: 400px; overflow-y: auto; margin: 20px;" />
+        <engine:Button text="Back" name="buttonBack" class="button" />
     </engine:VisualElement>
 </engine:UXML>

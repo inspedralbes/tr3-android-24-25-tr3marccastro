@@ -1204,7 +1204,7 @@ MonoBehaviour:
   statsManager: {fileID: 1071743950}
   playerController: {fileID: 418390172}
   statsSocket:
-    save: 
+    save: 0
     name: 
     health: 0
     speed: 0
@@ -1387,7 +1387,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1795674431
 MonoBehaviour:
   m_ObjectHideFlags: 0

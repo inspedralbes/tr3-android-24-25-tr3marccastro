@@ -3,24 +3,31 @@ using UnityEngine.UIElements;
 using UnityEngine.Networking;
 using System.Collections;
 using System.IO;
-using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using System.Text;
 
 public class ShopScreen : MonoBehaviour
 {
     private VisualElement rootElement;
     private ScrollView itemsContainer;
-    private string apiUrl = "http://localhost:3002/api/items"; // URL del servidor Node.js
-    public GameObject targetObject;
+    private Button buttonBack;
+    private string apiUrlPost = "http://localhost:3002/api/purchases/new-purchase";
+    private string apiUrl = "http://localhost:3002/api/items";
 
     private void Awake()
     {
         PlayerSkins.DeleteAll();
+
+        //UserSession.DeleteEmail();
     }
 
     void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
         itemsContainer = rootElement.Q<ScrollView>("itemsContainer");
+        buttonBack = rootElement.Q<Button>("buttonBack");
+
+        buttonBack.clicked += () => SceneManager.LoadScene("MainMenu");
 
         // Cargar los items desde el servidor
         StartCoroutine(GetItemsFromServer());
@@ -51,7 +58,7 @@ public class ShopScreen : MonoBehaviour
         VisualElement itemElement = new VisualElement();
         itemElement.AddToClassList("item");
 
-        Image itemImage = new Image();
+        Image itemImage = new();
         itemImage.style.backgroundImage = new StyleBackground(new Texture2D(1, 1));
         StartCoroutine(LoadImage(item.imagePath, itemImage));
 
@@ -74,11 +81,6 @@ public class ShopScreen : MonoBehaviour
         itemsContainer.Add(itemElement);
     }
 
-    private void BuyItem(Item item)
-    {
-        StartCoroutine(DownloadAndSaveAssetBundle(item));
-    }
-
     private IEnumerator LoadImage(string imageUrl, Image imageElement)
     {
         UnityWebRequest request = UnityWebRequestTexture.GetTexture("http://localhost:3002" + imageUrl);
@@ -93,6 +95,12 @@ public class ShopScreen : MonoBehaviour
         {
             Debug.LogError("Error al cargar la imagen: " + request.error);
         }
+    }
+
+    private void BuyItem(Item item)
+    {
+        StartCoroutine(SaveBillToServer(item.id));
+        StartCoroutine(DownloadAndSaveAssetBundle(item));
     }
 
     private IEnumerator DownloadAndSaveAssetBundle(Item item)
@@ -116,7 +124,6 @@ public class ShopScreen : MonoBehaviour
                 File.WriteAllBytes(localPath, assetData);
                 Debug.Log("AssetBundle guardado en: " + localPath);
                 PlayerSkins.AddItem(item.id, imageName, localPath);
-                // StartCoroutine(ApplyImageToObject(localPath, targetObject));
             }
             else
             {
@@ -129,49 +136,70 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    /*
-    private IEnumerator ApplyImageToObject(string localPath, GameObject target)
+    private IEnumerator SaveBillToServer(int skinId)
     {
-        // Cargar el AssetBundle desde el archivo local
-        AssetBundle bundle = AssetBundle.LoadFromFile(localPath);
+        string email = UserSession.GetUserEmail();
 
-        Debug.Log(bundle);
-
-        if (bundle == null)
+        BuyData buyData = new()
         {
-            Debug.LogError("No se pudo cargar el AssetBundle desde la ruta: " + localPath);
-            yield break;
-        }
+            itemId = skinId,
+            email = email
+        };
 
-        // Intentar obtener la textura del AssetBundle (asumiendo que la textura está con un nombre específico)
-        Texture2D texture = bundle.LoadAsset<Texture2D>("fanta");  // Asegúrate de que el nombre coincida con el que está en el AssetBundle
+        string jsonData = JsonUtility.ToJson(buyData);
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
-        if (texture != null)
+        UnityWebRequest request = new(apiUrlPost, "POST")
         {
-            // Crear un sprite a partir de la textura
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            uploadHandler = new UploadHandlerRaw(jsonBytes),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
 
-            // Obtener el SpriteRenderer del objeto y asignar el sprite
-            SpriteRenderer renderer = target.GetComponent<SpriteRenderer>();
-            if (renderer != null)
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string result = request.downloadHandler.text;
+            Debug.Log("Respuesta del servidor: " + result);
+
+            try
             {
-                renderer.sprite = sprite;
-                Debug.Log("Imagen aplicada al objeto correctamente.");
+                ResponsePurchaseData response = JsonUtility.FromJson<ResponsePurchaseData>(result);
+
+                if (response.message == "success")
+                {
+                    Debug.Log("Compra existosa");
+                }
+                else
+                {
+                    Debug.LogError(response.message);
+                }
             }
-            else
+            catch (System.Exception e)
             {
-                Debug.LogError("El objeto no tiene un SpriteRenderer.");
+                Debug.LogError("Error en la respuesta del servidor: " + e.Message);
             }
         }
         else
         {
-            Debug.LogError("No se encontró la textura dentro del AssetBundle.");
+            Debug.LogError("Error de conexión: " + request.error);
         }
-
-        // Liberar el AssetBundle para evitar fugas de memoria
-        bundle.Unload(false);
     }
-    */
+
+    [System.Serializable]
+    public class BuyData
+    {
+        public int itemId;
+        public string email;
+    }
+
+    [System.Serializable]
+    public class ResponsePurchaseData
+    {
+        public string message;
+    }
 
     // Clases para deserializar los datos del servidor
     [System.Serializable]

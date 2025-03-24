@@ -58,15 +58,15 @@ public class RegisterMenu : MonoBehaviour
         // Crear el objeto JSON manualmente
         RegisterData registerData = new()
         {
-            username = usernameField.value,
-            email = emailField.value,
-            password = passwordField.value
+            username = username,
+            email = email,
+            password = password
         };
 
         string jsonData = JsonUtility.ToJson(registerData);
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
+        UnityWebRequest request = new(apiUrl, "POST")
         {
             uploadHandler = new UploadHandlerRaw(jsonBytes),
             downloadHandler = new DownloadHandlerBuffer()
@@ -88,7 +88,8 @@ public class RegisterMenu : MonoBehaviour
                 if (response.message == "success")
                 {
                     Debug.Log("Resgistro exitoso.");
-                    SceneManager.LoadScene("MultiplayerScene");
+                    UserSession.SaveUserEmail(email);
+                    SceneManager.LoadScene("ShopMenu");
                 }
                 else
                 {

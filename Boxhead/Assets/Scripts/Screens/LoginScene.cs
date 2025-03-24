@@ -11,6 +11,11 @@ public class LoginManager : MonoBehaviour
     private Label errorLabel;
     private string apiUrl = "http://localhost:3002/api/login";
 
+    private void Awake()
+    {
+        if(UserSession.IsUserLoggedIn()) SceneManager.LoadScene("ShopMenu");
+    }
+
     private void OnEnable()
     {
         var root = GetComponent<UIDocument>().rootVisualElement;
@@ -43,7 +48,7 @@ public class LoginManager : MonoBehaviour
         string jsonData = JsonUtility.ToJson(loginData);
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
+        UnityWebRequest request = new(apiUrl, "POST")
         {
             uploadHandler = new UploadHandlerRaw(jsonBytes),
             downloadHandler = new DownloadHandlerBuffer()
@@ -65,7 +70,8 @@ public class LoginManager : MonoBehaviour
                 if (response.message == "success")
                 {
                     Debug.Log("Inicio de sesión exitoso. Cargando la escena...");
-                    SceneManager.LoadScene("MultiplayerScene");
+                    UserSession.SaveUserEmail(response.email);
+                    SceneManager.LoadScene("ShopMenu");
                 }
                 else
                 {
@@ -104,4 +110,5 @@ public class LoginData
 public class ResponseData
 {
     public string message;
+    public string email;
 }
