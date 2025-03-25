@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     public float speed = 5f;
     private float currentSpeed;
     private Rigidbody2D rb;
+    private Animator animator; // ✅ Nuevo: Referencia al Animator
     public Transform firePoint;
     public LifeBar lifeBar;
 
@@ -17,6 +18,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>(); // ✅ Obtener el Animator
         currentHealth = maxHealth;
         currentSpeed = speed;
         lifeBar.SetMaxHealth(maxHealth);
@@ -24,20 +26,47 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        float moveX = Input.GetAxis("Horizontal");
-        float moveY = Input.GetAxis("Vertical");
+        float moveX = Input.GetAxisRaw("Horizontal");
+        float moveY = Input.GetAxisRaw("Vertical");
 
-        Vector2 movement = new Vector2(moveX, moveY) * currentSpeed;
-        rb.linearVelocity = movement;
+        Vector2 movement = new Vector2(moveX, moveY).normalized;
+        rb.linearVelocity = movement * currentSpeed;
+
+        // ✅ ACTUALIZAR ANIMACIONES
+        if (movement != Vector2.zero)
+        {
+            animator.SetFloat("Horizontal", moveX);
+            animator.SetFloat("Vertical", moveY);
+            animator.SetBool("IsMoving", true);
+
+            // Guardamos la última dirección antes de detenernos
+            animator.SetFloat("LastMoveX", moveX);
+            animator.SetFloat("LastMoveY", moveY);
+
+            float originalScaleX = Mathf.Abs(transform.localScale.x);
+
+            if (moveX < 0)
+            {
+                transform.localScale = new Vector3(-originalScaleX, transform.localScale.y, transform.localScale.z);
+            }
+            else if (moveX > 0)
+            {
+                transform.localScale = new Vector3(originalScaleX, transform.localScale.y, transform.localScale.z);
+            }
+        }
+        else
+        {
+            animator.SetBool("IsMoving", false);
+        }
 
         // Obtener la posición del ratón en el mundo
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0f;
 
         // Rotar al jugador hacia el ratón
-        Vector3 direction = mousePosition - transform.position;
-        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
+        //Vector3 direction = mousePosition - transform.position;
+        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -47,6 +76,7 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
+        animator.SetTrigger("Shoot");
         GameObject bullet = PoolBulletsManager.Instance.GetFromPool(firePoint.position, firePoint.rotation);
         if (bullet != null)
         {
@@ -95,5 +125,4 @@ public class PlayerController : MonoBehaviour
 
         Debug.Log("📌 Estadísticas del jugador actualizadas: Vida = " + maxHealth + " | Velocidad = " + currentSpeed);
     }
-
 }

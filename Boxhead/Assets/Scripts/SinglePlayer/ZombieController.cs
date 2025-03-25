@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;  // Asegúrate de importar el namespace de NavMesh.
 
 public class ZombieController : MonoBehaviour
 {
@@ -6,31 +7,31 @@ public class ZombieController : MonoBehaviour
     private float currentSpeed;
     private int currentDamage;
     private Transform playerTransform;
-    private Rigidbody2D rb;
+    private NavMeshAgent agent; // Usamos NavMeshAgent en vez de Rigidbody2D
     private SpriteRenderer enemyRenderer;
     private EnemySpawner enemySpawner;
 
     private void Awake()
     {
         enemySpawner = EnemySpawner.Instance;
-
         if (enemySpawner == null)
         {
             Debug.LogError("EnemySpawner no encontrado en la escena.");
         }
 
         enemyRenderer = GetComponent<SpriteRenderer>();
+        agent = GetComponent<NavMeshAgent>(); // Inicializamos el NavMeshAgent
+        agent.updateRotation = false;  // No actualiza la rotación, ya que es un juego 2D
+        agent.updateUpAxis = false;    // No necesitamos que se mueva en el eje Y
     }
 
     private void OnEnable()
     {
-        // Cargar estadísticas cada vez que el enemigo se activa
         UpdateStats();
     }
 
     void Start()
     {
-        rb = GetComponent<Rigidbody2D>();
         playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
 
         if (playerTransform == null)
@@ -43,16 +44,7 @@ public class ZombieController : MonoBehaviour
     {
         if (playerTransform != null)
         {
-            Vector2 direction = (playerTransform.position - transform.position).normalized;
-            MoveZombie(direction);
-        }
-    }
-
-    void MoveZombie(Vector2 direction)
-    {
-        if (rb != null)
-        {
-            rb.linearVelocity = direction * currentSpeed;
+            agent.SetDestination(playerTransform.position);  // El agente va hacia el jugador
         }
     }
 
@@ -74,27 +66,23 @@ public class ZombieController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        // Si la bala colisiona con un enemigo, le aplica el daño
         if (collision.gameObject.CompareTag("Player"))
         {
-            // Llamamos al método TakeDamage() en el enemigo
             PlayerController player = collision.gameObject.GetComponent<PlayerController>();
             if (player != null)
             {
-                player.TakeDamagePlayer(currentDamage); // Aplica el daño de la bala al enemigo
+                player.TakeDamagePlayer(currentDamage);
             }
         }
     }
 
     private void UpdateStats()
     {
-        // Obtener las estadísticas más recientes del EnemyStatsManager
         currentHealth = EnemyStatsManager.ZombieStats.health;
         currentSpeed = EnemyStatsManager.ZombieStats.speed;
         currentDamage = EnemyStatsManager.ZombieStats.damage;
 
-        // Convertir el color hexadecimal a un Color de Unity
-        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.ZombieStats.color, out Color newColor))  // Asegúrate de agregar el `#` para que sea válido
+        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.ZombieStats.color, out Color newColor))
         {
             enemyRenderer.color = newColor;
         }
