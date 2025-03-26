@@ -7,12 +7,12 @@ public class EnemyStatsManager : MonoBehaviour
     public static EnemyStats ZombieStats;
     public static EnemyStats DogStats;
 
-    private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10, "FF0000");
-    private static readonly EnemyStats DefaultDogStats = new(3, 2f, 15, "FF00D2");
+    private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10);
+    private static readonly EnemyStats DefaultDogStats = new(3, 2f, 15);
 
     void Awake()
     {
-        // Implementación del Singleton
+        // Implementaciï¿½n del Singleton
         if (Instance == null)
         {
             Instance = this;
@@ -24,7 +24,7 @@ public class EnemyStatsManager : MonoBehaviour
             return;
         }
 
-        // Inicializar las estadísticas
+        // Inicializar las estadï¿½sticas
         if (!PlayerPrefs.HasKey("GameInitialized"))
         {
             Debug.Log("Hola ge");
@@ -43,14 +43,14 @@ public class EnemyStatsManager : MonoBehaviour
             ZombieStats.health = newHealth;
             ZombieStats.speed = newSpeed;
             ZombieStats.damage = newDamage;
-            ZombieStats.color = newColor;
+            // ZombieStats.color = newColor;
         }
         else if (enemyType == "DogZombie")
         {
             DogStats.health = newHealth;
             DogStats.speed = newSpeed;
             DogStats.damage = newDamage;
-            DogStats.color = newColor;
+            // DogStats.color = newColor;
         }
         else {
             ZombieStats.health = Mathf.RoundToInt(ZombieStats.health * Mathf.Pow(1.1f, currentRound));
@@ -77,8 +77,8 @@ public class EnemyStatsManager : MonoBehaviour
 
     public void ResetToDefault()
     {
-        ZombieStats = new EnemyStats(DefaultZombieStats.health, DefaultZombieStats.speed, DefaultZombieStats.damage, DefaultZombieStats.color);
-        DogStats = new EnemyStats(DefaultDogStats.health, DefaultDogStats.speed, DefaultDogStats.damage, DefaultDogStats.color);
+        ZombieStats = new EnemyStats(DefaultZombieStats.health, DefaultZombieStats.speed, DefaultZombieStats.damage);
+        DogStats = new EnemyStats(DefaultDogStats.health, DefaultDogStats.speed, DefaultDogStats.damage);
 
         EnemyStatsPersistence.SaveDefaultEnemyStats();
     }
@@ -90,13 +90,11 @@ public class EnemyStats
     public int health;
     public float speed;
     public int damage;
-    public string color;
 
-    public EnemyStats(int health, float speed, int damage, string color)
+    public EnemyStats(int health, float speed, int damage)
     {
         this.health = health;
         this.speed = speed;
         this.damage = damage;
-        this.color = color;
     }
 }

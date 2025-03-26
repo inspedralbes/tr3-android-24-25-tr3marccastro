@@ -32,31 +32,26 @@ public class PlayerController : MonoBehaviour
         Vector2 movement = new Vector2(moveX, moveY).normalized;
         rb.linearVelocity = movement * currentSpeed;
 
-        // ✅ ACTUALIZAR ANIMACIONES
-        if (movement != Vector2.zero)
+        // Actualizar los parámetros del Animator para el Blend Tree
+        animator.SetFloat("Horizontal", moveX);  // Para movimiento horizontal
+        animator.SetFloat("Vertical", moveY);    // Para movimiento vertical
+
+        float originalScaleX = Mathf.Abs(transform.localScale.x);
+
+        if (moveX < 0)
         {
-            animator.SetFloat("Horizontal", moveX);
-            animator.SetFloat("Vertical", moveY);
-            animator.SetBool("IsMoving", true);
-
-            // Guardamos la última dirección antes de detenernos
-            animator.SetFloat("LastMoveX", moveX);
-            animator.SetFloat("LastMoveY", moveY);
-
-            float originalScaleX = Mathf.Abs(transform.localScale.x);
-
-            if (moveX < 0)
-            {
-                transform.localScale = new Vector3(-originalScaleX, transform.localScale.y, transform.localScale.z);
-            }
-            else if (moveX > 0)
-            {
-                transform.localScale = new Vector3(originalScaleX, transform.localScale.y, transform.localScale.z);
-            }
+            transform.localScale = new Vector3(-originalScaleX, transform.localScale.y, transform.localScale.z);
         }
-        else
+        else if (moveX > 0)
         {
-            animator.SetBool("IsMoving", false);
+            transform.localScale = new Vector3(originalScaleX, transform.localScale.y, transform.localScale.z);
+        }
+
+        // Recordar la última dirección de movimiento
+        if (moveX != 0 || moveY != 0)
+        {
+            animator.SetFloat("LastMoveX", moveX);  // Última dirección horizontal
+            animator.SetFloat("LastMoveY", moveY);
         }
 
         // Obtener la posición del ratón en el mundo
@@ -76,7 +71,6 @@ public class PlayerController : MonoBehaviour
 
     void Shoot(Vector3 targetPosition)
     {
-        animator.SetTrigger("Shoot");
         GameObject bullet = PoolBulletsManager.Instance.GetFromPool(firePoint.position, firePoint.rotation);
         if (bullet != null)
         {

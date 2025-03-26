@@ -84,6 +84,7 @@ public class DogZombieController : MonoBehaviour
         currentSpeed = EnemyStatsManager.DogStats.speed;
         currentDamage = EnemyStatsManager.DogStats.damage;
 
+        /*
         if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.DogStats.color, out Color newColor))
         {
             enemyRenderer.material.color = newColor;
@@ -92,6 +93,7 @@ public class DogZombieController : MonoBehaviour
         {
             Debug.LogWarning("Color inválido: " + EnemyStatsManager.DogStats.color);
         }
+        */
 
         Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }
