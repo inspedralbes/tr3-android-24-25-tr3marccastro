@@ -26,43 +26,40 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        // 📌 1. Obtener entrada del teclado (Movimiento)
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");
 
         Vector2 movement = new Vector2(moveX, moveY).normalized;
         rb.linearVelocity = movement * currentSpeed;
 
-        // Actualizar los parámetros del Animator para el Blend Tree
-        animator.SetFloat("Horizontal", moveX);  // Para movimiento horizontal
-        animator.SetFloat("Vertical", moveY);    // Para movimiento vertical
+        // 📌 2. Obtener la posición del ratón en el mundo
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 lookDirection = (mousePosition - transform.position).normalized;
 
+        // 📌 3. Enviar al Animator la dirección del ratón (aunque no se mueva)
+        animator.SetFloat("Horizontal", lookDirection.x);
+        animator.SetFloat("Vertical", lookDirection.y);
+
+        // 📌 4. Cambiar la escala del sprite según la dirección del ratón
         float originalScaleX = Mathf.Abs(transform.localScale.x);
-
-        if (moveX < 0)
+        if (lookDirection.x < 0)
         {
             transform.localScale = new Vector3(-originalScaleX, transform.localScale.y, transform.localScale.z);
         }
-        else if (moveX > 0)
+        else if (lookDirection.x > 0)
         {
             transform.localScale = new Vector3(originalScaleX, transform.localScale.y, transform.localScale.z);
         }
 
-        // Recordar la última dirección de movimiento
+        // 📌 5. Recordar la última dirección en que se movió
         if (moveX != 0 || moveY != 0)
         {
-            animator.SetFloat("LastMoveX", moveX);  // Última dirección horizontal
+            animator.SetFloat("LastMoveX", moveX);
             animator.SetFloat("LastMoveY", moveY);
         }
 
-        // Obtener la posición del ratón en el mundo
-        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0f;
-
-        // Rotar al jugador hacia el ratón
-        //Vector3 direction = mousePosition - transform.position;
-        //float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        //transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle));
-
+        // 📌 6. Disparar con clic izquierdo
         if (Input.GetMouseButtonDown(0))
         {
             Shoot(mousePosition);
@@ -77,11 +74,19 @@ public class PlayerController : MonoBehaviour
             Rigidbody2D bulletRb = bullet.GetComponent<Rigidbody2D>();
             if (bulletRb != null)
             {
+                // ✅ Corregimos la dirección de la bala
                 Vector2 direction = (targetPosition - firePoint.position).normalized;
-                bulletRb.linearVelocity = direction * 10f; // Velocidad de la bala
+
+                // ✅ Aseguramos que la rotación de la bala sea correcta
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                bullet.transform.rotation = Quaternion.Euler(0, 0, angle);
+
+                // ✅ Aplicamos velocidad en la dirección correcta
+                bulletRb.linearVelocity = direction * 10f; // Ajusta la velocidad según sea necesario
             }
         }
     }
+
 
     // 🔴 Método para recibir daño y actualizar la barra
     public void TakeDamagePlayer(float damage)

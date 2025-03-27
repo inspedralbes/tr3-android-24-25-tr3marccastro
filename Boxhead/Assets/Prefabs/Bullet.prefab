@@ -29,8 +29,8 @@ Transform:
   m_GameObject: {fileID: 3640395715974563274}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.8282, y: 0.4441, z: 0}
-  m_LocalScale: {x: 0.30372897, y: 0.11176704, z: 1}
+  m_LocalPosition: {x: -3.76018, y: 0.47587, z: 0}
+  m_LocalScale: {x: 0.16769482, y: 0.048234183, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.5670938, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -131,6 +131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   lifetime: 3
+  collisionEffect: {fileID: 7520842583050221458, guid: ef8209904f870964b91a9a8ff1c4bdea, type: 3}
 --- !u!61 &-806965035816118887
 BoxCollider2D:
   m_ObjectHideFlags: 0

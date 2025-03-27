@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\screens\\shopmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\shopmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\loginscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\loginscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\dogzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\dogzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\registermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\registermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playerprefs\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerprefs\\usersession.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\mainmenuscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\mainmenuscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,71 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UserSession.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\UserSession.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\UserSession.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\UserSession.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\UserSession.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAADwvx4AAAAoAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAowE4AAAAlAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T22:36:29.535Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainMenuScreen.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T22:37:01.513Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RegisterMenu.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\RegisterMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\RegisterMenu.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\RegisterMenu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\RegisterMenu.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T22:27:34.686Z",
+              "WhenOpened": "2025-03-25T16:34:02.193Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "LoginScene.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\LoginScene.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\LoginScene.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\LoginScene.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\LoginScene.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEMAAABTAAAAAAAAAA==",
+              "Title": "DogZombieController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAiwGIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T22:23:45.458Z",
+              "WhenOpened": "2025-03-25T16:01:25.445Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ShopMenu.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAA+AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ZombieController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-24T20:32:21.15Z",
+              "WhenOpened": "2025-03-25T15:59:43.454Z",
               "EditorCaption": ""
             }
           ]
