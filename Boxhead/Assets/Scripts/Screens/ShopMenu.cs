@@ -107,7 +107,7 @@ public class ShopScreen : MonoBehaviour
     {
         string imageName = Path.GetFileNameWithoutExtension(item.imagePath);
         string fullBundleUrl = "http://localhost:3002" + item.assetBundlePath;
-        string localPath = Application.persistentDataPath + "/item_" + item.name;
+        string localPath = Application.persistentDataPath + "/" + item.name;
 
         UnityWebRequest bundleRequest = UnityWebRequest.Get(fullBundleUrl);
         yield return bundleRequest.SendWebRequest();

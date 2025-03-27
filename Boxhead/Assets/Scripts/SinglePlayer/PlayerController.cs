@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        SpriteRenderer renderer = gameObject.GetComponent<SpriteRenderer>();
+        Vector2 spriteSize = renderer.bounds.size;
+        Debug.Log("El tamaño del sprite en el mundo es: " + spriteSize);
+
         // 📌 1. Obtener entrada del teclado (Movimiento)
         float moveX = Input.GetAxisRaw("Horizontal");
         float moveY = Input.GetAxisRaw("Vertical");

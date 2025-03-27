@@ -148,13 +148,25 @@ public class SpriteSelectionScreen : MonoBehaviour
             return;
         }
 
-        // Intentar obtener la textura del AssetBundle (cambiar "fanta" al nombre correcto de la textura)
-        Texture2D texture = bundle.LoadAsset<Texture2D>(name);
+        // Intentar obtener la textura del AssetBundle
+        Texture2D originalTexture = bundle.LoadAsset<Texture2D>(name);
 
-        if (texture != null)
+        if (originalTexture != null)
         {
-            // Crear un sprite a partir de la textura
-            Sprite sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+            Debug.Log("Original texture size: " + originalTexture.width + "x" + originalTexture.height);
+
+            // Aquí especificas el tamaño que deseas para la nueva textura
+            int newWidth = 88; // Nuevo tamaño deseado (en pixeles)
+            int newHeight = 100;
+
+            // Crear una nueva textura con el tamaño deseado
+            Texture2D resizedTexture = new Texture2D(newWidth, newHeight, originalTexture.format, false);
+            
+            // Redimensionar la textura original usando el método Resize
+            Graphics.ConvertTexture(originalTexture, resizedTexture);
+
+            // Ahora, crea un sprite a partir de la textura redimensionada
+            Sprite sprite = Sprite.Create(resizedTexture, new Rect(0, 0, resizedTexture.width, resizedTexture.height), new Vector2(0.5f, 0.5f));
 
             // Obtener el SpriteRenderer del objeto y asignar el sprite
             SpriteRenderer renderer = targetObject.GetComponent<SpriteRenderer>();

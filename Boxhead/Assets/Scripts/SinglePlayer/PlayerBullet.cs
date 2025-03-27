@@ -33,6 +33,7 @@ public class PlayerBullet : MonoBehaviour
             {
                 ParticleSystem effect = Instantiate(collisionEffect, position, Quaternion.identity);
                 effect.Play();
+                Destroy(effect.gameObject, effect.main.duration);
             }
             else
             {
