@@ -15,7 +15,7 @@ public class SpriteSelectionScreen : MonoBehaviour
     {
         // Obtener la raíz del documento visual
         rootElement = GetComponent<UIDocument>().rootVisualElement;
-        spriteContainer = rootElement.Q<ScrollView>("spriteContainer");
+        spriteContainer = rootElement.Q<ScrollView>("animationContainer");
         closeButton = rootElement.Q<Button>("closeButton");  // Botón de cerrar
 
         // Configurar el evento del botón de cerrar
@@ -65,12 +65,12 @@ public class SpriteSelectionScreen : MonoBehaviour
     {
         // Crear el contenedor para el botón
         VisualElement spriteElement = new VisualElement();
-        spriteElement.AddToClassList("sprite-element");
+        spriteElement.AddToClassList("animation-element");
 
         // Crear y añadir la imagen del sprite
-        Image spriteImage = new Image();
-        StartCoroutine(LoadSpriteImageFromBundle(localPath, name, spriteImage));
-        spriteElement.Add(spriteImage);
+        //Image spriteImage = new Image();
+        //StartCoroutine(LoadSpriteImageFromBundle(localPath, name, spriteImage));
+        //spriteElement.Add(spriteImage);
 
         // Botón para seleccionar el sprite
         Button selectButton = new Button(() => SelectSprite(localPath, name)) { text = "Seleccionar" };
@@ -148,41 +148,48 @@ public class SpriteSelectionScreen : MonoBehaviour
             return;
         }
 
-        // Intentar obtener la textura del AssetBundle
-        Texture2D originalTexture = bundle.LoadAsset<Texture2D>(name);
+        // Obtener el nombre correcto del Animator Controller dentro del AssetBundle
+        string[] assetNames = bundle.GetAllAssetNames();
+        string controllerPath = null;
 
-        if (originalTexture != null)
+        foreach (var asset in assetNames)
         {
-            Debug.Log("Original texture size: " + originalTexture.width + "x" + originalTexture.height);
-
-            // Aquí especificas el tamaño que deseas para la nueva textura
-            int newWidth = 88; // Nuevo tamaño deseado (en pixeles)
-            int newHeight = 100;
-
-            // Crear una nueva textura con el tamaño deseado
-            Texture2D resizedTexture = new Texture2D(newWidth, newHeight, originalTexture.format, false);
-            
-            // Redimensionar la textura original usando el método Resize
-            Graphics.ConvertTexture(originalTexture, resizedTexture);
-
-            // Ahora, crea un sprite a partir de la textura redimensionada
-            Sprite sprite = Sprite.Create(resizedTexture, new Rect(0, 0, resizedTexture.width, resizedTexture.height), new Vector2(0.5f, 0.5f));
-
-            // Obtener el SpriteRenderer del objeto y asignar el sprite
-            SpriteRenderer renderer = targetObject.GetComponent<SpriteRenderer>();
-            if (renderer != null)
+            Debug.Log("Asset encontrado en AssetBundle: " + asset);
+            if (asset.EndsWith(".controller"))
             {
-                renderer.sprite = sprite;
-                Debug.Log("Imagen aplicada al objeto correctamente.");
+                controllerPath = asset;
+                break; // Tomamos el primero que encontramos
+            }
+        }
+
+        // Si encontramos el Animator Controller, lo cargamos
+        if (!string.IsNullOrEmpty(controllerPath))
+        {
+            RuntimeAnimatorController animatorController = bundle.LoadAsset<RuntimeAnimatorController>(controllerPath);
+
+            if (animatorController != null)
+            {
+                // Obtener el componente Animator del objeto de destino
+                Animator animator = targetObject.GetComponent<Animator>();
+                if (animator != null)
+                {
+                    // Asignar el Animator Controller al componente Animator
+                    animator.runtimeAnimatorController = animatorController;
+                    Debug.Log("✅ Animator Controller asignado correctamente: " + controllerPath);
+                }
+                else
+                {
+                    Debug.LogError("⚠️ El objeto no tiene un componente Animator.");
+                }
             }
             else
             {
-                Debug.LogError("El objeto no tiene un SpriteRenderer.");
+                Debug.LogError("⚠️ No se pudo cargar el Animator Controller.");
             }
         }
         else
         {
-            Debug.LogError("No se encontró la textura dentro del AssetBundle.");
+            Debug.LogError("⚠️ No se encontró ningún archivo .controller en el AssetBundle.");
         }
 
         // Liberar el AssetBundle para evitar fugas de memoria

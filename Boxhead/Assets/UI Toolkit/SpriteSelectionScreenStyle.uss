@@ -21,7 +21,7 @@
 }
 
 /* Contenedor de los sprites */
-.spriteContainer {
+.animationContainer {
     width: 100%;
     max-height: 400px;
     overflow-y: auto; /* Desplazamiento si es necesario */
@@ -29,7 +29,7 @@
 }
 
 /* Elemento de cada sprite */
-.sprite-element {
+.animation-element {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -41,15 +41,15 @@
 }
 
 /* Imagen del sprite */
-.sprite-element .image {
-    width: 100px;
-    height: 100px;
-    margin-right: 10px;
-    border-radius: 8px;
-}
+/* .animation-element .image { */
+/*     width: 100px; */
+/*     height: 100px; */
+/*     margin-right: 10px; */
+/*     border-radius: 8px; */
+/* } */
 
 /* Botón de selección */
-.sprite-element button {
+.animation-element button {
     padding: 5px 15px;
     font-size: 14px;
     background-color: #4CAF50; /* Color verde */
@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 
-.sprite-element button:hover {
+.animation-element button:hover {
     background-color: #45a049; /* Color verde más oscuro al pasar el ratón */
 }
 

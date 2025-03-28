@@ -3,12 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\ui toolkit\\spriteselectionscreenstyle.uss||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\ui toolkit\\spriteselectionscreenstyle.uss||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\ui toolkit\\spriteselectionscreenvisualtree.uxml||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\ui toolkit\\spriteselectionscreenvisualtree.uxml||{3B902123-F8A7-4915-9F01-361F908088D0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,32 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "PlayerBullet.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAAiwEAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-27T00:10:40.338Z",
+              "DocumentIndex": 2,
+              "Title": "SpriteSelectionScreenVisualTree.uxml",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\SpriteSelectionScreenVisualTree.uxml",
+              "RelativeDocumentMoniker": "Assets\\UI Toolkit\\SpriteSelectionScreenVisualTree.uxml",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\SpriteSelectionScreenVisualTree.uxml",
+              "RelativeToolTip": "Assets\\UI Toolkit\\SpriteSelectionScreenVisualTree.uxml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAABOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003576|",
+              "WhenOpened": "2025-03-28T00:44:18.507Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAFQAAAAnAAAAAAAAAA==",
+              "Title": "SpriteSelectionScreenStyle.uss",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\SpriteSelectionScreenStyle.uss",
+              "RelativeDocumentMoniker": "Assets\\UI Toolkit\\SpriteSelectionScreenStyle.uss",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\SpriteSelectionScreenStyle.uss",
+              "RelativeToolTip": "Assets\\UI Toolkit\\SpriteSelectionScreenStyle.uss",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAAwBcAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2025-03-28T00:44:10.455Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SpriteSelectionScreen.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAowBEAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-26T23:27:05.121Z",
+              "WhenOpened": "2025-03-28T00:42:59.582Z",
               "EditorCaption": ""
             }
           ]

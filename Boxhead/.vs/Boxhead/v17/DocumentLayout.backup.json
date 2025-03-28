@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\dogzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\dogzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,40 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAAAowE4AAAAlAAAAAAAAAA==",
+              "Title": "PlayerBullet.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAiwEAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T16:34:02.193Z",
+              "WhenOpened": "2025-03-27T00:10:40.338Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "DogZombieController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\DogZombieController.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAiwGIAAAAAAAAAAAAAAA==",
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAAAFQAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T16:01:25.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ZombieController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAGAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-25T15:59:43.454Z",
+              "WhenOpened": "2025-03-26T23:27:05.121Z",
               "EditorCaption": ""
             }
           ]

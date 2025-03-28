@@ -9,7 +9,7 @@
         <engine:Label text="Selecciona un Sprite" class="title" />
         
         <!-- Contenedor de sprites que contiene una lista de botones con imágenes -->
-        <engine:ScrollView name="spriteContainer" class="spriteContainer" />
+        <engine:ScrollView name="animationContainer" class="animationContainer" />
         
         <!-- Botón de cerrar -->
         <engine:Button name="closeButton" text="Cerrar" class="closeButton" />
