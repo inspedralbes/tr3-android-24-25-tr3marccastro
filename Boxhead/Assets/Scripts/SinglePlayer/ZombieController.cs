@@ -11,6 +11,9 @@ public class ZombieController : MonoBehaviour
     private NavMeshAgent agent;
     private SpriteRenderer enemyRenderer;
     private EnemySpawner enemySpawner;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip audioBite;
+    [SerializeField] private AudioClip audioHit;
 
     private void Awake()
     {
@@ -22,6 +25,7 @@ public class ZombieController : MonoBehaviour
 
         enemyRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         agent = GetComponent<NavMeshAgent>(); // Inicializamos el NavMeshAgent
         agent.updateRotation = false;  // No actualiza la rotación, ya que es un juego 2D
         agent.updateUpAxis = false;    // No necesitamos que se mueva en el eje Y
@@ -40,6 +44,8 @@ public class ZombieController : MonoBehaviour
         {
             Debug.LogWarning("Player transform no encontrado.");
         }
+
+        audioSource.Play();
     }
 
     void Update()
@@ -83,6 +89,8 @@ public class ZombieController : MonoBehaviour
         {
             Die();
         }
+
+        SoundController.Instance.ExecuteSound(audioHit);
     }
 
     private void Die()
@@ -100,6 +108,8 @@ public class ZombieController : MonoBehaviour
             {
                 player.TakeDamagePlayer(currentDamage);
             }
+
+            SoundController.Instance.ExecuteSound(audioBite);
         }
     }
 

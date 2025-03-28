@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     public int maxHealth = 100;
     private float currentHealth;
     public GameOverMenu gameOverMenu;
+    [SerializeField] private AudioClip audioShoot;
 
     void Start()
     {
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
         // 📌 6. Disparar con clic izquierdo
         if (Input.GetMouseButtonDown(0))
         {
+            SoundController.Instance.ExecuteSound(audioShoot);
+
             Shoot(mousePosition);
         }
     }
