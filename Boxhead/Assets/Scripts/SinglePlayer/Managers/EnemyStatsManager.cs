@@ -5,10 +5,10 @@ public class EnemyStatsManager : MonoBehaviour
     public static EnemyStatsManager Instance { get; private set; }
 
     public static EnemyStats ZombieStats;
-    public static EnemyStats DogStats;
+    public static EnemyStats FatStats;
 
     private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10);
-    private static readonly EnemyStats DefaultDogStats = new(3, 2f, 15);
+    private static readonly EnemyStats DefaultFatStats = new(3, 2f, 15);
 
     void Awake()
     {
@@ -45,11 +45,11 @@ public class EnemyStatsManager : MonoBehaviour
             ZombieStats.damage = newDamage;
             // ZombieStats.color = newColor;
         }
-        else if (enemyType == "DogZombie")
+        else if (enemyType == "FatZombie")
         {
-            DogStats.health = newHealth;
-            DogStats.speed = newSpeed;
-            DogStats.damage = newDamage;
+            FatStats.health = newHealth;
+            FatStats.speed = newSpeed;
+            FatStats.damage = newDamage;
             // DogStats.color = newColor;
         }
         else {
@@ -57,9 +57,9 @@ public class EnemyStatsManager : MonoBehaviour
             ZombieStats.speed = ZombieStats.speed * Mathf.Pow(1.05f, currentRound);
             ZombieStats.damage = Mathf.RoundToInt(ZombieStats.damage * Mathf.Pow(1.1f, currentRound));
 
-            DogStats.health = Mathf.RoundToInt(DogStats.health * Mathf.Pow(1.1f, currentRound));
-            DogStats.speed = DogStats.speed * Mathf.Pow(1.05f, currentRound);
-            DogStats.damage = Mathf.RoundToInt(DogStats.damage * Mathf.Pow(1.1f, currentRound));
+            FatStats.health = Mathf.RoundToInt(FatStats.health * Mathf.Pow(1.1f, currentRound));
+            FatStats.speed = FatStats.speed * Mathf.Pow(1.05f, currentRound);
+            FatStats.damage = Mathf.RoundToInt(FatStats.damage * Mathf.Pow(1.1f, currentRound));
         }
 
         if (save) SaveData(enemyType);
@@ -78,7 +78,7 @@ public class EnemyStatsManager : MonoBehaviour
     public void ResetToDefault()
     {
         ZombieStats = new EnemyStats(DefaultZombieStats.health, DefaultZombieStats.speed, DefaultZombieStats.damage);
-        DogStats = new EnemyStats(DefaultDogStats.health, DefaultDogStats.speed, DefaultDogStats.damage);
+        FatStats = new EnemyStats(DefaultFatStats.health, DefaultFatStats.speed, DefaultFatStats.damage);
 
         EnemyStatsPersistence.SaveDefaultEnemyStats();
     }

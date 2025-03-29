@@ -9,7 +9,7 @@ public class LoginManager : MonoBehaviour
 {
     private TextField usernameField, passwordField;
     private Label errorLabel;
-    private string apiUrl = "http://localhost:3002/api/login";
+    private string apiUrl = "http://localhost:3002/api/users/login";
 
     private void Awake()
     {

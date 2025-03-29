@@ -12,7 +12,7 @@ public class RegisterMenu : MonoBehaviour
     private Button registerButton, backButton;
     private Label errorLabel;
 
-    private string apiUrl = "http://localhost:3002/api/register"; // URL del backend
+    private string apiUrl = "http://localhost:3002/api/users/register"; // URL del backend
 
     void OnEnable()
     {
@@ -128,4 +128,5 @@ public class RegisterData
 public class ResponseRegisterData
 {
     public string message;
+    public string email;
 }

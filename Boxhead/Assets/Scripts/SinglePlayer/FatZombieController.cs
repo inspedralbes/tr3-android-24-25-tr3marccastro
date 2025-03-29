@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;  // Asegúrate de importar el namespace de NavMesh.
 
-public class DogZombieController : MonoBehaviour
+public class FatZombieController : MonoBehaviour
 {
     private int currentHealth;
     private float currentSpeed;
@@ -61,7 +61,7 @@ public class DogZombieController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Perro zombie muerto!");
+        Debug.Log("Zombi gordo muerto!");
         EnemyPoolManager.Instance.ReturnToPool(gameObject, false);
         enemySpawner.EnemyDied();
     }
@@ -80,9 +80,9 @@ public class DogZombieController : MonoBehaviour
 
     private void UpdateStats()
     {
-        currentHealth = EnemyStatsManager.DogStats.health;
-        currentSpeed = EnemyStatsManager.DogStats.speed;
-        currentDamage = EnemyStatsManager.DogStats.damage;
+        currentHealth = EnemyStatsManager.FatStats.health;
+        currentSpeed = EnemyStatsManager.FatStats.speed;
+        currentDamage = EnemyStatsManager.FatStats.damage;
 
         /*
         if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.DogStats.color, out Color newColor))

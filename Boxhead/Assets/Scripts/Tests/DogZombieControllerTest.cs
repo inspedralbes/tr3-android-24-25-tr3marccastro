@@ -81,10 +81,10 @@ public class DogZombieControllerTest : MonoBehaviour
     private void UpdateStats()
     {
         // Obtener las estad�sticas m�s recientes del EnemyStatsManager
-        currentHealth = EnemyStatsManager.DogStats.health;
-        currentSpeed = EnemyStatsManager.DogStats.speed;
-        currentDamage = EnemyStatsManager.DogStats.damage;
+        currentHealth = EnemyStatsManager.FatStats.health;
+        currentSpeed = EnemyStatsManager.FatStats.speed;
+        currentDamage = EnemyStatsManager.FatStats.damage;
 
-        Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Da�o=" + currentDamage);
+        Debug.Log("FatZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Da�o=" + currentDamage);
     }
 }

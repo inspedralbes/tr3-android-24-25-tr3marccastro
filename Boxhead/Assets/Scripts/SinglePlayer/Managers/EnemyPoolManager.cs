@@ -7,15 +7,15 @@ public class EnemyPoolManager : MonoBehaviour
 
     // Prefabs para los diferentes tipos de enemigos
     public GameObject zombiePrefab;
-    public GameObject dogZombiePrefab;
+    public GameObject fatZombiePrefab;
 
     // Tamaños de los pools para cada tipo de enemigo
     public int zombiePoolSize = 10;
-    public int dogZombiePoolSize = 10;
+    public int fatZombiePoolSize = 10;
 
     // Pool de enemigos
     private List<GameObject> zombiePool = new List<GameObject>();
-    private List<GameObject> dogZombiePool = new List<GameObject>();
+    private List<GameObject> fatZombiePool = new List<GameObject>();
 
     private void Awake()
     {
@@ -32,18 +32,18 @@ public class EnemyPoolManager : MonoBehaviour
             return;
         }
 
-        if (dogZombiePrefab == null)
+        if (fatZombiePrefab == null)
         {
-            Debug.LogError("Dog Zombie Prefab no asignado en el Inspector.");
+            Debug.LogError("Fat Zombie Prefab no asignado en el Inspector.");
             return;
         }
 
         // Crear enemigos iniciales en el pool
-        CreateEnemyPool(zombiePoolSize, dogZombiePoolSize);
+        CreateEnemyPool(zombiePoolSize, fatZombiePoolSize);
     }
 
     // Función para crear los pools de enemigos
-    private void CreateEnemyPool(int zombieCount, int dogZombieCount)
+    private void CreateEnemyPool(int zombieCount, int fatZombieCount)
     {
         // Crear zombies
         for (int i = 0; i < zombieCount; i++)
@@ -52,9 +52,9 @@ public class EnemyPoolManager : MonoBehaviour
         }
 
         // Crear dog zombies
-        for (int i = 0; i < dogZombieCount; i++)
+        for (int i = 0; i < fatZombieCount; i++)
         {
-            AddToPool(Instantiate(dogZombiePrefab), dogZombiePool, "DogZombie", i);
+            AddToPool(Instantiate(fatZombiePrefab), fatZombiePool, "FatZombie", i);
         }
     }
 
@@ -74,24 +74,16 @@ public class EnemyPoolManager : MonoBehaviour
         pool.Add(enemy);
     } 
 
-    // Obtener un enemigo del pool por tipo (Zombie o DogZombie)
+    // Obtener un enemigo del pool por tipo (Zombie o FatZombie)
     public GameObject GetEnemy(string enemyType, Vector3 position, Quaternion rotation)
     {
-        if (zombiePool.Count <= 0 && dogZombiePool.Count <= 0) return null;
+        if (zombiePool.Count <= 0 && fatZombiePool.Count <= 0) return null;
         
         if (string.IsNullOrEmpty(enemyType))
         {
             Debug.LogError("enemyType no puede ser null o vacío.");
             return null;
         }
-
-        /*
-        if (zombiePool == null || zombiePool.Count == 0)
-        {
-            Debug.LogError("El pool de enemigos está vacío o no se ha inicializado.");
-            return null;
-        }
-        */
 
         GameObject enemy = null;
 
@@ -101,10 +93,10 @@ public class EnemyPoolManager : MonoBehaviour
             enemy = zombiePool[0];
             zombiePool.RemoveAt(0);
         }
-        else if (enemyType == "DogZombie" && dogZombiePool.Count > 0)
+        else if (enemyType == "FatZombie" && fatZombiePool.Count > 0)
         {
-            enemy = dogZombiePool[0];
-            dogZombiePool.RemoveAt(0);
+            enemy = fatZombiePool[0];
+            fatZombiePool.RemoveAt(0);
         }
 
         if (enemy != null)
@@ -122,16 +114,14 @@ public class EnemyPoolManager : MonoBehaviour
     {
         enemy.SetActive(false);
         enemy.transform.parent = transform;
-        enemy.transform.position = Vector3.zero;
-        enemy.transform.rotation = Quaternion.identity;
-
+        enemy.transform.SetPositionAndRotation(Vector3.zero, Quaternion.identity);
         if (isZombie)
         {
             zombiePool.Add(enemy);
         }
         else
         {
-            dogZombiePool.Add(enemy);
+            fatZombiePool.Add(enemy);
         }
     }
 }

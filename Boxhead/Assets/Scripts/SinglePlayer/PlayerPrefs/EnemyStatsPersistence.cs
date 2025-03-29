@@ -13,9 +13,9 @@ public static class EnemyStatsPersistence
         }
         else
         {
-            PlayerPrefs.SetInt("DogHealth", EnemyStatsManager.DogStats.health);
-            PlayerPrefs.SetFloat("DogSpeed", EnemyStatsManager.DogStats.speed);
-            PlayerPrefs.SetInt("DogDamage", EnemyStatsManager.DogStats.damage);
+            PlayerPrefs.SetInt("FatHealth", EnemyStatsManager.FatStats.health);
+            PlayerPrefs.SetFloat("FatSpeed", EnemyStatsManager.FatStats.speed);
+            PlayerPrefs.SetInt("FatDamage", EnemyStatsManager.FatStats.damage);
             // PlayerPrefs.SetString("DogColor", EnemyStatsManager.DogStats.color);
         }
 
@@ -31,10 +31,10 @@ public static class EnemyStatsPersistence
             // PlayerPrefs.GetString("ZombieColor", "FF0000")
         );
 
-        EnemyStatsManager.DogStats = new EnemyStats(
-            PlayerPrefs.GetInt("DogHealth", 3),
-            PlayerPrefs.GetFloat("DogSpeed", 2f),
-            PlayerPrefs.GetInt("DogDamage", 15)
+        EnemyStatsManager.FatStats = new EnemyStats(
+            PlayerPrefs.GetInt("FatHealth", 3),
+            PlayerPrefs.GetFloat("FatSpeed", 2f),
+            PlayerPrefs.GetInt("FatDamage", 15)
             // PlayerPrefs.GetString("DogColor", "FF00D2")
         );
     }
@@ -46,9 +46,9 @@ public static class EnemyStatsPersistence
         PlayerPrefs.SetInt("ZombieDamage", 10);
         // PlayerPrefs.SetString("ZombieColor", "FF0000");
 
-        PlayerPrefs.SetInt("DogHealth", 3);
-        PlayerPrefs.SetFloat("DogSpeed", 2f);
-        PlayerPrefs.SetInt("DogDamage", 15);
+        PlayerPrefs.SetInt("FatHealth", 3);
+        PlayerPrefs.SetFloat("FatSpeed", 2f);
+        PlayerPrefs.SetInt("FatDamage", 15);
         // PlayerPrefs.SetString("DogColor", "FF00D2");
 
         PlayerPrefs.Save();

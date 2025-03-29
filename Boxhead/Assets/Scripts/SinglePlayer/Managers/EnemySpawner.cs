@@ -52,9 +52,7 @@ public class EnemySpawner : MonoBehaviour
             else Debug.LogWarning("No se pudo obtener un Zombie del pool.");
 
             // Continuamos el spawneo
-            StartCoroutine(SpawnDogZombieWithDelay());
-
-            if (round > 10) yield break;
+            StartCoroutine(SpawnFatZombieWithDelay());
         }
     }
 
@@ -86,7 +84,7 @@ public class EnemySpawner : MonoBehaviour
         StartCoroutine(SpawnEnemy());
     }
 
-    IEnumerator SpawnDogZombieWithDelay()
+    IEnumerator SpawnFatZombieWithDelay()
     {
         // Esperamos 3 segundos
         yield return new WaitForSeconds(3f);
@@ -95,7 +93,7 @@ public class EnemySpawner : MonoBehaviour
         {
             // Instanciamos el DogZombie después del retraso
             Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
-            EnemyPoolManager.Instance.GetEnemy("DogZombie", spawnPoint.position, Quaternion.identity);
+            EnemyPoolManager.Instance.GetEnemy("FatZombie", spawnPoint.position, Quaternion.identity);
 
             totalEnemies++;
         }

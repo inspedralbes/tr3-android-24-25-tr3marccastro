@@ -50,9 +50,9 @@ public class PlayerBullet : MonoBehaviour
                 enemy.TakeDamage(damageBullet); // Aplica el daño de la bala al enemigo
             }
         }
-        else if (collision.gameObject.CompareTag("DogZombie"))
+        else if (collision.gameObject.CompareTag("FatZombie"))
         {
-            DogZombieController enemy = collision.gameObject.GetComponent<DogZombieController>();
+            FatZombieController enemy = collision.gameObject.GetComponent<FatZombieController>();
             if (enemy != null)
             {
                 enemy.TakeDamage(damageBullet); // Aplica el daño de la bala al enemigo

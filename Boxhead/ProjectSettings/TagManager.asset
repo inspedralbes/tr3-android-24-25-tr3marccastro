@@ -6,7 +6,7 @@ TagManager:
   tags:
   - Zombie
   - Bullet
-  - DogZombie
+  - FatZombie
   layers:
   - Default
   - TransparentFX

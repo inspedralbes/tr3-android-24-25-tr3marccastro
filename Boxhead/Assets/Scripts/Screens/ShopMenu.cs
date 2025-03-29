@@ -12,11 +12,12 @@ public class ShopScreen : MonoBehaviour
     private ScrollView itemsContainer;
     private Button buttonBack;
     private string apiUrlPost = "http://localhost:3002/api/purchases/new-purchase";
-    private string apiUrl = "http://localhost:3002/api/items";
+    private string apiUrl = "http://localhost:3002/api/skins";
+    private string apiUrlIdSkin = "http://localhost:3002/api/purchases/history";
 
     private void Awake()
     {
-        PlayerSkins.DeleteAll();
+        //PlayerSkins.DeleteAll();
 
         //UserSession.DeleteEmail();
     }
@@ -41,10 +42,10 @@ public class ShopScreen : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             // Deserializar los datos JSON (ahora es un objeto con una propiedad "items")
-            var itemsData = JsonUtility.FromJson<ItemList>(request.downloadHandler.text);
-            foreach (var item in itemsData.items)
+            var skinsData = JsonUtility.FromJson<SkinList>(request.downloadHandler.text);
+            foreach (var skin in skinsData.skins)
             {
-                CreateItemUI(item);
+                CreateItemUI(skin);
             }
         }
         else
@@ -53,32 +54,37 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private void CreateItemUI(Item item)
+    private void CreateItemUI(Skin skin)
     {
         VisualElement itemElement = new VisualElement();
         itemElement.AddToClassList("item");
 
         Image itemImage = new();
         itemImage.style.backgroundImage = new StyleBackground(new Texture2D(1, 1));
-        StartCoroutine(LoadImage(item.imagePath, itemImage));
+        StartCoroutine(LoadImage(skin.imagePath, itemImage));
 
         itemImage.AddToClassList("image");
         itemElement.Add(itemImage);
 
-        var nameLabel = new Label(item.name);
+        var nameLabel = new Label(skin.name);
         nameLabel.AddToClassList("name");
         itemElement.Add(nameLabel);
 
-        var priceLabel = new Label("$" + item.price);
+        var priceLabel = new Label("$" + skin.price);
         priceLabel.AddToClassList("price");
         itemElement.Add(priceLabel);
 
-        var buyButton = new Button(() => BuyItem(item)) { text = PlayerSkins.HasItem(item.id) ? "Comprado" : "Comprar" };
-        buyButton.SetEnabled(!PlayerSkins.HasItem(item.id));
+        Button buyButton = new Button { text = "Verificando..." };
         buyButton.AddToClassList("buy-button");
         itemElement.Add(buyButton);
 
         itemsContainer.Add(itemElement);
+
+        StartCoroutine(CheckPurchaseHistory(skin.id, isOwned =>
+        {
+            buyButton.text = isOwned ? "Descargar" : "Comprar";
+            buyButton.clicked += () => HandleItemAction(skin, isOwned);
+        }));
     }
 
     private IEnumerator LoadImage(string imageUrl, Image imageElement)
@@ -97,13 +103,81 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private void BuyItem(Item item)
+    private void HandleItemAction(Skin skin, bool isOwned)
     {
-        StartCoroutine(SaveBillToServer(item.id));
-        StartCoroutine(DownloadAndSaveAssetBundle(item));
+        if (isOwned)
+        {
+            StartCoroutine(DownloadAndSaveAssetBundle(skin));
+        }
+        else
+        {
+            BuyItem(skin);
+        }
     }
 
-    private IEnumerator DownloadAndSaveAssetBundle(Item item)
+    private IEnumerator CheckPurchaseHistory(int id, System.Action<bool> callback)
+    {
+
+        if (PlayerSkins.HasItem(id))
+        {
+            Debug.Log("Skin " + id + " encontrada en PlayerPrefs.");
+            callback(true);
+            yield break;
+        }
+
+        Debug.Log("Skin " + id + " no encontrada en PlayerPrefs, consultando base de datos...");
+
+        string email = UserSession.GetUserEmail();
+        SkinData skinData = new() { skinId = id, email = email };
+
+        string jsonData = JsonUtility.ToJson(skinData);
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
+
+        UnityWebRequest request = new(apiUrlIdSkin, "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(jsonBytes),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            string result = request.downloadHandler.text;
+            Debug.Log("Respuesta del servidor: " + result);
+
+            try
+            {
+                ResponseHistory response = JsonUtility.FromJson<ResponseHistory>(result);
+                if (response.message == "success")
+                {
+                    callback(true);
+                    yield break;
+                }
+            }
+            catch (System.Exception e)
+            {
+                Debug.LogError("Error al procesar la respuesta JSON: " + e.Message);
+                callback(false);
+            }
+        }
+        else
+        {
+            //Debug.LogError("Error de conexión: " + request.error);
+            //Debug.LogError("Código de respuesta HTTP: " + request.responseCode);
+            //Debug.LogError("Respuesta completa del servidor: " + request.downloadHandler.text);
+            callback(false);
+        }
+    }
+
+    private void BuyItem(Skin skin)
+    {
+        StartCoroutine(SaveBillToServer(skin.id));
+        StartCoroutine(DownloadAndSaveAssetBundle(skin));
+    }
+
+    private IEnumerator DownloadAndSaveAssetBundle(Skin item)
     {
         string imageName = Path.GetFileNameWithoutExtension(item.imagePath);
         string fullBundleUrl = "http://localhost:3002" + item.assetBundlePath;
@@ -201,9 +275,22 @@ public class ShopScreen : MonoBehaviour
         public string message;
     }
 
+    [System.Serializable]
+    public class SkinData
+    {
+        public int skinId;
+        public string email;
+    }
+
+    [System.Serializable]
+    public class ResponseHistory
+    {
+        public string message;
+    }
+
     // Clases para deserializar los datos del servidor
     [System.Serializable]
-    public class Item
+    public class Skin
     {
         public int id;
         public string name;
@@ -214,8 +301,8 @@ public class ShopScreen : MonoBehaviour
     }
 
     [System.Serializable]
-    public class ItemList
+    public class SkinList
     {
-        public Item[] items;
+        public Skin[] skins;
     }
 }
