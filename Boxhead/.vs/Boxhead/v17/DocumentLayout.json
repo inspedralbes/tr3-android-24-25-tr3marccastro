@@ -7,32 +7,12 @@
       "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemyspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\fatzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\fatzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\fatzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\managers\\enemypoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemypoolmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\playerprefs\\enemystatspersistence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerprefs\\enemystatspersistence.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerbullet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\zombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,68 +22,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-29T00:06:16.506Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "EnemyStatsPersistence.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPersistence.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPersistence.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPersistence.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPersistence.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAUwCkAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:58:59.488Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ZombieController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
-              "ViewState": "AgIAAC8AAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:56:36.894Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "FatZombieController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
-              "ViewState": "AgIAACMAAAAAAAAAAAAwwFQAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:54:36.868Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EnemyStatsManager.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
-              "ViewState": "AgIAADsAAAAAAAAAAAAwwFAAAABbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:55:58.067Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -112,34 +32,36 @@
               "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
               "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
               "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAIwFYAAAAnAAAAAAAAAA==",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAmwFkAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:53:02.185Z",
+              "WhenOpened": "2025-03-30T03:44:38.822Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "PlayerBullet.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerBullet.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADQAAAA1AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "ZombieController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\ZombieController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:48:46.333Z"
+              "WhenOpened": "2025-03-30T03:42:31.098Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "EnemyPoolManager.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyPoolManager.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyPoolManager.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyPoolManager.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyPoolManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAABTAAAAAAAAAA==",
+              "DocumentIndex": 1,
+              "Title": "FatZombieController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\FatZombieController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAeAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-28T23:45:56.767Z"
+              "WhenOpened": "2025-03-30T03:42:23.096Z",
+              "EditorCaption": ""
             }
           ]
         }

@@ -7,8 +7,9 @@ public class FatZombieController : MonoBehaviour
     private float currentSpeed;
     private int currentDamage;
     private Transform playerTransform;
+    private Animator animator;
     private NavMeshAgent agent; // Usamos NavMeshAgent en vez de Rigidbody2D
-    private Renderer enemyRenderer;
+    private SpriteRenderer enemyRenderer;
     private EnemySpawner enemySpawner;
 
     private void Awake()
@@ -20,7 +21,8 @@ public class FatZombieController : MonoBehaviour
             Debug.LogError("EnemySpawner no encontrado en la escena.");
         }
 
-        enemyRenderer = GetComponent<Renderer>();
+        enemyRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>(); // Inicializamos el NavMeshAgent
         agent.updateRotation = false;  // No actualiza la rotación, ya que es un juego 2D
         agent.updateUpAxis = false;    // No necesitamos que se mueva en el eje Y
@@ -46,6 +48,31 @@ public class FatZombieController : MonoBehaviour
         if (playerTransform != null)
         {
             agent.SetDestination(playerTransform.position);  // El agente va hacia el jugador
+            agent.speed = currentSpeed; // Establece la velocidad del agente con el zombi
+        }
+
+        // Obtener la dirección de movimiento del agente
+        Vector2 velocity = agent.velocity;
+
+        // Actualizamos los parámetros del Blend Tree
+        animator.SetFloat("Horizontal", velocity.x); // Dirección horizontal (izquierda/derecha)
+        animator.SetFloat("Vertical", velocity.y); // Dirección vertical (arriba/abajo)
+
+        // Actualizamos los parámetros LastMoveX y LastMoveY (dirección última conocida)
+        if (velocity.x != 0 || velocity.y != 0)
+        {
+            animator.SetFloat("LastMoveX", velocity.x);  // Guarda la última dirección horizontal
+            animator.SetFloat("LastMoveY", velocity.y);
+        }
+
+        // Volteamos el sprite si se mueve a la izquierda (opcional si no usas "LastMoveX")
+        if (velocity.x < 0)
+        {
+            enemyRenderer.flipX = false;
+        }
+        else if (velocity.x > 0)
+        {
+            enemyRenderer.flipX = true;
         }
     }
 

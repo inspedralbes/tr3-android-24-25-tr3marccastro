@@ -77,7 +77,7 @@ public class EnemySpawner : MonoBehaviour
         WebSocketManager.Instance.SetRoundPause(false, round);  // Reanudar la ronda
         enemiesKilled = 0; // Reiniciar el contador
         totalEnemies = 0;
-        maxScreen = Mathf.RoundToInt(maxScreen * 1.1f);
+        maxScreen += 2;
         round++;
         Debug.Log("Començando la siguiente ronda " + round);
 
@@ -87,7 +87,7 @@ public class EnemySpawner : MonoBehaviour
     IEnumerator SpawnFatZombieWithDelay()
     {
         // Esperamos 3 segundos
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
 
         if(totalEnemies < maxScreen)
         {
