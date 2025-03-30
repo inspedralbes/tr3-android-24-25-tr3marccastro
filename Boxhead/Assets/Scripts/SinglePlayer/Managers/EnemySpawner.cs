@@ -13,6 +13,8 @@ public class EnemySpawner : MonoBehaviour
     private int totalEnemies = 0;
     public int round = 1;
     public int kills = 0;
+    public float roundTimer = 0f;
+    private bool isPaused = false;
 
     void Awake()
     {
@@ -25,6 +27,14 @@ public class EnemySpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemy()); // Spawnea enemigos cada cierto tiempo
+    }
+
+    void Update()
+    {
+        if (!isPaused)
+        {
+            roundTimer += Time.deltaTime;
+        }
     }
 
     IEnumerator SpawnEnemy()

@@ -8,10 +8,10 @@ using System.Text;
 public class GameOverMenu : MonoBehaviour
 {
     private VisualElement gameOverScreen;
-    private Button retryButton;
-    private Button mainMenuButton;
+    private Button retryButton, mainMenuButton;
     private string apiUrl = "http://localhost:3002/api/stats";
     public EnemySpawner enemySpawner;
+    public WebSocketManager webSocketManager;
 
     private void OnEnable()
     {
@@ -42,13 +42,15 @@ public class GameOverMenu : MonoBehaviour
         ResultsMatch resultsMatch = new()
         {
             kills = enemySpawner.kills,
-            rounds = enemySpawner.round
+            rounds = enemySpawner.round,
+            totalTime = enemySpawner.roundTimer,
+            wasModificated = webSocketManager.isModificated
         };
 
         string jsonData = JsonUtility.ToJson(resultsMatch);
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
-        UnityWebRequest request = new UnityWebRequest(apiUrl, "POST")
+        UnityWebRequest request = new(apiUrl, "POST")
         {
             uploadHandler = new UploadHandlerRaw(jsonBytes),
             downloadHandler = new DownloadHandlerBuffer()
@@ -94,6 +96,8 @@ public class ResultsMatch
 {
     public int kills;
     public int rounds;
+    public float totalTime;
+    public bool wasModificated;
 }
 
 // Clase para recibir respuesta del servidor

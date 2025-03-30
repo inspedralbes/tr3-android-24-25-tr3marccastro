@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public static class EnemyStatsPersistence
+public static class EnemyStatsPrefs
 {
     public static void SaveEnemyStats(string enemyType)
     {

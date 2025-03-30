@@ -7,9 +7,6 @@ public class EnemyStatsManager : MonoBehaviour
     public static EnemyStats ZombieStats;
     public static EnemyStats FatStats;
 
-    // private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10, "FFFFFF");
-    // private static readonly EnemyStats DefaultFatStats = new(5, 0.5f, 20, "FFFFFF");
-
     void Awake()
     {
         // Implementaci�n del Singleton
@@ -52,7 +49,7 @@ public class EnemyStatsManager : MonoBehaviour
             FatStats.color = newColor;
         }
 
-        if (save) EnemyStatsPersistence.SaveEnemyStats(enemyType);
+        if (save) EnemyStatsPrefs.SaveEnemyStats(enemyType);
     }
 
     public void UpdateEnemyStatsForRounds(int currentRound)
@@ -66,13 +63,13 @@ public class EnemyStatsManager : MonoBehaviour
 
     public void LoadEnemyStats()
     {
-        EnemyStatsPersistence.LoadEnemyStats();
+        EnemyStatsPrefs.LoadEnemyStats();
     }
 
     public void ResetToDefault()
     {
-        EnemyStatsPersistence.SaveDefaultEnemyStats();
-        EnemyStatsPersistence.LoadEnemyStats();
+        EnemyStatsPrefs.SaveDefaultEnemyStats();
+        EnemyStatsPrefs.LoadEnemyStats();
     }
 }
 

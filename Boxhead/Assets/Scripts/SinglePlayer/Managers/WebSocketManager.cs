@@ -8,12 +8,12 @@ public class WebSocketManager : MonoBehaviour
 {
     public static WebSocketManager Instance;
     private WebSocket websocket;
-    // public ZombieController zombieController;
     public EnemyStatsManager statsManager;
     public PlayerController playerController;
     public WebSocketMessage statsSocket;
 
     private bool isRoundPaused = false;
+    public bool isModificated = false;
 
     // Dirección del servidor WebSocket
     private string serverUrl = "ws://localhost:3002"; // Cambia a la URL de tu servidor WebSocket
@@ -86,14 +86,16 @@ public class WebSocketManager : MonoBehaviour
         {
             if (statsSocket.payload.name != "Player")
             {
-                Debug.Log("Aplicando estadísticas de Web Socket...");
+                Debug.Log("Aplicando estadísticas de Web Socket als enemics...");
                 statsManager.UpdateStatsEnemy(statsSocket.payload.name, statsSocket.payload.health, statsSocket.payload.speed, statsSocket.payload.damage, statsSocket.payload.color, statsSocket.payload.save);
                 Debug.Log("Estadísticas aplicadas.");
+                isModificated = true;
             }
             else
             {
                 Debug.Log("Aplicando estadísticas de Web Socket al Player...");
                 playerController.UpdateStatsPlayer(statsSocket.payload.health, statsSocket.payload.speed);
+                isModificated= true;
             }
         }
         else

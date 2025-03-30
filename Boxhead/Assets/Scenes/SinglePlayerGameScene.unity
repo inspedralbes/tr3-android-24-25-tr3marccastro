@@ -194,6 +194,7 @@ MonoBehaviour:
   maxScreen: 10
   round: 1
   kills: 0
+  roundTimer: 0
 --- !u!4 &111993158
 Transform:
   m_ObjectHideFlags: 0
@@ -3735,7 +3736,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1205520538
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51742,6 +51743,7 @@ MonoBehaviour:
       speed: 0
       damage: 0
       color: 
+  isModificated: 0
 --- !u!1 &1652840765
 GameObject:
   m_ObjectHideFlags: 0
@@ -51932,7 +51934,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1684347660
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51980,6 +51982,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemySpawner: {fileID: 111993157}
+  webSocketManager: {fileID: 1547257454}
 --- !u!1 &1739124217
 GameObject:
   m_ObjectHideFlags: 0
