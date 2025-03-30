@@ -7,8 +7,8 @@ public class EnemyStatsManager : MonoBehaviour
     public static EnemyStats ZombieStats;
     public static EnemyStats FatStats;
 
-    private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10);
-    private static readonly EnemyStats DefaultFatStats = new(3, 2f, 15);
+    // private static readonly EnemyStats DefaultZombieStats = new(3, 1f, 10, "FFFFFF");
+    // private static readonly EnemyStats DefaultFatStats = new(5, 0.5f, 20, "FFFFFF");
 
     void Awake()
     {
@@ -27,7 +27,6 @@ public class EnemyStatsManager : MonoBehaviour
         // Inicializar las estad�sticas
         if (!PlayerPrefs.HasKey("GameInitialized"))
         {
-            Debug.Log("Hola ge");
             ResetToDefault();
             PlayerPrefs.SetInt("GameInitialized", 1);
             PlayerPrefs.Save();
@@ -36,38 +35,33 @@ public class EnemyStatsManager : MonoBehaviour
         LoadEnemyStats();
     }
 
-    public void UpdateEnemyStats(string enemyType, int newHealth, float newSpeed, int newDamage, string newColor, bool save, int currentRound)
+    public void UpdateStatsEnemy(string enemyType, int newHealth, float newSpeed, int newDamage, string newColor, bool save)
     {
         if (enemyType == "Zombie")
         {
             ZombieStats.health = newHealth;
             ZombieStats.speed = newSpeed;
             ZombieStats.damage = newDamage;
-            // ZombieStats.color = newColor;
+            ZombieStats.color = newColor;
         }
         else if (enemyType == "FatZombie")
         {
             FatStats.health = newHealth;
             FatStats.speed = newSpeed;
             FatStats.damage = newDamage;
-            // DogStats.color = newColor;
-        }
-        else {
-            ZombieStats.health = Mathf.RoundToInt(ZombieStats.health * Mathf.Pow(1.1f, currentRound));
-            ZombieStats.speed = ZombieStats.speed * Mathf.Pow(1.05f, currentRound);
-            ZombieStats.damage = Mathf.RoundToInt(ZombieStats.damage * Mathf.Pow(1.1f, currentRound));
-
-            FatStats.health = Mathf.RoundToInt(FatStats.health * Mathf.Pow(1.1f, currentRound));
-            FatStats.speed = FatStats.speed * Mathf.Pow(1.05f, currentRound);
-            FatStats.damage = Mathf.RoundToInt(FatStats.damage * Mathf.Pow(1.1f, currentRound));
+            FatStats.color = newColor;
         }
 
-        if (save) SaveData(enemyType);
+        if (save) EnemyStatsPersistence.SaveEnemyStats(enemyType);
     }
 
-    public void SaveData(string enemyType)
+    public void UpdateEnemyStatsForRounds(int currentRound)
     {
-        EnemyStatsPersistence.SaveEnemyStats(enemyType);
+        ZombieStats.speed = ZombieStats.speed * Mathf.Pow(1.05f, currentRound);
+        ZombieStats.damage = Mathf.RoundToInt(ZombieStats.damage * Mathf.Pow(1.1f, currentRound));
+
+        FatStats.speed = FatStats.speed * Mathf.Pow(1.05f, currentRound);
+        FatStats.damage = Mathf.RoundToInt(FatStats.damage * Mathf.Pow(1.1f, currentRound));
     }
 
     public void LoadEnemyStats()
@@ -77,10 +71,8 @@ public class EnemyStatsManager : MonoBehaviour
 
     public void ResetToDefault()
     {
-        ZombieStats = new EnemyStats(DefaultZombieStats.health, DefaultZombieStats.speed, DefaultZombieStats.damage);
-        FatStats = new EnemyStats(DefaultFatStats.health, DefaultFatStats.speed, DefaultFatStats.damage);
-
         EnemyStatsPersistence.SaveDefaultEnemyStats();
+        EnemyStatsPersistence.LoadEnemyStats();
     }
 }
 
@@ -90,11 +82,13 @@ public class EnemyStats
     public int health;
     public float speed;
     public int damage;
+    public string color;
 
-    public EnemyStats(int health, float speed, int damage)
+    public EnemyStats(int health, float speed, int damage, string color)
     {
         this.health = health;
         this.speed = speed;
         this.damage = damage;
+        this.color = color;
     }
 }

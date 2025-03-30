@@ -11,7 +11,7 @@ public class WebSocketManager : MonoBehaviour
     // public ZombieController zombieController;
     public EnemyStatsManager statsManager;
     public PlayerController playerController;
-    public CharacterStatsFromWebSocket statsSocket;
+    public WebSocketMessage statsSocket;
 
     private bool isRoundPaused = false;
 
@@ -32,29 +32,17 @@ public class WebSocketManager : MonoBehaviour
 
     private async Task ConnectWebSocket()
     {
-        // Crea una nova instància de WebSocket amb la URL
         websocket = new WebSocket(serverUrl);
-        // Callback: Quan la connexió s’obre.
+
         websocket.OnOpen += () =>
         {
-            // Debug.Log("WebSocket connectat!");
+            websocket.SendText("{\"event_backend\": \"register\", \"payload\": {\"id\": \"client_unity\", \"tipo\": \"unity\"}}");
         };
-        // Callback: Quan es rep un error.
-        websocket.OnError += (e) =>
-        {
-            // Debug.LogError("WebSocket error: " + e);
-        };
-        // Callback: Quan la connexió es tanca.
-        websocket.OnClose += (e) =>
-        {
-            // Debug.Log("WebSocket tancat!");
-        };
-        // Callback: Quan es rep un missatge.
+
         websocket.OnMessage += (bytes) =>
         {
-        // Converteix els bytes a una cadena.
             string message = Encoding.UTF8.GetString(bytes);
-            // Debug.Log("Missatge rebut: " + message);
+
             ProcessMessage(message);
         };
 
@@ -64,13 +52,11 @@ public class WebSocketManager : MonoBehaviour
 
     private void Update()
     {
-        if (websocket != null)
-        {
-            websocket.DispatchMessageQueue();
-        }
+        websocket?.DispatchMessageQueue();
     }
 
-    private void ProcessMessage(string message) {
+    private void ProcessMessage(string message)
+    {
 
         if (string.IsNullOrEmpty(message))
         {
@@ -78,36 +64,42 @@ public class WebSocketManager : MonoBehaviour
             return; // No proceses si el mensaje está vacío o nulo
         }
 
-        statsSocket = JsonUtility.FromJson<CharacterStatsFromWebSocket>(message);
+        statsSocket = JsonUtility.FromJson<WebSocketMessage>(message);
 
-        if (statsSocket == null)
+        if (statsSocket == null || string.IsNullOrEmpty(statsSocket.event_unity))
         {
-            Debug.LogWarning("Deserialización fallida. statsSocket es null.");
-            return; // Si no se deserializa correctamente, no procedas.
+            Debug.LogWarning("Evento no reconocido o mensaje mal estructurado.");
+            return;
         }
 
-        Debug.Log("Recibido mensaje con nombre: " + statsSocket.save);
+        if (statsSocket.event_unity == "stats_restart")
+        {
+            Debug.Log("Reinicio");
+            EnemyStatsManager.Instance.ResetToDefault();
+        }
+        Debug.Log("Recibido mensaje con nombre: " + statsSocket.payload.name);
     }
 
     public void ApplyStatsIfUpdated(int currentRound)
     {
-        if(!string.IsNullOrEmpty(statsSocket.name)) 
+        if (!string.IsNullOrEmpty(statsSocket.payload.name))
         {
-            if (statsSocket.name != "Player")
+            if (statsSocket.payload.name != "Player")
             {
                 Debug.Log("Aplicando estadísticas de Web Socket...");
-                statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, statsSocket.save, currentRound);
+                statsManager.UpdateStatsEnemy(statsSocket.payload.name, statsSocket.payload.health, statsSocket.payload.speed, statsSocket.payload.damage, statsSocket.payload.color, statsSocket.payload.save);
                 Debug.Log("Estadísticas aplicadas.");
             }
-            else {
+            else
+            {
                 Debug.Log("Aplicando estadísticas de Web Socket al Player...");
-                playerController.UpdateStatsPlayer(statsSocket.health, statsSocket.speed);
+                playerController.UpdateStatsPlayer(statsSocket.payload.health, statsSocket.payload.speed);
             }
         }
         else
         {
             // Actualizar estadísticas con valores incrementados
-            statsManager.UpdateEnemyStats(statsSocket.name, statsSocket.health, statsSocket.speed, statsSocket.damage, statsSocket.color, statsSocket.save, currentRound);
+            statsManager.UpdateEnemyStatsForRounds(currentRound);
         }
     }
 
@@ -133,6 +125,13 @@ public class WebSocketManager : MonoBehaviour
             // enemyStatsManager.UpdateStats(1, 1);
             await websocket.Close();
         }
+    }
+
+    [System.Serializable]
+    public class WebSocketMessage
+    {
+        public string event_unity;
+        public CharacterStatsFromWebSocket payload;
     }
 
     [System.Serializable]

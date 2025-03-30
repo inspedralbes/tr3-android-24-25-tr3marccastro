@@ -3129,6 +3129,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1438643175}
+  - {fileID: 863020387}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &418390172
@@ -3436,7 +3437,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 418390171}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &863020388
 MonoBehaviour:
@@ -51733,12 +51734,14 @@ MonoBehaviour:
   statsManager: {fileID: 1071743950}
   playerController: {fileID: 418390172}
   statsSocket:
-    save: 0
-    name: 
-    health: 0
-    speed: 0
-    damage: 0
-    color: 
+    event_unity: 
+    payload:
+      save: 0
+      name: 
+      health: 0
+      speed: 0
+      damage: 0
+      color: 
 --- !u!1 &1652840765
 GameObject:
   m_ObjectHideFlags: 0
@@ -52175,7 +52178,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1012092905}
-  - {fileID: 863020387}
   - {fileID: 1739124219}
   - {fileID: 1684347661}
   - {fileID: 1795674433}

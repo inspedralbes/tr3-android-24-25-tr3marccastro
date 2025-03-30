@@ -32,7 +32,6 @@ public class GameOverMenu : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
-        EnemyStatsManager.Instance.ResetToDefault();
         StartCoroutine(Results());
     }
 

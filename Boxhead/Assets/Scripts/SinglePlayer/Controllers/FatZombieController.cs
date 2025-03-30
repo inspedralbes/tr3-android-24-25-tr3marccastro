@@ -111,16 +111,14 @@ public class FatZombieController : MonoBehaviour
         currentSpeed = EnemyStatsManager.FatStats.speed;
         currentDamage = EnemyStatsManager.FatStats.damage;
 
-        /*
-        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.DogStats.color, out Color newColor))
+        if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.FatStats.color, out Color newColor))
         {
             enemyRenderer.material.color = newColor;
         }
         else
         {
-            Debug.LogWarning("Color inválido: " + EnemyStatsManager.DogStats.color);
+            Debug.LogWarning("Color inválido: " + EnemyStatsManager.FatStats.color);
         }
-        */
 
         Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }

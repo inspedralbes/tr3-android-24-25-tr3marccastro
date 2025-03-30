@@ -16,11 +16,6 @@ public class PlayerController : MonoBehaviour
     public GameOverMenu gameOverMenu;
     [SerializeField] private AudioClip audioShoot;
 
-    private void Awake()
-    {
-        EnemyStatsPersistence.SaveDefaultEnemyStats();
-    }
-
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();

@@ -119,7 +119,6 @@ public class ZombieController : MonoBehaviour
         currentSpeed = EnemyStatsManager.ZombieStats.speed;
         currentDamage = EnemyStatsManager.ZombieStats.damage;
 
-        /*
         if (ColorUtility.TryParseHtmlString("#" + EnemyStatsManager.ZombieStats.color, out Color newColor))
         {
             enemyRenderer.color = newColor;
@@ -128,7 +127,6 @@ public class ZombieController : MonoBehaviour
         {
             Debug.LogWarning("Color inválido: " + EnemyStatsManager.ZombieStats.color);
         }
-        */
 
         Debug.Log("Zombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }
