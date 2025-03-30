@@ -4,7 +4,7 @@
         <engine:Label text="Boxhead" name="Header" class="header" />
         <engine:Button text="Start" name="StartButton" class="button" />
         <engine:Button text="Shop of Skins" name="ShopButton" class="button" />
-        <engine:Button text="Multiplayer" name="MultiplayerButton" class="button" />
+        <engine:Button text="Logout" name="LogoutButton" class="button" />
         <engine:Button text="Exit" name="ExitButton" class="button" />
     </engine:VisualElement>
 </engine:UXML>

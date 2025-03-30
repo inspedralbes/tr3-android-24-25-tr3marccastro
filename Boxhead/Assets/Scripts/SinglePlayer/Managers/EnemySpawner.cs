@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class EnemySpawner : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] spawnPoints; // Puntos donde aparecen los enemigos
     [SerializeField] private float spawnInterval = 2f;
     public Transform[] waypoints;
+    public TextMeshProUGUI numRoundsText;
     public int maxScreen = 10;
 
     private int enemiesKilled = 0;
@@ -22,6 +24,8 @@ public class EnemySpawner : MonoBehaviour
             Instance = this;
         else
             Destroy(gameObject); // Evita duplicados
+
+        numRoundsText.text = "" + round;
     }
 
     void Start()
@@ -89,6 +93,7 @@ public class EnemySpawner : MonoBehaviour
         totalEnemies = 0;
         maxScreen += 2;
         round++;
+        numRoundsText.text = "" + round;
         Debug.Log("Començando la siguiente ronda " + round);
 
         StartCoroutine(SpawnEnemy());

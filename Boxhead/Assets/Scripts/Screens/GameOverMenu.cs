@@ -32,19 +32,23 @@ public class GameOverMenu : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
-        StartCoroutine(Results());
+        if (UserSession.GetUserEmail() != null)
+        {
+            StartCoroutine(Results());
+        }
+        else SceneManager.LoadScene("MainMenu");
     }
 
     private IEnumerator Results() 
     {
-
         // Crear el objeto JSON manualmente
         ResultsMatch resultsMatch = new()
         {
             kills = enemySpawner.kills,
             rounds = enemySpawner.round,
             totalTime = enemySpawner.roundTimer,
-            wasModificated = webSocketManager.isModificated
+            wasModificated = webSocketManager.isModificated,
+            email = UserSession.GetUserEmail(),
         };
 
         string jsonData = JsonUtility.ToJson(resultsMatch);
@@ -98,6 +102,7 @@ public class ResultsMatch
     public int rounds;
     public float totalTime;
     public bool wasModificated;
+    public string email;
 }
 
 // Clase para recibir respuesta del servidor
