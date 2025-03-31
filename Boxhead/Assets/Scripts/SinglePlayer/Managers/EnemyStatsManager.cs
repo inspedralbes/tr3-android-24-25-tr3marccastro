@@ -69,7 +69,7 @@ public class EnemyStatsManager : MonoBehaviour
     public void ResetToDefault()
     {
         EnemyStatsPrefs.SaveDefaultEnemyStats();
-        EnemyStatsPrefs.LoadEnemyStats();
+        LoadEnemyStats();
     }
 }
 

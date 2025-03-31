@@ -15,6 +15,13 @@ public class ShopScreen : MonoBehaviour
     private string apiUrl = "http://localhost:3002/api/skins";
     private string apiUrlIdSkin = "http://localhost:3002/api/purchases/history";
 
+    private void Awake()
+     {
+        // PlayerSkins.DeleteAll();
+ 
+        // UserSession.DeleteEmail();
+     }
+
     void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;

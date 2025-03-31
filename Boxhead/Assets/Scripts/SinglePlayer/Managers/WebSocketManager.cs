@@ -71,23 +71,17 @@ public class WebSocketManager : MonoBehaviour
             Debug.LogWarning("Evento no reconocido o mensaje mal estructurado.");
             return;
         }
-
-        if (statsSocket.event_unity == "stats_restart")
-        {
-            Debug.Log("Reinicio");
-            EnemyStatsManager.Instance.ResetToDefault();
-        }
         Debug.Log("Recibido mensaje con nombre: " + statsSocket.payload.name);
     }
 
     public void ApplyStatsIfUpdated(int currentRound)
     {
-        if (!string.IsNullOrEmpty(statsSocket.payload.name))
+        if (statsSocket.event_unity == "stats-update")
         {
             if (statsSocket.payload.name != "Player")
             {
                 Debug.Log("Aplicando estadísticas de Web Socket als enemics...");
-                statsManager.UpdateStatsEnemy(statsSocket.payload.name, statsSocket.payload.health, statsSocket.payload.speed, statsSocket.payload.damage, statsSocket.payload.color, statsSocket.payload.save);
+                EnemyStatsManager.Instance.UpdateStatsEnemy(statsSocket.payload.name, statsSocket.payload.health, statsSocket.payload.speed, statsSocket.payload.damage, statsSocket.payload.color, statsSocket.payload.save);
                 Debug.Log("Estadísticas aplicadas.");
                 isModificated = true;
             }
@@ -97,6 +91,9 @@ public class WebSocketManager : MonoBehaviour
                 playerController.UpdateStatsPlayer(statsSocket.payload.health, statsSocket.payload.speed);
                 isModificated= true;
             }
+        }
+        else if(statsSocket.event_unity == "stats_restart") {
+            EnemyStatsManager.Instance.ResetToDefault();
         }
         else
         {
