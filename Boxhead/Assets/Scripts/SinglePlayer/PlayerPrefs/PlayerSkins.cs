@@ -3,58 +3,58 @@ using System.Collections.Generic;
 
 public static class PlayerSkins
 {
-    private const string OwnedItemsKey = "OwnedItems";
+    private const string OwnedSkinKey = "OwnedSkins";
 
     // Añadir un ítem con su ID y nombre de la imagen
-    public static void AddItem(int itemId, string nameImage, string assetBundlePath)
+    public static void AddSkin(int skinId, string nameImage, string assetBundlePath)
     {
-        List<ItemData> ownedItems = GetOwnedItems();
+        List<SkinsData> ownedSkins = GetOwnedSkins();
         
         // Verificar si el ítem ya está en la lista
-        if (!ownedItems.Exists(item => item.id == itemId))
+        if (!ownedSkins.Exists(skin => skin.id == skinId))
         {
-            ownedItems.Add(new ItemData { id = itemId, name = nameImage, assetBundlePath = assetBundlePath });
-            SaveOwnedItems(ownedItems);
+            ownedSkins.Add(new SkinsData { id = skinId, name = nameImage, assetBundlePath = assetBundlePath });
+            SaveOwnedSkins(ownedSkins);
         }
     }
 
     // Verificar si el jugador tiene un ítem con el ID
-    public static bool HasItem(int itemId)
+    public static bool HasSkin(int skinId)
     {
-        List<ItemData> ownedItems = GetOwnedItems();
-        return ownedItems.Exists(item => item.id == itemId);
+        List<SkinsData> ownedSkins = GetOwnedSkins();
+        return ownedSkins.Exists(skin => skin.id == skinId);
     }
 
     // Obtener los ítems poseídos (con ID y nombre de imagen)
-    public static List<ItemData> GetOwnedItems()
+    public static List<SkinsData> GetOwnedSkins()
     {
-        string json = PlayerPrefs.GetString(OwnedItemsKey, "");
+        string json = PlayerPrefs.GetString(OwnedSkinKey, "");
         if (string.IsNullOrEmpty(json))
         {
-            return new List<ItemData>();
+            return new List<SkinsData>();
         }
-        ItemList itemList = JsonUtility.FromJson<ItemList>(json);
-        return itemList != null ? itemList.items : new List<ItemData>();
+        SkinList skinsList = JsonUtility.FromJson<SkinList>(json);
+        return skinsList != null ? skinsList.skins : new List<SkinsData>();
     }
 
     // Guardar los ítems poseídos
-    private static void SaveOwnedItems(List<ItemData> items)
+    private static void SaveOwnedSkins(List<SkinsData> skins)
     {
-        ItemList itemList = new ItemList() { items = items };
-        string json = JsonUtility.ToJson(itemList);
-        PlayerPrefs.SetString(OwnedItemsKey, json);
+        SkinList skinsList = new SkinList() { skins = skins };
+        string json = JsonUtility.ToJson(skinsList);
+        PlayerPrefs.SetString(OwnedSkinKey, json);
         PlayerPrefs.Save();
     }
 
     // Eliminar todos los ítems
     public static void DeleteAll()
     {
-        PlayerPrefs.DeleteKey(OwnedItemsKey); // Eliminar solo los ítems, no todos los PlayerPrefs
+        PlayerPrefs.DeleteKey(OwnedSkinKey); // Eliminar solo los ítems, no todos los PlayerPrefs
     }
 
     // Clase para representar el ítem (ID y nombre de la imagen) - Ahora es pública
     [System.Serializable]
-    public class ItemData
+    public class SkinsData
     {
         public int id;
         public string name;
@@ -63,8 +63,8 @@ public static class PlayerSkins
 
     // Clase auxiliar para deserializar la lista de ítems
     [System.Serializable]
-    private class ItemList
+    private class SkinList
     {
-        public List<ItemData> items;
+        public List<SkinsData> skins;
     }
 }

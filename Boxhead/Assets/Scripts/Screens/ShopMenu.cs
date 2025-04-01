@@ -9,7 +9,7 @@ using System.Text;
 public class ShopScreen : MonoBehaviour
 {
     private VisualElement rootElement;
-    private ScrollView itemsContainer;
+    private ScrollView skinsContainer;
     private Button buttonBack;
     private string apiUrlPost = "http://localhost:3002/api/purchases/new-purchase";
     private string apiUrl = "http://localhost:3002/api/skins";
@@ -25,27 +25,41 @@ public class ShopScreen : MonoBehaviour
     void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
-        itemsContainer = rootElement.Q<ScrollView>("itemsContainer");
+        skinsContainer = rootElement.Q<ScrollView>("itemsContainer");
         buttonBack = rootElement.Q<Button>("buttonBack");
 
         buttonBack.clicked += () => SceneManager.LoadScene("MainMenu");
 
-        // Cargar los items desde el servidor
-        StartCoroutine(GetItemsFromServer());
+        // Cargar los skins desde el servidor
+        StartCoroutine(GetSkinsFromServer());
     }
 
-    private IEnumerator GetItemsFromServer()
+    private IEnumerator GetSkinsFromServer()
     {
         UnityWebRequest request = UnityWebRequest.Get(apiUrl);
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            // Deserializar los datos JSON (ahora es un objeto con una propiedad "items")
+            // Deserializar los datos JSON (ahora es un objeto con una propiedad "skins")
             var skinsData = JsonUtility.FromJson<SkinList>(request.downloadHandler.text);
-            foreach (var skin in skinsData.skins)
+
+            if (skinsData?.skins != null && skinsData.skins.Length > 0)
             {
-                CreateItemUI(skin);
+                Debug.Log($"🔄 Se encontraron {skinsData.skins.Length} skins.");
+                foreach (var skin in skinsData.skins)
+                {
+                    if (skin == null)
+                    {
+                        Debug.LogError("❌ Una skin es null en el array.");
+                        continue;
+                    }
+                    CreateSkinUI(skin);
+                }
+            }
+            else
+            {
+                Debug.LogError("❌ skinsData.skins es null o está vacío.");
             }
         }
         else
@@ -54,36 +68,36 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private void CreateItemUI(Skin skin)
+    private void CreateSkinUI(Skin skin)
     {
-        VisualElement itemElement = new VisualElement();
-        itemElement.AddToClassList("item");
+        VisualElement skinElement = new VisualElement();
+        skinElement.AddToClassList("item");
 
-        Image itemImage = new();
-        itemImage.style.backgroundImage = new StyleBackground(new Texture2D(1, 1));
-        StartCoroutine(LoadImage(skin.imagePath, itemImage));
+        Image skinImage = new();
+        skinImage.style.backgroundImage = new StyleBackground(new Texture2D(1, 1));
+        StartCoroutine(LoadImage(skin.imagePath, skinImage));
 
-        itemImage.AddToClassList("image");
-        itemElement.Add(itemImage);
+        skinImage.AddToClassList("image");
+        skinElement.Add(skinImage);
 
         var nameLabel = new Label(skin.name);
         nameLabel.AddToClassList("name");
-        itemElement.Add(nameLabel);
+        skinElement.Add(nameLabel);
 
         var priceLabel = new Label("$" + skin.price);
         priceLabel.AddToClassList("price");
-        itemElement.Add(priceLabel);
+        skinElement.Add(priceLabel);
 
         Button buyButton = new Button { text = "Verificando..." };
         buyButton.AddToClassList("buy-button");
-        itemElement.Add(buyButton);
+        skinElement.Add(buyButton);
 
-        itemsContainer.Add(itemElement);
+        skinsContainer.Add(skinElement);
 
         StartCoroutine(CheckPurchaseHistory(skin.id, isOwned =>
         {
             buyButton.text = isOwned ? "Descargar" : "Comprar";
-            buyButton.clicked += () => HandleItemAction(skin, isOwned);
+            buyButton.clicked += () => HandleSkinAction(skin, isOwned);
         }));
     }
 
@@ -103,7 +117,7 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private void HandleItemAction(Skin skin, bool isOwned)
+    private void HandleSkinAction(Skin skin, bool isOwned)
     {
         if (isOwned)
         {
@@ -111,14 +125,14 @@ public class ShopScreen : MonoBehaviour
         }
         else
         {
-            BuyItem(skin);
+            BuySkin(skin);
         }
     }
 
     private IEnumerator CheckPurchaseHistory(int id, System.Action<bool> callback)
     {
 
-        if (PlayerSkins.HasItem(id))
+        if (PlayerSkins.HasSkin(id))
         {
             Debug.Log("Skin " + id + " encontrada en PlayerPrefs.");
             callback(true);
@@ -171,17 +185,17 @@ public class ShopScreen : MonoBehaviour
         }
     }
 
-    private void BuyItem(Skin skin)
+    private void BuySkin(Skin skin)
     {
         StartCoroutine(SaveBillToServer(skin.id));
         StartCoroutine(DownloadAndSaveAssetBundle(skin));
     }
 
-    private IEnumerator DownloadAndSaveAssetBundle(Skin item)
+    private IEnumerator DownloadAndSaveAssetBundle(Skin skin)
     {
-        string imageName = Path.GetFileNameWithoutExtension(item.imagePath);
-        string fullBundleUrl = "http://localhost:3002" + item.assetBundlePath;
-        string localPath = Application.persistentDataPath + "/" + item.name;
+        string imageName = Path.GetFileNameWithoutExtension(skin.imagePath);
+        string fullBundleUrl = "http://localhost:3002" + skin.assetBundlePath;
+        string localPath = Application.persistentDataPath + "/" + skin.name;
 
         UnityWebRequest bundleRequest = UnityWebRequest.Get(fullBundleUrl);
         yield return bundleRequest.SendWebRequest();
@@ -197,7 +211,7 @@ public class ShopScreen : MonoBehaviour
                 // Guardar el AssetBundle en local como un archivo binario
                 File.WriteAllBytes(localPath, assetData);
                 Debug.Log("AssetBundle guardado en: " + localPath);
-                PlayerSkins.AddItem(item.id, imageName, localPath);
+                PlayerSkins.AddSkin(skin.id, imageName, localPath);
             }
             else
             {
@@ -216,7 +230,7 @@ public class ShopScreen : MonoBehaviour
 
         BuyData buyData = new()
         {
-            itemId = skinId,
+            skinId = skinId,
             email = email
         };
 
@@ -265,7 +279,7 @@ public class ShopScreen : MonoBehaviour
     [System.Serializable]
     public class BuyData
     {
-        public int itemId;
+        public int skinId;
         public string email;
     }
 
