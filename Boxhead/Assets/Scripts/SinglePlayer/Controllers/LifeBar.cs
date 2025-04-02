@@ -3,17 +3,17 @@ using UnityEngine.UI;
 
 public class LifeBar : MonoBehaviour
 {
-    public Image rellenoBarraVida;
-    private float vidaMaxima;
+    public Image fillingBarLife;
+    private float maxHealth;
 
     public void SetMaxHealth(float maxVida)
     {
-        vidaMaxima = maxVida;
-        ActualizarVida(maxVida);
+        maxHealth = maxVida;
+        UpdateHealth(maxVida);
     }
 
-    public void ActualizarVida(float vidaActual)
+    public void UpdateHealth(float actualHealth)
     {
-        rellenoBarraVida.fillAmount = vidaActual / vidaMaxima;
+        fillingBarLife.fillAmount = actualHealth / maxHealth;
     }
 }

@@ -17,6 +17,15 @@
     text-align: center;
 }
 
+.purchase-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00ff00;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}
+
 .items-container {
     width: 500px;
     height: 400px;

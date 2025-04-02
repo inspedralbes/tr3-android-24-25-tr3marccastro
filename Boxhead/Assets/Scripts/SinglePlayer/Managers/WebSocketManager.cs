@@ -15,8 +15,7 @@ public class WebSocketManager : MonoBehaviour
     private bool isRoundPaused = false;
     public bool isModificated = false;
 
-    // Dirección del servidor WebSocket
-    private string serverUrl = "ws://localhost:3002"; // Cambia a la URL de tu servidor WebSocket
+    private string serverUrl = "ws://localhost:3002";
 
     private void Awake()
     {
@@ -26,7 +25,6 @@ public class WebSocketManager : MonoBehaviour
 
     private async void Start()
     {
-        // Inicialitza la connexió al WebSocket.
         await ConnectWebSocket();
     }
 
@@ -46,7 +44,6 @@ public class WebSocketManager : MonoBehaviour
             ProcessMessage(message);
         };
 
-        // Inicia la connexió de manera asíncrona.
         await websocket.Connect();
     }
 
@@ -60,18 +57,15 @@ public class WebSocketManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(message))
         {
-            Debug.LogWarning("Mensaje vacío o nulo recibido.");
-            return; // No proceses si el mensaje está vacío o nulo
+            return;
         }
 
         statsSocket = JsonUtility.FromJson<WebSocketMessage>(message);
 
         if (statsSocket == null || string.IsNullOrEmpty(statsSocket.event_unity))
         {
-            Debug.LogWarning("Evento no reconocido o mensaje mal estructurado.");
             return;
         }
-        Debug.Log("Recibido mensaje con nombre: " + statsSocket.payload.name);
     }
 
     public void ApplyStatsIfUpdated(int currentRound)
@@ -80,14 +74,11 @@ public class WebSocketManager : MonoBehaviour
         {
             if (statsSocket.payload.name != "Player")
             {
-                Debug.Log("Aplicando estadísticas de Web Socket als enemics...");
                 EnemyStatsManager.Instance.UpdateStatsEnemy(statsSocket.payload.name, statsSocket.payload.health, statsSocket.payload.speed, statsSocket.payload.damage, statsSocket.payload.color, statsSocket.payload.save);
-                Debug.Log("Estadísticas aplicadas.");
                 isModificated = true;
             }
             else
             {
-                Debug.Log("Aplicando estadísticas de Web Socket al Player...");
                 playerController.UpdateStatsPlayer(statsSocket.payload.health, statsSocket.payload.speed);
                 isModificated= true;
             }
@@ -97,19 +88,16 @@ public class WebSocketManager : MonoBehaviour
         }
         else
         {
-            // Actualizar estadísticas con valores incrementados
             statsManager.UpdateEnemyStatsForRounds(currentRound);
         }
     }
 
-    // Esto debe ejecutarse durante la pausa entre rondas (10s de descanso)
     public void SetRoundPause(bool pause, int currentRound)
     {
-        Debug.Log(pause);
         isRoundPaused = pause;
         if (isRoundPaused)
         {
-            ApplyStatsIfUpdated(currentRound); // Aplicamos las nuevas stats durante la pausa
+            ApplyStatsIfUpdated(currentRound);
         }
         else
         {
@@ -121,7 +109,6 @@ public class WebSocketManager : MonoBehaviour
     {
         if (websocket != null)
         {
-            // enemyStatsManager.UpdateStats(1, 1);
             await websocket.Close();
         }
     }

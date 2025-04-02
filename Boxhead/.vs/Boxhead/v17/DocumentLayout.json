@@ -3,48 +3,28 @@
   "WorkspaceRootPath": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\managers\\enemyspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemyspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\controllers\\fatzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\controllers\\fatzombiecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\gameovermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\gameovermenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\screens\\mainmenuscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\mainmenuscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\ui toolkit\\mainmenustyle.uss||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\ui toolkit\\mainmenustyle.uss||{3B902123-F8A7-4915-9F01-361F908088D0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\screens\\shopmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\shopmenu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\managers\\websocketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\managers\\websocketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\websocketmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\playerprefs\\enemystatsprefs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\playerprefs\\enemystatsprefs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\playerprefs\\enemystatsprefs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\managers\\enemyspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemyspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\managers\\enemystatsmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\singleplayer\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\singleplayer\\controllers\\playercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|c:\\users\\marcc\\desktop\\github\\tr3-android-24-25-tr3marccastro\\boxhead\\assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{CC05C344-D75E-4F64-83A0-466DA224EE2E}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\screens\\spriteselectionscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -54,142 +34,85 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FatZombieController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\FatZombieController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Controllers\\FatZombieController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\FatZombieController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Controllers\\FatZombieController.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAIwBAAAAAkAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T22:44:22.462Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MainMenuScreen.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\MainMenuScreen.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAByAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T21:22:23.803Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MainMenuStyle.uss",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\MainMenuStyle.uss",
-              "RelativeDocumentMoniker": "Assets\\UI Toolkit\\MainMenuStyle.uss",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\UI Toolkit\\MainMenuStyle.uss",
-              "RelativeToolTip": "Assets\\UI Toolkit\\MainMenuStyle.uss",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2025-03-30T21:22:12.962Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ShopMenu.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\ShopMenu.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAABQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T17:05:33.172Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GameOverMenu.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\GameOverMenu.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\GameOverMenu.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\GameOverMenu.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\GameOverMenu.cs",
-              "ViewState": "AgIAABwAAAAAAAAAAAAkwCoAAAAFAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T14:34:30.923Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "EnemySpawner.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAAwBsAAAAbAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T14:31:05.814Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "EnemyStatsPrefs.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T14:26:00.043Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "PlayerController.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
-              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAAAUwHEAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T04:24:56.262Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "SpriteSelectionScreen.cs",
-              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
-              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
-              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
-              "RelativeToolTip": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T04:13:46.851Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
               "Title": "EnemyStatsManager.cs",
               "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
               "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemyStatsManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAApwEMAAAAYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T03:48:13.208Z"
+              "WhenOpened": "2025-04-02T00:39:27.367Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
+              "Title": "EnemyStatsPrefs.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\PlayerPrefs\\EnemyStatsPrefs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-02T00:26:10.959Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
               "Title": "WebSocketManager.cs",
               "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\WebSocketManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\WebSocketManager.cs",
               "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\WebSocketManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\WebSocketManager.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFgAAABLAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAADgv1YAAAA4AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-30T03:48:09.423Z"
+              "WhenOpened": "2025-04-01T23:58:48.593Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "EnemySpawner.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Managers\\EnemySpawner.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwHcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T23:34:17.004Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "SpriteSelectionScreen.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Screens\\SpriteSelectionScreen.cs",
+              "ViewState": "AgIAAHYAAAAAAAAAAAAqwIkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T23:50:18.484Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "PlayerController.cs",
+              "DocumentMoniker": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
+              "ToolTip": "C:\\Users\\marcc\\Desktop\\GitHub\\tr3-android-24-25-tr3marccastro\\Boxhead\\Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
+              "RelativeToolTip": "Assets\\Scripts\\SinglePlayer\\Controllers\\PlayerController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-01T22:58:38.827Z",
+              "EditorCaption": ""
             }
           ]
         }

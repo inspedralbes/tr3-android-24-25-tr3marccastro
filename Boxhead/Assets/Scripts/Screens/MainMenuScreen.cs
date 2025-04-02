@@ -1,13 +1,12 @@
 using UnityEngine;
 using UnityEngine.UIElements;
-using UnityEngine.SceneManagement; // Para cambiar de escena
+using UnityEngine.SceneManagement;
 
 public class MainMenuScreen : MonoBehaviour
 {
     private Button startButton, shopButton, logoutButton, exitButton;
     private void OnEnable()
     {
-        // Obtener el root del documento UI
         var root = GetComponent<UIDocument>().rootVisualElement;
         string email = UserSession.GetUserEmail();
 
@@ -19,7 +18,6 @@ public class MainMenuScreen : MonoBehaviour
 
         logoutButton.style.display = string.IsNullOrEmpty(email) ? DisplayStyle.None : DisplayStyle.Flex;
 
-        // Asignar eventos
         startButton.clicked += () => SceneManager.LoadScene("SinglePlayerGameScene");
         logoutButton.clicked += () => { UserSession.DeleteEmail(); logoutButton.style.display = DisplayStyle.None; };
         shopButton.clicked += () => SceneManager.LoadScene("LoginScene");
@@ -30,7 +28,7 @@ public class MainMenuScreen : MonoBehaviour
     {
         Application.Quit();
         #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false; // Para detener en el editor
+            UnityEditor.EditorApplication.isPlaying = false;
         #endif
     }
 }

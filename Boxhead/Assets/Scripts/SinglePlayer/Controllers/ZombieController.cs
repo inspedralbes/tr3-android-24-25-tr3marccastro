@@ -26,9 +26,9 @@ public class ZombieController : MonoBehaviour
         enemyRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
-        agent = GetComponent<NavMeshAgent>(); // Inicializamos el NavMeshAgent
-        agent.updateRotation = false;  // No actualiza la rotación, ya que es un juego 2D
-        agent.updateUpAxis = false;    // No necesitamos que se mueva en el eje Y
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void OnEnable()
@@ -52,25 +52,21 @@ public class ZombieController : MonoBehaviour
     {
         if (playerTransform != null)
         {
-            agent.SetDestination(playerTransform.position);  // El agente va hacia el jugador
-            agent.speed = currentSpeed; // Establece la velocidad del agente con el zombi
+            agent.SetDestination(playerTransform.position);
+            agent.speed = currentSpeed;
         }
 
-        // Obtener la dirección de movimiento del agente
         Vector2 velocity = agent.velocity;
 
-        // Actualizamos los parámetros del Blend Tree
-        animator.SetFloat("Horizontal", velocity.x); // Dirección horizontal (izquierda/derecha)
-        animator.SetFloat("Vertical", velocity.y); // Dirección vertical (arriba/abajo)
+        animator.SetFloat("Horizontal", velocity.x);
+        animator.SetFloat("Vertical", velocity.y);
 
-        // Actualizamos los parámetros LastMoveX y LastMoveY (dirección última conocida)
         if (velocity.x != 0 || velocity.y != 0)
         {
-            animator.SetFloat("LastMoveX", velocity.x);  // Guarda la última dirección horizontal
+            animator.SetFloat("LastMoveX", velocity.x);
             animator.SetFloat("LastMoveY", velocity.y);
         }
 
-        // Volteamos el sprite si se mueve a la izquierda (opcional si no usas "LastMoveX")
         if (velocity.x < 0)
         {
             enemyRenderer.flipX = false;
@@ -123,11 +119,5 @@ public class ZombieController : MonoBehaviour
         {
             enemyRenderer.color = newColor;
         }
-        else
-        {
-            Debug.LogWarning("Color inválido: " + EnemyStatsManager.ZombieStats.color);
-        }
-
-        Debug.Log("Zombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }
 }

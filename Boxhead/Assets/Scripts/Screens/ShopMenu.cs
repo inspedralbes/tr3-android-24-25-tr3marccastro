@@ -11,26 +11,20 @@ public class ShopScreen : MonoBehaviour
     private VisualElement rootElement;
     private ScrollView skinsContainer;
     private Button buttonBack;
+    private Label purchaseMessage;
     private string apiUrlPost = "http://localhost:3002/api/purchases/new-purchase";
     private string apiUrl = "http://localhost:3002/api/skins";
     private string apiUrlIdSkin = "http://localhost:3002/api/purchases/history";
 
-    private void Awake()
-     {
-        // PlayerSkins.DeleteAll();
- 
-        // UserSession.DeleteEmail();
-     }
-
-    void OnEnable()
+    private void OnEnable()
     {
         rootElement = GetComponent<UIDocument>().rootVisualElement;
         skinsContainer = rootElement.Q<ScrollView>("itemsContainer");
         buttonBack = rootElement.Q<Button>("buttonBack");
+        purchaseMessage = rootElement.Q<Label>("purchaseMessage");
 
         buttonBack.clicked += () => SceneManager.LoadScene("MainMenu");
 
-        // Cargar los skins desde el servidor
         StartCoroutine(GetSkinsFromServer());
     }
 
@@ -41,36 +35,21 @@ public class ShopScreen : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            // Deserializar los datos JSON (ahora es un objeto con una propiedad "skins")
             var skinsData = JsonUtility.FromJson<SkinList>(request.downloadHandler.text);
 
-            if (skinsData?.skins != null && skinsData.skins.Length > 0)
+            if (skinsData.skins != null && skinsData.skins.Length > 0)
             {
-                Debug.Log($"🔄 Se encontraron {skinsData.skins.Length} skins.");
                 foreach (var skin in skinsData.skins)
                 {
-                    if (skin == null)
-                    {
-                        Debug.LogError("❌ Una skin es null en el array.");
-                        continue;
-                    }
-                    CreateSkinUI(skin);
+                    if (skin != null) CreateSkinUI(skin);
                 }
             }
-            else
-            {
-                Debug.LogError("❌ skinsData.skins es null o está vacío.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Error al obtener los ítems: " + request.error);
         }
     }
 
     private void CreateSkinUI(Skin skin)
     {
-        VisualElement skinElement = new VisualElement();
+        VisualElement skinElement = new();
         skinElement.AddToClassList("item");
 
         Image skinImage = new();
@@ -88,7 +67,7 @@ public class ShopScreen : MonoBehaviour
         priceLabel.AddToClassList("price");
         skinElement.Add(priceLabel);
 
-        Button buyButton = new Button { text = "Verificando..." };
+        Button buyButton = new() { text = "Verificant..." };
         buyButton.AddToClassList("buy-button");
         skinElement.Add(buyButton);
 
@@ -96,9 +75,29 @@ public class ShopScreen : MonoBehaviour
 
         StartCoroutine(CheckPurchaseHistory(skin.id, isOwned =>
         {
-            buyButton.text = isOwned ? "Descargar" : "Comprar";
+            buyButton.text = isOwned ? "Descarregar" : "Comprar";
             buyButton.clicked += () => HandleSkinAction(skin, isOwned);
         }));
+    }
+
+    private void HandleSkinAction(Skin skin, bool isOwned)
+    {
+        purchaseMessage.style.display = DisplayStyle.None;
+
+        if (isOwned)
+        {
+            StartCoroutine(DownloadAndSaveAssetBundle(skin, () => {
+                purchaseMessage.text = "Descarregat amb èxit.";
+                purchaseMessage.style.display = DisplayStyle.Flex;
+            }));
+        }
+        else if (UserSession.GetUserEmail() != null)
+        {
+            BuySkin(skin, () => {
+                purchaseMessage.text = "Comprat i descarregat.";
+                purchaseMessage.style.display = DisplayStyle.Flex;
+            });
+        }
     }
 
     private IEnumerator LoadImage(string imageUrl, Image imageElement)
@@ -111,128 +110,19 @@ public class ShopScreen : MonoBehaviour
             Texture2D texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
             imageElement.style.backgroundImage = new StyleBackground(texture);
         }
-        else
-        {
-            Debug.LogError("Error al cargar la imagen: " + request.error);
-        }
     }
 
-    private void HandleSkinAction(Skin skin, bool isOwned)
+    private void BuySkin(Skin skin, System.Action onComplete = null)
     {
-        if (isOwned)
-        {
-            StartCoroutine(DownloadAndSaveAssetBundle(skin));
-        }
-        else
-        {
-            BuySkin(skin);
-        }
+        StartCoroutine(SaveBillToServer(skin.id, () => {
+            StartCoroutine(DownloadAndSaveAssetBundle(skin, onComplete));
+        }));
     }
 
-    private IEnumerator CheckPurchaseHistory(int id, System.Action<bool> callback)
-    {
-
-        if (PlayerSkins.HasSkin(id))
-        {
-            Debug.Log("Skin " + id + " encontrada en PlayerPrefs.");
-            callback(true);
-            yield break;
-        }
-
-        Debug.Log("Skin " + id + " no encontrada en PlayerPrefs, consultando base de datos...");
-
-        string email = UserSession.GetUserEmail();
-        SkinData skinData = new() { skinId = id, email = email };
-
-        string jsonData = JsonUtility.ToJson(skinData);
-        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
-
-        UnityWebRequest request = new(apiUrlIdSkin, "POST")
-        {
-            uploadHandler = new UploadHandlerRaw(jsonBytes),
-            downloadHandler = new DownloadHandlerBuffer()
-        };
-
-        request.SetRequestHeader("Content-Type", "application/json");
-
-        yield return request.SendWebRequest();
-        if (request.result == UnityWebRequest.Result.Success)
-        {
-            string result = request.downloadHandler.text;
-            Debug.Log("Respuesta del servidor: " + result);
-
-            try
-            {
-                ResponseHistory response = JsonUtility.FromJson<ResponseHistory>(result);
-                if (response.message == "success")
-                {
-                    callback(true);
-                    yield break;
-                }
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("Error al procesar la respuesta JSON: " + e.Message);
-                callback(false);
-            }
-        }
-        else
-        {
-            //Debug.LogError("Error de conexión: " + request.error);
-            //Debug.LogError("Código de respuesta HTTP: " + request.responseCode);
-            //Debug.LogError("Respuesta completa del servidor: " + request.downloadHandler.text);
-            callback(false);
-        }
-    }
-
-    private void BuySkin(Skin skin)
-    {
-        StartCoroutine(SaveBillToServer(skin.id));
-        StartCoroutine(DownloadAndSaveAssetBundle(skin));
-    }
-
-    private IEnumerator DownloadAndSaveAssetBundle(Skin skin)
-    {
-        string imageName = Path.GetFileNameWithoutExtension(skin.imagePath);
-        string fullBundleUrl = "http://localhost:3002" + skin.assetBundlePath;
-        string localPath = Application.persistentDataPath + "/" + skin.name;
-
-        UnityWebRequest bundleRequest = UnityWebRequest.Get(fullBundleUrl);
-        yield return bundleRequest.SendWebRequest();
-
-        if (bundleRequest.result == UnityWebRequest.Result.Success)
-        {
-            // Obtener los datos binarios del AssetBundle
-            byte[] assetData = bundleRequest.downloadHandler.data;
-
-            // Comprobar si los datos son válidos
-            if (assetData != null && assetData.Length > 0)
-            {
-                // Guardar el AssetBundle en local como un archivo binario
-                File.WriteAllBytes(localPath, assetData);
-                Debug.Log("AssetBundle guardado en: " + localPath);
-                PlayerSkins.AddSkin(skin.id, imageName, localPath);
-            }
-            else
-            {
-                Debug.LogError("No se recibieron datos válidos del AssetBundle.");
-            }
-        }
-        else
-        {
-            Debug.LogError("Error al descargar el archivo: " + bundleRequest.error);
-        }
-    }
-
-    private IEnumerator SaveBillToServer(int skinId)
+    private IEnumerator SaveBillToServer(int skinId, System.Action onSuccess = null)
     {
         string email = UserSession.GetUserEmail();
-
-        BuyData buyData = new()
-        {
-            skinId = skinId,
-            email = email
-        };
+        BuyData buyData = new() { skinId = skinId, email = email };
 
         string jsonData = JsonUtility.ToJson(buyData);
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
@@ -249,74 +139,104 @@ public class ShopScreen : MonoBehaviour
 
         if (request.result == UnityWebRequest.Result.Success)
         {
-            string result = request.downloadHandler.text;
-            Debug.Log("Respuesta del servidor: " + result);
-
-            try
+            ResponsePurchaseData response = JsonUtility.FromJson<ResponsePurchaseData>(request.downloadHandler.text);
+            if (response.message == "success")
             {
-                ResponsePurchaseData response = JsonUtility.FromJson<ResponsePurchaseData>(result);
+                onSuccess?.Invoke();
+            }
+        }
+    }
 
-                if (response.message == "success")
-                {
-                    Debug.Log("Compra existosa");
-                }
-                else
-                {
-                    Debug.LogError(response.message);
-                }
-            }
-            catch (System.Exception e)
-            {
-                Debug.LogError("Error en la respuesta del servidor: " + e.Message);
-            }
+    private IEnumerator DownloadAndSaveAssetBundle(Skin skin, System.Action onComplete = null)
+    {
+        string localPath = Application.persistentDataPath + "/" + skin.name;
+
+        UnityWebRequest bundleRequest = UnityWebRequest.Get("http://localhost:3002" + skin.assetBundlePath);
+        yield return bundleRequest.SendWebRequest();
+
+        if (bundleRequest.result == UnityWebRequest.Result.Success)
+        {
+            File.WriteAllBytes(localPath, bundleRequest.downloadHandler.data);
+            PlayerSkins.AddSkin(skin.id, skin.name, localPath);
+            onComplete?.Invoke();
+        }
+    }
+
+    private IEnumerator CheckPurchaseHistory(int id, System.Action<bool> callback)
+    {
+        if (PlayerSkins.HasSkin(id))
+        {
+            callback(true);
+            yield break;
+        }
+
+        string email = UserSession.GetUserEmail();
+        SkinData skinData = new() { skinId = id, email = email };
+
+        string jsonData = JsonUtility.ToJson(skinData);
+        byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
+
+        UnityWebRequest request = new(apiUrlIdSkin, "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(jsonBytes),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            ResponseHistory response = JsonUtility.FromJson<ResponseHistory>(request.downloadHandler.text);
+            callback(response.message == "success");
         }
         else
         {
-            Debug.LogError("Error de conexión: " + request.error);
+            callback(false);
         }
     }
 
-    [System.Serializable]
-    public class BuyData
-    {
-        public int skinId;
-        public string email;
+    [System.Serializable] 
+    public class BuyData 
+    { 
+        public int skinId; 
+        public string email; 
     }
 
-    [System.Serializable]
-    public class ResponsePurchaseData
-    {
-        public string message;
+    [System.Serializable] 
+    public class ResponsePurchaseData 
+    { 
+        public string message; 
     }
 
-    [System.Serializable]
-    public class SkinData
-    {
-        public int skinId;
-        public string email;
+    [System.Serializable] 
+    public class SkinData 
+    { 
+        public int skinId; 
+        public string email; 
     }
 
-    [System.Serializable]
-    public class ResponseHistory
-    {
-        public string message;
+    [System.Serializable] 
+    public class ResponseHistory 
+    { 
+        public string message; 
     }
 
-    // Clases para deserializar los datos del servidor
-    [System.Serializable]
-    public class Skin
-    {
-        public int id;
-        public string name;
-        public int price;
+    [System.Serializable] 
+    public class Skin 
+    { 
+        public int id; 
+        public string name; 
+        public int price; 
         public string imagePath;
-        public string assetBundlePath;
-        public bool active;
+        public string assetBundlePath; 
+        public bool active; 
     }
 
-    [System.Serializable]
-    public class SkinList
-    {
-        public Skin[] skins;
+    [System.Serializable] 
+    public class SkinList 
+    { 
+        public Skin[] skins; 
     }
 }

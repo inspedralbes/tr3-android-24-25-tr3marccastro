@@ -11,7 +11,6 @@ public static class UserSession
 
     public static void SaveUserEmail(string email)
     {
-        // Guardar el email
         PlayerPrefs.SetString(EmailKey, email);
         PlayerPrefs.Save();
     }

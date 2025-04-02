@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.AI;  // Asegúrate de importar el namespace de NavMesh.
+using UnityEngine.AI;
 
 public class FatZombieController : MonoBehaviour
 {
@@ -8,7 +8,7 @@ public class FatZombieController : MonoBehaviour
     private int currentDamage;
     private Transform playerTransform;
     private Animator animator;
-    private NavMeshAgent agent; // Usamos NavMeshAgent en vez de Rigidbody2D
+    private NavMeshAgent agent;
     private SpriteRenderer enemyRenderer;
     private EnemySpawner enemySpawner;
 
@@ -23,9 +23,9 @@ public class FatZombieController : MonoBehaviour
 
         enemyRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
-        agent = GetComponent<NavMeshAgent>(); // Inicializamos el NavMeshAgent
-        agent.updateRotation = false;  // No actualiza la rotación, ya que es un juego 2D
-        agent.updateUpAxis = false;    // No necesitamos que se mueva en el eje Y
+        agent = GetComponent<NavMeshAgent>();
+        agent.updateRotation = false;
+        agent.updateUpAxis = false;
     }
 
     private void OnEnable()
@@ -47,25 +47,21 @@ public class FatZombieController : MonoBehaviour
     {
         if (playerTransform != null)
         {
-            agent.SetDestination(playerTransform.position);  // El agente va hacia el jugador
-            agent.speed = currentSpeed; // Establece la velocidad del agente con el zombi
+            agent.SetDestination(playerTransform.position);
+            agent.speed = currentSpeed;
         }
 
-        // Obtener la dirección de movimiento del agente
         Vector2 velocity = agent.velocity;
 
-        // Actualizamos los parámetros del Blend Tree
-        animator.SetFloat("Horizontal", velocity.x); // Dirección horizontal (izquierda/derecha)
-        animator.SetFloat("Vertical", velocity.y); // Dirección vertical (arriba/abajo)
+        animator.SetFloat("Horizontal", velocity.x);
+        animator.SetFloat("Vertical", velocity.y);
 
-        // Actualizamos los parámetros LastMoveX y LastMoveY (dirección última conocida)
         if (velocity.x != 0 || velocity.y != 0)
         {
-            animator.SetFloat("LastMoveX", velocity.x);  // Guarda la última dirección horizontal
+            animator.SetFloat("LastMoveX", velocity.x);
             animator.SetFloat("LastMoveY", velocity.y);
         }
 
-        // Volteamos el sprite si se mueve a la izquierda (opcional si no usas "LastMoveX")
         if (velocity.x < 0)
         {
             enemyRenderer.flipX = false;
@@ -88,7 +84,6 @@ public class FatZombieController : MonoBehaviour
 
     private void Die()
     {
-        Debug.Log("Zombi gordo muerto!");
         EnemyPoolManager.Instance.ReturnToPool(gameObject, false);
         enemySpawner.EnemyDied();
     }
@@ -115,11 +110,5 @@ public class FatZombieController : MonoBehaviour
         {
             enemyRenderer.material.color = newColor;
         }
-        else
-        {
-            Debug.LogWarning("Color inválido: " + EnemyStatsManager.FatStats.color);
-        }
-
-        Debug.Log("DogZombie actualizado: HP=" + currentHealth + ", Velocidad=" + currentSpeed + ", Daño=" + currentDamage);
     }
 }

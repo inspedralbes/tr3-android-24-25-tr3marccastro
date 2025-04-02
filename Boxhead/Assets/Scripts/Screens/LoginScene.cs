@@ -34,7 +34,7 @@ public class LoginManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
         {
-            ShowErrorMessage("Por favor, ingresa usuario y contraseña.");
+            ShowErrorMessage("Si us plau, introduïu usuari i contrasenya.");
             yield break;
         }
 
@@ -61,7 +61,6 @@ public class LoginManager : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             string result = request.downloadHandler.text;
-            Debug.Log("Respuesta del servidor: " + result);
 
             try
             {
@@ -69,24 +68,22 @@ public class LoginManager : MonoBehaviour
 
                 if (response.message == "success")
                 {
-                    Debug.Log("Inicio de sesión exitoso. Cargando la escena...");
                     UserSession.SaveUserEmail(response.email);
                     SceneManager.LoadScene("ShopMenu");
                 }
                 else
                 {
-                    ShowErrorMessage("Usuario o contraseña incorrectos.");
+                    ShowErrorMessage(response.message);
                 }
             }
             catch (System.Exception e)
             {
-                ShowErrorMessage("Error en la respuesta del servidor.");
-                Debug.LogError("Error al procesar la respuesta JSON: " + e.Message);
+                Debug.LogError("Error en processar la resposta JSON: " + e.Message);
             }
         }
         else
         {
-            ShowErrorMessage("Error de conexión: " + request.error);
+            ShowErrorMessage("Error de connexió.");
         }
     }
 
@@ -97,7 +94,6 @@ public class LoginManager : MonoBehaviour
     }
 }
 
-// Clase para enviar datos de login en JSON
 [System.Serializable]
 public class LoginData
 {
@@ -105,7 +101,6 @@ public class LoginData
     public string password;
 }
 
-// Clase para recibir respuesta del servidor
 [System.Serializable]
 public class ResponseData
 {

@@ -1,13 +1,8 @@
-<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-             xmlns:engine="UnityEngine.UIElements"
-             xmlns:editor="UnityEditor.UIElements">
-    
-    <engine:Style src="project://database/Assets/UI%20Toolkit/GameOverMenuStyle.uss" />
-
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/GameOverMenuStyle.uss?fileID=7433441132597879392&amp;guid=984f9d38a6c3413e6b11a3e437ffc566&amp;type=3#GameOverMenuStyle" />
     <engine:VisualElement name="gameOverScreen">
         <engine:Label name="gameOverLabel" text="GAME OVER" />
-        <engine:Button name="retryButton" text="Reintentar" />
-        <engine:Button name="mainMenuButton" text="Menú Principal" />
+        <engine:Button name="retryButton" text="Reintentar" class="button" />
+        <engine:Button name="mainMenuButton" text="Menú Principal" class="button" />
     </engine:VisualElement>
-
 </engine:UXML>

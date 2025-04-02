@@ -18,7 +18,7 @@ public class PauseMenu : MonoBehaviour
         resumeButton.clicked += ResumeGame;
         mainMenuButton.clicked += ReturnToMainMenu;
 
-        pauseMenu.style.display = DisplayStyle.None; // Ocultar al inicio
+        pauseMenu.style.display = DisplayStyle.None;
     }
 
     private void Update()
@@ -33,7 +33,7 @@ public class PauseMenu : MonoBehaviour
     {
         isPaused = !isPaused;
         pauseMenu.style.display = isPaused ? DisplayStyle.Flex : DisplayStyle.None;
-        Time.timeScale = isPaused ? 0 : 1; // Pausar o reanudar el tiempo
+        Time.timeScale = isPaused ? 0 : 1;
     }
 
     private void ResumeGame()
@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
 
     private void ReturnToMainMenu()
     {
-        Time.timeScale = 1; // Resetear el tiempo antes de cambiar de escena
+        Time.timeScale = 1;
         SceneManager.LoadScene("MainMenu");
     }
 }

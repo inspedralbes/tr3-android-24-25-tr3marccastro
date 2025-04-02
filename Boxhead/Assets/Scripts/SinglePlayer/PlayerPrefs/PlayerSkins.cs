@@ -5,12 +5,10 @@ public static class PlayerSkins
 {
     private const string OwnedSkinKey = "OwnedSkins";
 
-    // Añadir un ítem con su ID y nombre de la imagen
     public static void AddSkin(int skinId, string nameImage, string assetBundlePath)
     {
         List<SkinsData> ownedSkins = GetOwnedSkins();
         
-        // Verificar si el ítem ya está en la lista
         if (!ownedSkins.Exists(skin => skin.id == skinId))
         {
             ownedSkins.Add(new SkinsData { id = skinId, name = nameImage, assetBundlePath = assetBundlePath });
@@ -18,14 +16,12 @@ public static class PlayerSkins
         }
     }
 
-    // Verificar si el jugador tiene un ítem con el ID
     public static bool HasSkin(int skinId)
     {
         List<SkinsData> ownedSkins = GetOwnedSkins();
         return ownedSkins.Exists(skin => skin.id == skinId);
     }
 
-    // Obtener los ítems poseídos (con ID y nombre de imagen)
     public static List<SkinsData> GetOwnedSkins()
     {
         string json = PlayerPrefs.GetString(OwnedSkinKey, "");
@@ -37,7 +33,6 @@ public static class PlayerSkins
         return skinsList != null ? skinsList.skins : new List<SkinsData>();
     }
 
-    // Guardar los ítems poseídos
     private static void SaveOwnedSkins(List<SkinsData> skins)
     {
         SkinList skinsList = new SkinList() { skins = skins };
@@ -46,13 +41,11 @@ public static class PlayerSkins
         PlayerPrefs.Save();
     }
 
-    // Eliminar todos los ítems
     public static void DeleteAll()
     {
-        PlayerPrefs.DeleteKey(OwnedSkinKey); // Eliminar solo los ítems, no todos los PlayerPrefs
+        PlayerPrefs.DeleteKey(OwnedSkinKey);
     }
 
-    // Clase para representar el ítem (ID y nombre de la imagen) - Ahora es pública
     [System.Serializable]
     public class SkinsData
     {

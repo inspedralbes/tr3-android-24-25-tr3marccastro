@@ -9,7 +9,6 @@ public class EnemyStatsManager : MonoBehaviour
 
     void Awake()
     {
-        // Implementaci�n del Singleton
         if (Instance == null)
         {
             Instance = this;

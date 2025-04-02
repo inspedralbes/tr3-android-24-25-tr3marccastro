@@ -5,11 +5,11 @@ using TMPro;
 public class EnemySpawner : MonoBehaviour
 {
     public static EnemySpawner Instance { get; private set; }
-    public Transform[] spawnPoints; // Puntos donde aparecen los enemigos
+    public Transform[] spawnPoints;
     [SerializeField] private float spawnInterval = 2f;
     public Transform[] waypoints;
-    public TextMeshProUGUI numRoundsText;
-    public int maxScreen = 10;
+    public TextMeshProUGUI numRoundsText, numZombiesText;
+    public int maxScreen = 10, maxScreenText;
 
     private int enemiesKilled = 0;
     private int totalEnemies = 0;
@@ -17,20 +17,29 @@ public class EnemySpawner : MonoBehaviour
     public int kills = 0;
     public float roundTimer = 0f;
     private bool isPaused = false;
+    private bool isSpawning = true;
 
     void Awake()
     {
         if (Instance == null)
             Instance = this;
         else
-            Destroy(gameObject); // Evita duplicados
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-        numRoundsText.text = "" + round;
+        if (numRoundsText != null)
+            numRoundsText.text = round.ToString();
+        if (numZombiesText != null)
+            numZombiesText.text = maxScreen.ToString();
+
+        maxScreenText = maxScreen;
     }
 
     void Start()
     {
-        StartCoroutine(SpawnEnemy()); // Spawnea enemigos cada cierto tiempo
+        StartCoroutine(SpawnEnemy());
     }
 
     void Update()
@@ -43,15 +52,11 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator SpawnEnemy()
     {
-        while (true)
+        while (isSpawning)
         {
-            // Esperar un intervalo general de zombies
             yield return new WaitForSeconds(spawnInterval);
 
-            if (totalEnemies >= maxScreen)
-            {
-                continue; // Esperar hasta que haya espacio para más enemigos
-            }
+            if (totalEnemies >= maxScreen) continue;
 
             if (waypoints.Length == 0)
             {
@@ -65,16 +70,16 @@ public class EnemySpawner : MonoBehaviour
             if (zombie) totalEnemies++;
             else Debug.LogWarning("No se pudo obtener un Zombie del pool.");
 
-            // Continuamos el spawneo
             StartCoroutine(SpawnFatZombieWithDelay());
         }
     }
 
-    // Este método debe llamarse cuando un enemigo muere
     public void EnemyDied()
     {
         enemiesKilled++;
         kills++;
+        maxScreenText = Mathf.Max(0, maxScreenText - 1);
+        numZombiesText.text = maxScreenText.ToString();
 
         if (enemiesKilled >= maxScreen)
         {
@@ -82,36 +87,34 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    // Pausa entre rondas de 10 segundos
     IEnumerator RoundPause()
     {
-        // Pausar la ronda, esperar 10 segundos
-        WebSocketManager.Instance.SetRoundPause(true, round);  // Pausa y aplica las nuevas estadísticas
-        yield return new WaitForSeconds(3f);  // Pausa de 10 segundos
-        WebSocketManager.Instance.SetRoundPause(false, round);  // Reanudar la ronda
-        enemiesKilled = 0; // Reiniciar el contador
+        isSpawning = false;
+        WebSocketManager.Instance.SetRoundPause(true, round);
+        yield return new WaitForSeconds(3f);
+        WebSocketManager.Instance.SetRoundPause(false, round);
+
+        enemiesKilled = 0;
         totalEnemies = 0;
         maxScreen += 2;
+        maxScreenText = maxScreen;
         round++;
-        numRoundsText.text = "" + round;
-        Debug.Log("Començando la siguiente ronda " + round);
 
+        numRoundsText.text = round.ToString();
+        numZombiesText.text = maxScreenText.ToString();
+
+        isSpawning = true;
         StartCoroutine(SpawnEnemy());
     }
 
     IEnumerator SpawnFatZombieWithDelay()
     {
-        // Esperamos 3 segundos
         yield return new WaitForSeconds(2f);
 
-        if(totalEnemies < maxScreen)
-        {
-            // Instanciamos el DogZombie después del retraso
-            Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
-            EnemyPoolManager.Instance.GetEnemy("FatZombie", spawnPoint.position, Quaternion.identity);
+        if (totalEnemies >= maxScreen) yield break;
 
-            totalEnemies++;
-        }
-        
+        Transform spawnPoint = waypoints[Random.Range(0, waypoints.Length)];
+        EnemyPoolManager.Instance.GetEnemy("FatZombie", spawnPoint.position, Quaternion.identity);
+        totalEnemies++;
     }
 }

@@ -8,10 +8,10 @@ public class PoolBulletsManager : MonoBehaviour
 
     public static PoolBulletsManager Instance {get {return _instance;}}
 
-    [SerializeField] private List<GameObject> pool = new List<GameObject>(); // Lista del pool
+    [SerializeField] private List<GameObject> pool = new List<GameObject>();
     
-    [SerializeField] private GameObject prefabPool; // Prefab de la bala
-    public int maxBullets = 20;   // Máximo de balas en el pool
+    [SerializeField] private GameObject prefabPool;
+    public int maxBullets = 20;
 
     private void Awake()
     {
@@ -36,10 +36,10 @@ public class PoolBulletsManager : MonoBehaviour
         for (int i = 0; i < maxBullets; i++)
         {
             GameObject go = Instantiate(prefabPool);
-            go.transform.parent = transform; // Se asigna como hijo del pool
+            go.transform.parent = transform;
             go.SetActive(false);
             go.name = prefabPool.tag + "_" + i;
-            pool.Add(go); // Agregar la bala al pool
+            pool.Add(go);
         }
     }
 
@@ -47,23 +47,23 @@ public class PoolBulletsManager : MonoBehaviour
     {
         if (pool.Count <= 0) return null;
 
-        GameObject go = pool[0]; // Obtener la primera bala
-        pool.RemoveAt(0); // Removerla de la lista
+        GameObject go = pool[0];
+        pool.RemoveAt(0);
 
         go.transform.position = position;
         go.transform.rotation = rotation;
-        go.transform.parent = null; // Se saca del parent (para evitar problemas)
-        go.SetActive(true); // Activar la bala
+        go.transform.parent = null;
+        go.SetActive(true);
 
-        return go; // Retornar la bala
+        return go;
     }
 
     public void ReturnToPool(GameObject bullet)
     {
         bullet.SetActive(false);
-        bullet.transform.parent = transform; // Se vuelve a asignar como hijo del pool
+        bullet.transform.parent = transform;
         bullet.transform.position = Vector3.zero;
         bullet.transform.rotation = Quaternion.identity;
-        pool.Add(bullet); // Reagregar la bala al pool
+        pool.Add(bullet);
     }
 }

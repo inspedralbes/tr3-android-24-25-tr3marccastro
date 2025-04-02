@@ -13,12 +13,10 @@ public class SpriteSelectionScreen : MonoBehaviour
 
     void OnEnable()
     {
-        // Obtener la raíz del documento visual
         rootElement = GetComponent<UIDocument>().rootVisualElement;
         spriteContainer = rootElement.Q<ScrollView>("animationContainer");
-        closeButton = rootElement.Q<Button>("closeButton");  // Botón de cerrar
+        closeButton = rootElement.Q<Button>("closeButton");
 
-        // Configurar el evento del botón de cerrar
         closeButton.clicked += CloseScreen;
 
         enemySpawner = FindFirstObjectByType<EnemySpawner>();
@@ -27,33 +25,24 @@ public class SpriteSelectionScreen : MonoBehaviour
             enemySpawner.gameObject.SetActive(false);
         }
 
-        // Recargar los sprites descargados desde PlayerPrefs
         StartCoroutine(LoadDownloadedSprites());
     }
 
     private IEnumerator LoadDownloadedSprites()
     {
-        // Obtener la lista de los skins comprados (y los sprites correspondientes) desde PlayerPrefs
         var ownedSkins = PlayerSkins.GetOwnedSkins();
         if (ownedSkins.Count == 0)
         {
-            Debug.LogWarning("No se han descargado sprites.");
             yield break;
         }
 
-        // Cargar cada sprite desde el directorio local
         foreach (var skin in ownedSkins)
         {
             string localPath = skin.assetBundlePath;
 
             if (System.IO.File.Exists(localPath))
             {
-                // Crear el botón para seleccionar el sprite
                 CreateSpriteButton(localPath, skin.name);
-            }
-            else
-            {
-                Debug.LogWarning("Sprite no encontrado: " + localPath);
             }
 
             yield return null;
@@ -62,16 +51,13 @@ public class SpriteSelectionScreen : MonoBehaviour
 
     private void CreateSpriteButton(string localPath, string name)
     {
-        // Cargar el AssetBundle desde el archivo local
         AssetBundle bundle = AssetBundle.LoadFromFile(localPath);
 
         if (bundle == null)
         {
-            Debug.LogError("No se pudo cargar el AssetBundle desde la ruta: " + localPath);
             return;
         }
 
-        // Obtener el nombre correcto del Animator Controller dentro del AssetBundle
         string[] assetNames = bundle.GetAllAssetNames();
         string controllerPath = null;
         string keyword = "base";
@@ -79,7 +65,6 @@ public class SpriteSelectionScreen : MonoBehaviour
 
         foreach (var asset in assetNames)
         {
-            Debug.Log("Asset encontrado en AssetBundle: " + asset);
             if (asset.EndsWith(".controller"))
             {
                 controllerPath = asset;
@@ -92,50 +77,35 @@ public class SpriteSelectionScreen : MonoBehaviour
             }
         }
 
-        Debug.Log("Los tengo: " + controllerPath + " " + image);
-
-        // Crear el contenedor para el botón
         VisualElement spriteElement = new VisualElement();
         spriteElement.AddToClassList("animation-element");
 
-        // Crear y añadir la imagen del sprite
         Image spriteImage = new Image();
         StartCoroutine(LoadSpriteImage(bundle, image, spriteImage));
         spriteElement.Add(spriteImage);
 
-        // Botón para seleccionar el sprite
         Button selectButton = new Button(() => SelectSprite(localPath, name)) { text = "Seleccionar" };
         spriteElement.Add(selectButton);
 
-        // Añadir el sprite a la lista
         spriteContainer.Add(spriteElement);
 
-        // Liberar el AssetBundle para evitar fugas de memoria
         bundle.Unload(false);
     }
 
     private IEnumerator LoadSpriteImage(AssetBundle bundle, string imagePath, Image spriteImage)
     {
-        // Intentar obtener la textura del AssetBundle
-        Texture2D texture = bundle.LoadAsset<Texture2D>(imagePath);  // Usar la ruta correcta de la imagen
+        Texture2D texture = bundle.LoadAsset<Texture2D>(imagePath);
 
         if (texture != null)
         {
-            Debug.Log("🖼️ Textura cargada con éxito, tamaño: " + texture.width + "x" + texture.height);
-            
-            float scaleFactor = 2.0f;  // Cambia este valor para hacer la imagen más grande o más pequeña
+            float scaleFactor = 2.0f;
             int newWidth = (int)(texture.width * scaleFactor);
             int newHeight = (int)(texture.height * scaleFactor);
 
-            // 🔹 Redimensionar la imagen en la UI
             spriteImage.style.width = newWidth;
             spriteImage.style.height = newHeight;
 
             spriteImage.style.backgroundImage = new StyleBackground(texture);
-        }
-        else
-        {
-            Debug.LogError("❌ No se encontró la textura dentro del AssetBundle.");
         }
 
         yield return null;
@@ -144,8 +114,6 @@ public class SpriteSelectionScreen : MonoBehaviour
 
     private void SelectSprite(string localPath, string name)
     {
-        Debug.Log("Sprite seleccionado: " + localPath);
-        // Aquí puedes aplicar el sprite al objeto del juego.
         ApplySelectedSprite(localPath, name);
 
         gameObject.SetActive(false);
@@ -158,73 +126,46 @@ public class SpriteSelectionScreen : MonoBehaviour
 
     private void ApplySelectedSprite(string localPath, string name)
     {
-        // Cargar el AssetBundle desde el archivo local
         AssetBundle bundle = AssetBundle.LoadFromFile(localPath);
 
         if (bundle == null)
         {
-            Debug.LogError("No se pudo cargar el AssetBundle desde la ruta: " + localPath);
             return;
         }
 
-        // Obtener el nombre correcto del Animator Controller dentro del AssetBundle
         string[] assetNames = bundle.GetAllAssetNames();
         string controllerPath = null;
 
-        // Debug: Mostrar todos los assets en el bundle
-        Debug.Log($"Contenido del AssetBundle ({name}):");
         foreach (var asset in assetNames)
         {
-            Debug.Log(" - " + asset);
             if (asset.EndsWith(".controller") && controllerPath == null)
             {
                 controllerPath = asset;
             }
         }
 
-        // Si encontramos el Animator Controller, lo cargamos
         if (!string.IsNullOrEmpty(controllerPath))
         {
             RuntimeAnimatorController animatorController = bundle.LoadAsset<RuntimeAnimatorController>(controllerPath);
 
             if (animatorController != null)
             {
-                // Obtener el componente Animator del objeto de destino
                 Animator animator = targetObject.GetComponent<Animator>();
                 if (animator != null)
                 {
-                    // Asignar el Animator Controller al componente Animator
                     animator.runtimeAnimatorController = animatorController;
-                    Debug.Log($"✅ Animator Controller asignado correctamente: {controllerPath}");
-                    
-                    // Opcional: Forzar una actualización inmediata
+
                     animator.Update(0f);
                 }
-                else
-                {
-                    Debug.LogError("⚠️ El objeto de destino no tiene un componente Animator.");
-                }
             }
-            else
-            {
-                Debug.LogError("⚠️ No se pudo cargar el Animator Controller desde: " + controllerPath);
-            }
-        }
-        else
-        {
-            Debug.LogError("⚠️ No se encontró ningún archivo .controller en el AssetBundle.");
         }
 
-        // Liberar el AssetBundle (pero mantener los assets cargados en memoria)
         bundle.Unload(false);
-        
-        Debug.Log("Proceso de carga del AssetBundle completado.");
     }
 
     private void CloseScreen()
     {
-        // Aquí puedes ocultar o desactivar la pantalla de selección
-        gameObject.SetActive(false); // Desactivar el objeto de la pantalla de selección de sprites
+        gameObject.SetActive(false);
 
         if (enemySpawner != null)
         {

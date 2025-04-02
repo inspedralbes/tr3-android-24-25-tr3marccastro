@@ -41,7 +41,6 @@ public class GameOverMenu : MonoBehaviour
 
     private IEnumerator Results() 
     {
-        // Crear el objeto JSON manualmente
         ResultsMatch resultsMatch = new()
         {
             kills = enemySpawner.kills,
@@ -67,7 +66,6 @@ public class GameOverMenu : MonoBehaviour
         if (request.result == UnityWebRequest.Result.Success)
         {
             string result = request.downloadHandler.text;
-            Debug.Log("Respuesta del servidor: " + result);
 
             try
             {
@@ -77,9 +75,6 @@ public class GameOverMenu : MonoBehaviour
                 {
                     SceneManager.LoadScene("MainMenu");
                 }
-                else {
-                    Debug.Log("No");
-                }
             }
             catch (System.Exception e)
             {
@@ -88,13 +83,11 @@ public class GameOverMenu : MonoBehaviour
         }
         else
         {
-            Debug.Log("Error de conexión: " + request.error);
             SceneManager.LoadScene("MainMenu");
         }
     }
 }
 
-// Clase para enviar datos de login en JSON
 [System.Serializable]
 public class ResultsMatch
 {
@@ -105,7 +98,6 @@ public class ResultsMatch
     public string email;
 }
 
-// Clase para recibir respuesta del servidor
 [System.Serializable]
 public class ResponseData2
 {
