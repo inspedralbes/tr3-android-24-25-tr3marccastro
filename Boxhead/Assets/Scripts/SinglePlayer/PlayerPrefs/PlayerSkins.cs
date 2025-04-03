@@ -53,8 +53,7 @@ public static class PlayerSkins
         public string name;
         public string assetBundlePath;
     }
-
-    // Clase auxiliar para deserializar la lista de ítems
+    
     [System.Serializable]
     private class SkinList
     {

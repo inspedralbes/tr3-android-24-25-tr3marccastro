@@ -10,7 +10,6 @@ public class MainMenuScreen : MonoBehaviour
         var root = GetComponent<UIDocument>().rootVisualElement;
         string email = UserSession.GetUserEmail();
 
-        // Encontrar los botones por su nombre
         startButton = root.Q<Button>("StartButton");
         exitButton = root.Q<Button>("ExitButton");
         logoutButton = root.Q<Button>("LogoutButton");
