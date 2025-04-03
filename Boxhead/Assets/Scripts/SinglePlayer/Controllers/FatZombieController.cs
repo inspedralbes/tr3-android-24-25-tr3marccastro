@@ -11,6 +11,9 @@ public class FatZombieController : MonoBehaviour
     private NavMeshAgent agent;
     private SpriteRenderer enemyRenderer;
     private EnemySpawner enemySpawner;
+    private AudioSource audioSource;
+    [SerializeField] private AudioClip audioBite;
+    [SerializeField] private AudioClip audioHit;
 
     private void Awake()
     {
@@ -18,12 +21,13 @@ public class FatZombieController : MonoBehaviour
 
         if (enemySpawner == null)
         {
-            Debug.LogError("EnemySpawner no encontrado en la escena.");
+            Debug.LogError("EnemySpawner no trobat a l'escena.");
         }
 
         enemyRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
         agent = GetComponent<NavMeshAgent>();
+        audioSource = GetComponent<AudioSource>();
         agent.updateRotation = false;
         agent.updateUpAxis = false;
     }
@@ -39,8 +43,10 @@ public class FatZombieController : MonoBehaviour
 
         if (playerTransform == null)
         {
-            Debug.LogWarning("Player transform no encontrado.");
+            Debug.LogWarning("Player transform no trobat.");
         }
+
+        audioSource.Play();
     }
 
     void Update()
@@ -80,6 +86,8 @@ public class FatZombieController : MonoBehaviour
         {
             Die();
         }
+
+        SoundController.Instance.ExecuteSound(audioHit);
     }
 
     private void Die()
@@ -97,6 +105,8 @@ public class FatZombieController : MonoBehaviour
             {
                 player.TakeDamagePlayer(currentDamage);
             }
+
+            SoundController.Instance.ExecuteSound(audioBite);
         }
     }
 

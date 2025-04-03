@@ -20,7 +20,6 @@ public class EnemyStatsManager : MonoBehaviour
             return;
         }
 
-        // Inicializar las estad�sticas
         if (!PlayerPrefs.HasKey("GameInitialized"))
         {
             ResetToDefault();

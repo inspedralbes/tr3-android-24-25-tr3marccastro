@@ -20,7 +20,7 @@ public class ZombieController : MonoBehaviour
         enemySpawner = EnemySpawner.Instance;
         if (enemySpawner == null)
         {
-            Debug.LogError("EnemySpawner no encontrado en la escena.");
+            Debug.LogError("EnemySpawner no trobat a l'escena.");
         }
 
         enemyRenderer = GetComponent<SpriteRenderer>();
@@ -42,7 +42,7 @@ public class ZombieController : MonoBehaviour
 
         if (playerTransform == null)
         {
-            Debug.LogWarning("Player transform no encontrado.");
+            Debug.LogWarning("Player transform no trobat.");
         }
 
         audioSource.Play();

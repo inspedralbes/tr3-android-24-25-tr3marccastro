@@ -60,7 +60,6 @@ public class EnemySpawner : MonoBehaviour
 
             if (waypoints.Length == 0)
             {
-                Debug.LogWarning("No hay waypoints asignados.");
                 yield break;
             }
 
@@ -68,7 +67,6 @@ public class EnemySpawner : MonoBehaviour
             GameObject zombie = EnemyPoolManager.Instance.GetEnemy("Zombie", spawnPoint.position, Quaternion.identity);
 
             if (zombie) totalEnemies++;
-            else Debug.LogWarning("No se pudo obtener un Zombie del pool.");
 
             StartCoroutine(SpawnFatZombieWithDelay());
         }

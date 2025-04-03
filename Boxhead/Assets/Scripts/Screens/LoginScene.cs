@@ -29,7 +29,6 @@ public class LoginManager : MonoBehaviour
         root.Q<Button>("backButton").clicked += () => SceneManager.LoadScene("MainMenu");
     }
 
-    // Metodo 1
     private IEnumerator LoginRequest()
     {
         if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
@@ -38,7 +37,6 @@ public class LoginManager : MonoBehaviour
             yield break;
         }
 
-        // Crear el objeto JSON manualmente
         LoginData loginData = new()
         {
             username = usernameField.value,

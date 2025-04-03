@@ -164,13 +164,13 @@ public class ShopScreen : MonoBehaviour
 
     private IEnumerator CheckPurchaseHistory(int id, System.Action<bool> callback)
     {
-        if (PlayerSkins.HasSkin(id))
+        string email = UserSession.GetUserEmail();
+        if (string.IsNullOrEmpty(email))
         {
-            callback(true);
+            callback(false);
             yield break;
         }
 
-        string email = UserSession.GetUserEmail();
         SkinData skinData = new() { skinId = id, email = email };
 
         string jsonData = JsonUtility.ToJson(skinData);

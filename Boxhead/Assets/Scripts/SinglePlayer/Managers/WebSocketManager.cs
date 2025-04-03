@@ -99,10 +99,6 @@ public class WebSocketManager : MonoBehaviour
         {
             ApplyStatsIfUpdated(currentRound);
         }
-        else
-        {
-            if (statsSocket == null) Debug.LogWarning("statsSocket es null, no se pueden aplicar las estadísticas.");
-        }
     }
 
     private async void OnApplicationQuit()

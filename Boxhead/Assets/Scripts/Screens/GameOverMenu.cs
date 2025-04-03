@@ -78,7 +78,7 @@ public class GameOverMenu : MonoBehaviour
             }
             catch (System.Exception e)
             {
-                Debug.LogError("Error al procesar la respuesta JSON: " + e.Message);
+                Debug.LogError("Error en processar la resposta JSON: " + e.Message);
             }
         }
         else
