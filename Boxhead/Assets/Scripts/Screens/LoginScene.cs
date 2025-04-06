@@ -7,36 +7,50 @@ using System.Text;
 
 public class LoginManager : MonoBehaviour
 {
+    // Campos UI
     private TextField usernameField, passwordField;
     private Label errorLabel;
+
+    // URL del endpoint de login
     private string apiUrl = "http://localhost:3002/api/users/login";
 
+    // Se ejecuta antes del OnEnable, útil para verificar sesión persistente
     private void Awake()
     {
-        if(UserSession.IsUserLoggedIn()) SceneManager.LoadScene("ShopMenu");
+        // Si el usuario ya está logueado, lo redirige directamente a la tienda
+        if (UserSession.IsUserLoggedIn())
+            SceneManager.LoadScene("ShopMenu");
     }
 
+    // Se ejecuta cuando el objeto se activa
     private void OnEnable()
     {
+        // Obtener la raíz del UI
         var root = GetComponent<UIDocument>().rootVisualElement;
+
+        // Asociar campos del formulario
         usernameField = root.Q<TextField>("usernameField");
         passwordField = root.Q<TextField>("passwordField");
         errorLabel = root.Q<Label>("errorLabel");
-        errorLabel.style.display = DisplayStyle.None;
+        errorLabel.style.display = DisplayStyle.None; // Ocultar mensajes de error por defecto
 
+        // Asignar acciones a los botones
         root.Q<Button>("loginButton").clicked += () => StartCoroutine(LoginRequest());
         root.Q<Button>("registerButton").clicked += () => SceneManager.LoadScene("RegisterMenu");
         root.Q<Button>("backButton").clicked += () => SceneManager.LoadScene("MainMenu");
     }
 
+    // Coroutine para enviar la solicitud de login al servidor
     private IEnumerator LoginRequest()
     {
+        // Validar campos vacíos
         if (string.IsNullOrEmpty(usernameField.value) || string.IsNullOrEmpty(passwordField.value))
         {
             ShowErrorMessage("Si us plau, introduïu usuari i contrasenya.");
             yield break;
         }
 
+        // Crear el cuerpo de la solicitud
         LoginData loginData = new()
         {
             username = usernameField.value,
@@ -46,6 +60,7 @@ public class LoginManager : MonoBehaviour
         string jsonData = JsonUtility.ToJson(loginData);
         byte[] jsonBytes = Encoding.UTF8.GetBytes(jsonData);
 
+        // Preparar la solicitud HTTP POST
         UnityWebRequest request = new(apiUrl, "POST")
         {
             uploadHandler = new UploadHandlerRaw(jsonBytes),
@@ -54,6 +69,7 @@ public class LoginManager : MonoBehaviour
 
         request.SetRequestHeader("Content-Type", "application/json");
 
+        // Esperar respuesta del servidor
         yield return request.SendWebRequest();
 
         if (request.result == UnityWebRequest.Result.Success)
@@ -62,10 +78,12 @@ public class LoginManager : MonoBehaviour
 
             try
             {
+                // Convertir la respuesta en objeto
                 ResponseData response = JsonUtility.FromJson<ResponseData>(result);
 
                 if (response.message == "success")
                 {
+                    // Guardar el email del usuario en sesión y redirigir a la tienda
                     UserSession.SaveUserEmail(response.email);
                     SceneManager.LoadScene("ShopMenu");
                 }
@@ -85,6 +103,7 @@ public class LoginManager : MonoBehaviour
         }
     }
 
+    // Mostrar un mensaje de error en la UI
     private void ShowErrorMessage(string message)
     {
         errorLabel.text = message;
@@ -92,6 +111,7 @@ public class LoginManager : MonoBehaviour
     }
 }
 
+// Clases auxiliares para estructurar los datos del login
 [System.Serializable]
 public class LoginData
 {
