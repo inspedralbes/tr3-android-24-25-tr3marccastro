@@ -1,4 +1,4 @@
-# TR3 - Marc Castro:
+# TR3 - Boxhead:
  * Nom dels integrants: Marc Castro
  * Nom del projecte: Boxhead
  * Petita descripció: Aquest projecte és un videojoc 2D a Unity que es tracta de sobreviure onades de zombis per rondes.
