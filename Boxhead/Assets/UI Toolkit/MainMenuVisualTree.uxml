@@ -1,0 +1,10 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/MainMenuStyle.uss?fileID=7433441132597879392&amp;guid=87344a319a3193a26bbc1766daefd2a9&amp;type=3#MainMenuStyle" />
+    <engine:VisualElement name="Container">
+        <engine:Label text="Boxhead" name="Header" class="header" />
+        <engine:Button text="Començar" name="StartButton" class="button" />
+        <engine:Button text="Botiga de Skins" name="ShopButton" class="button" />
+        <engine:Button text="Tanca sessió" name="LogoutButton" class="button" />
+        <engine:Button text="Sortir a l&apos;escriptori" name="ExitButton" class="button" />
+    </engine:VisualElement>
+</engine:UXML>

@@ -1,0 +1,48 @@
+#gameOverScreen {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.9);
+    background-blend-mode: multiply;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    border: 5px solid #7a1616;
+    box-shadow: inset 0 0 20px #300000;
+}
+
+#gameOverLabel {
+    font-size: 80px;
+    font-weight: bold;
+    color: #ff0000; /* Rojo sangre */
+    text-shadow: 5px 5px 15px black, 0 0 5px red;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+}
+
+.button {
+    font-size: 24px;
+    font-weight: bold;
+    width: 250px;
+    height: 60px;
+    margin: 15px;
+    color: white;
+    border-radius: 10px;
+    text-shadow: 2px 2px 5px black;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#retryButton:hover {
+    background-color: #ff6347;
+    border-color: #8b0000;
+}
+
+#mainMenuButton {
+    background-color: #7a1616;
+    border: 3px solid #500000;
+}
+
+#mainMenuButton:hover {
+    background-color: #ff0000;
+    border-color: black;
+}

@@ -1,0 +1,103 @@
+:root {
+    background-color: #1a1a1a;
+}
+
+#shopMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    font-size: 40px;
+    font-weight: bold;
+    color: #ff0000; /* Rojo sangre */
+    text-shadow: 2px 2px 10px rgba(255, 0, 0, 0.7);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.purchase-message {
+    font-size: 18px;
+    font-weight: bold;
+    color: #00ff00;
+    text-align: center;
+    margin-top: 15px;
+    display: none;
+}
+
+.items-container {
+    width: 500px;
+    height: 400px;
+    overflow-y: auto;
+    border: 2px solid #770000;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+}
+
+.item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    border: 1px solid #ddd;
+    margin-bottom: 10px;
+    width: 460px;
+}
+
+.item .image {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.item .name {
+    font-size: 20px;
+    color: #ffcc00;
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(255, 204, 0, 0.7);
+}
+
+.item .price {
+    font-size: 18px;
+    color: #ff6600;
+}
+
+.item .buy-button {
+    padding: 10px;
+    font-size: 14px;
+    background-color: #ff0000;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.item .buy-button:hover {
+    background-color: #990000;
+}
+
+.button {
+    width: 250px;
+    height: 50px;
+    font-size: 18px;
+    color: white;
+    background-color: rgb(0, 123, 255);
+    border-radius: 8px;
+    margin: 10px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: rgb(0, 86, 179);
+}
+
+.back-button {
+    background-color: #444;
+    color: #ff0000;
+    border: 2px solid #ff0000;
+}
+
+.back-button:hover {
+    background-color: #222;
+}

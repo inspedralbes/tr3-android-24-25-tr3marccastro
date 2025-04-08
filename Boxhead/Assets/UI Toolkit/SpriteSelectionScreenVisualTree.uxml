@@ -1,0 +1,8 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns="UnityEngine.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/UI%20Toolkit/SpriteSelectionScreenStyle.uss?fileID=7433441132597879392&amp;guid=cf92030a703e9a20e862ef0b25b5dd70&amp;type=3#SpriteSelectionScreenStyle" />
+    <engine:VisualElement class="root">
+        <engine:Label text="Selecciona una Skin" class="title" />
+        <engine:ScrollView name="animationContainer" class="animationContainer" />
+        <engine:Button name="closeButton" text="Tancar" class="closeButton" />
+    </engine:VisualElement>
+</engine:UXML>
